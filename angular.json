@@ -1,16 +1,29 @@
 {
   "version": 1,
   "projects": {
+    "auth": {
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/auth/**/*.ts"]
+          }
+        }
+      }
+    },
     "env": {
       "projectType": "library",
-      "root": "packages/env",
-      "sourceRoot": "packages/env/src",
+      "root": "libs/env",
+      "sourceRoot": "libs/env/src",
       "prefix": "hb",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "packages/env/jest.config.js",
+            "jestConfig": "libs/env/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -18,8 +31,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "packages/env/src/**/*.ts",
-              "packages/env/src/**/*.html"
+              "libs/env/src/**/*.ts",
+              "libs/env/src/**/*.html"
             ]
           }
         }

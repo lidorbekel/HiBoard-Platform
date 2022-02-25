@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@hiboard/env": ["packages/env/src/index.ts"]
+      "@hiboard/auth": ["libs/auth/src/index.ts"],
+      "@hiboard/auth/*": ["libs/auth/src/lib/*"],
+      "@hiboard/env": ["libs/env/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
