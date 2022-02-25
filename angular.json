@@ -1,7 +1,144 @@
 {
-  "version": 2,
+  "version": 1,
   "projects": {
-    "platform": "apps/platform",
-    "platform-e2e": "apps/platform-e2e"
+    "env": {
+      "projectType": "library",
+      "root": "packages/env",
+      "sourceRoot": "packages/env/src",
+      "prefix": "hb",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/env/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/env/src/**/*.ts",
+              "packages/env/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "platform": {
+      "projectType": "application",
+      "root": "apps/platform",
+      "sourceRoot": "apps/platform/src",
+      "prefix": "hb",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/platform",
+            "assets": [
+              "apps/platform/src/favicon.ico",
+              "apps/platform/src/assets"
+            ],
+            "index": "apps/platform/src/index.html",
+            "main": "apps/platform/src/main.ts",
+            "polyfills": "apps/platform/src/polyfills.ts",
+            "tsConfig": "apps/platform/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "styles": ["apps/platform/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/platform/src/environments/environment.ts",
+                  "with": "apps/platform/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "platform:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "platform:build:production"
+            },
+            "development": {
+              "browserTarget": "platform:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "platform:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/platform/src/**/*.ts",
+              "apps/platform/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/platform/src/test.ts",
+            "tsConfig": "apps/platform/tsconfig.spec.json",
+            "karmaConfig": "apps/platform/karma.conf.js",
+            "polyfills": "apps/platform/src/polyfills.ts",
+            "styles": [],
+            "scripts": [],
+            "assets": []
+          }
+        }
+      }
+    },
+    "platform-e2e": {
+      "root": "apps/platform-e2e",
+      "sourceRoot": "apps/platform-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/platform-e2e/cypress.json",
+            "tsConfig": "apps/platform-e2e/tsconfig.json",
+            "devServerTarget": "platform:serve:cypress",
+            "watch": true
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "",
+              "watch": false
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/platform-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
   }
 }

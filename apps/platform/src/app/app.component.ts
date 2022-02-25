@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'hiboard-platform-root',
+  selector: 'hbd-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
