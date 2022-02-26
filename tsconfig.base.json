@@ -16,8 +16,11 @@
     "baseUrl": ".",
     "paths": {
       "@hiboard/auth": ["libs/auth/src/index.ts"],
+      "@hiboard/auth-login": ["libs/auth-login/src/index.ts"],
+      "@hiboard/auth-login/*": ["libs/auth-login/src/lib/*"],
       "@hiboard/auth/*": ["libs/auth/src/lib/*"],
-      "@hiboard/env": ["libs/env/src/index.ts"]
+      "@hiboard/env": ["libs/env/src/index.ts"],
+      "@hiboard/navigation/*": ["libs/navigation/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

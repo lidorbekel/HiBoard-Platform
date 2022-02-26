@@ -14,11 +14,26 @@
         }
       }
     },
+    "auth-login": {
+      "root": "libs/auth-login",
+      "sourceRoot": "libs/auth-login/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/auth-login/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "env": {
       "projectType": "library",
       "root": "libs/env",
       "sourceRoot": "libs/env/src",
-      "prefix": "hb",
+      "prefix": "hbd",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -38,11 +53,26 @@
         }
       }
     },
+    "navigation": {
+      "root": "libs/navigation",
+      "sourceRoot": "libs/navigation/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/navigation/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "platform": {
       "projectType": "application",
       "root": "apps/platform",
       "sourceRoot": "apps/platform/src",
-      "prefix": "hb",
+      "prefix": "hbd",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
