@@ -5,3 +5,32 @@
   align-items: center;
   justify-content: center;
 }
+
+.auth-container {
+  flex-basis: 450px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px -1px  rgba(0,0,0,0.16), 0 3px 6px -1px rgba(0,0,0,0.23);
+}
+
+::ng-deep {
+  .auth-form-container {
+    width: min(100%, 330px);
+  }
+
+  .auth-title {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .login-form-forgot {
+    float: right;
+    font-size: var(--text12);
+    transform: translateY(-20px);
+  }
+}
+
+.auth-container {
+  flex-basis: 450px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px -1px  rgba(0,0,0,0.16), 0 3px 6px -1px rgba(0,0,0,0.23);
+}

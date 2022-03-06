@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import {RouterModule} from "@angular/router";
+import {SvgIconsModule} from "@ngneat/svg-icon";
 
 @Component({
   selector: 'hbd-auth-page',
@@ -12,7 +13,8 @@ export class AuthPageComponent {}
 @NgModule({
   declarations: [AuthPageComponent],
   imports: [
-    RouterModule
+    RouterModule,
+    SvgIconsModule,
   ],
   exports: [AuthPageComponent]
 })

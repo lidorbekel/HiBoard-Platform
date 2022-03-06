@@ -10,6 +10,10 @@ export class NavigationService {
     return this.router.navigateByUrl(url);
   }
 
+  forgotPassword(){
+    return this.router.navigateByUrl('auth/forgot-password')
+  }
+
   toHome() {
     return this.navigate('dashboard');
   }

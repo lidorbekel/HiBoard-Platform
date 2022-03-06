@@ -21,7 +21,10 @@
       "@hiboard/auth-signup/*": ["libs/auth-signup/src/lib/*"],
       "@hiboard/auth/*": ["libs/auth/src/lib/*"],
       "@hiboard/env": ["libs/env/src/index.ts"],
-      "@hiboard/navigation/*": ["libs/navigation/src/lib/*"]
+      "@hiboard/navigation/*": ["libs/navigation/src/lib/*"],
+      "@hiboard/svg/*": ["libs/svg/*"],
+      "@hiboard/theme/*": ["libs/theme/src/lib/*"],
+      "@hiboard/ui/*": ["libs/ui/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

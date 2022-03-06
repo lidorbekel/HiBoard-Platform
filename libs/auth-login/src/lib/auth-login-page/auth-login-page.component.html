@@ -1,1 +1,33 @@
-<p>auth-login-page works!</p>
+<h1 class="auth-title mb-4">Log In to your Account</h1>
+
+<form [formGroup]="loginForm">
+  <mat-label>Username</mat-label>
+  <mat-form-field appearance="outline" class="w-full">
+    <input matInput type="email" formControlName="username">
+    <mat-error *ngIf="username?.errors?.['required']">This field is required</mat-error>
+    <mat-error *ngIf="username?.errors?.['email']">Invalid email</mat-error>
+  </mat-form-field>
+
+
+
+  <mat-label>Password</mat-label>
+  <mat-form-field appearance="outline"class="w-full">
+    <input matInput type="password" formControlName="password">
+    <mat-error *ngIf="password?.errors?.['required']">This field is required</mat-error>
+    <mat-error *ngIf="password?.errors?.['minlength']">This field must have at least 6 characters</mat-error>
+  </mat-form-field>
+
+  <button class="login-form-forgot mb-4" (click)="toForgotPassword()">Forgot password</button>
+
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    class="w-full"
+    (click)="login()"
+    [disabled]="loginForm.invalid"
+  >
+    Login
+  </button>
+
+</form>

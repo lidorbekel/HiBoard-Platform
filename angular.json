@@ -78,6 +78,9 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/platform",
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
+            },
             "assets": [
               "apps/platform/src/favicon.ico",
               "apps/platform/src/assets"
@@ -87,7 +90,10 @@
             "polyfills": "apps/platform/src/polyfills.ts",
             "tsConfig": "apps/platform/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "styles": ["apps/platform/src/styles.scss"],
+            "styles": [
+              "apps/platform/src/styles.scss",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -182,6 +188,51 @@
           }
         }
       }
+    },
+    "svg": {
+      "root": "libs/svg",
+      "sourceRoot": "libs/svg/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/svg/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "theme": {
+      "root": "libs/theme",
+      "sourceRoot": "libs/theme/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/theme/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/ui/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
