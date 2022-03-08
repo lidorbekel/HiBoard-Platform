@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@hiboard/auth": ["libs/auth/src/index.ts"],
+      "@hiboard/auth-change-password/*": [
+        "libs/auth-change-password/src/lib/*"
+      ],
       "@hiboard/auth-login": ["libs/auth-login/src/index.ts"],
       "@hiboard/auth-login/*": ["libs/auth-login/src/lib/*"],
       "@hiboard/auth-signup/*": ["libs/auth-signup/src/lib/*"],

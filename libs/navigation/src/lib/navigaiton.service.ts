@@ -11,7 +11,7 @@ export class NavigationService {
   }
 
   forgotPassword(){
-    return this.router.navigateByUrl('auth/forgot-password')
+    return this.router.navigateByUrl('auth/reset-password/change-password')
   }
 
   toHome() {

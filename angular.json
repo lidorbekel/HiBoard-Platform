@@ -14,6 +14,21 @@
         }
       }
     },
+    "auth-change-password": {
+      "root": "libs/auth-change-password",
+      "sourceRoot": "libs/auth-change-password/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/auth-change-password/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "auth-login": {
       "root": "libs/auth-login",
       "sourceRoot": "libs/auth-login/src",

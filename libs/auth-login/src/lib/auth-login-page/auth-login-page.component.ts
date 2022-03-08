@@ -3,6 +3,7 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {AuthService} from "@hiboard/auth/state/auth.service";
 
 @Component({
   selector: 'hbd-auth-login-page',
@@ -16,10 +17,14 @@ export class AuthLoginPageComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
-  constructor(private navigationService: NavigationService) {}
+  constructor(private navigationService: NavigationService, private authService: AuthService) {}
 
   login(){
+    if(this.loginForm.invalid){
+      return;
+    }
 
+    this.authService.login(this.loginForm.value)
   }
 
   get username(){

@@ -23,6 +23,21 @@ const authRoutes: Routes = [
         ...guards,
         loadChildren: () => import('@hiboard/auth-login/auth-login.module').then(({ AuthLoginModule }) => AuthLoginModule)
       },
+      {
+        path: 'reset-password',
+        children: [
+          {
+            path: 'change-password',
+            ...guards,
+            loadChildren: () =>
+              import(
+                '@hiboard/auth-change-password/auth-change-password.module'
+                ).then(
+                ({ AuthChangePasswordModule }) => AuthChangePasswordModule
+              ),
+          },
+        ],
+      },
     ]
   }
 ]

@@ -6,6 +6,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {SvgIconsModule} from "@ngneat/svg-icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
     SvgIconsModule.forRoot({
       defaultSize: 'xxl'
     })
