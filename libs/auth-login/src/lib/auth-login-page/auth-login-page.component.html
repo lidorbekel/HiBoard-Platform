@@ -1,14 +1,12 @@
 <h1 class="auth-title mb-4">Log In to your Account</h1>
 
 <form [formGroup]="loginForm">
-  <mat-label>Username</mat-label>
+  <mat-label class="primary">Username</mat-label>
   <mat-form-field appearance="outline" class="w-full">
     <input matInput type="email" formControlName="username">
     <mat-error *ngIf="username?.errors?.['required']">This field is required</mat-error>
     <mat-error *ngIf="username?.errors?.['email']">Invalid email</mat-error>
   </mat-form-field>
-
-
 
   <mat-label>Password</mat-label>
   <mat-form-field appearance="outline"class="w-full">
@@ -25,9 +23,7 @@
     color="primary"
     class="w-full"
     (click)="login()"
-    [disabled]="loginForm.invalid"
   >
     Login
   </button>
-
 </form>

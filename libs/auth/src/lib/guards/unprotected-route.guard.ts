@@ -17,7 +17,7 @@ export class UnProtectedRouteGuard implements CanLoad, CanActivate {
   }
 
   canLoad(): Observable<boolean | UrlTree> {
-    return this.authService.isLoggedIn$.pipe(
+    return this.authService.isLoggedIn().pipe(
       map((isLoggedIn) => {
         if (isLoggedIn) {
           this.navigationService.toHome();

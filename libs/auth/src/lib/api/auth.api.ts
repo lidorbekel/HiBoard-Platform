@@ -8,6 +8,6 @@ export class AuthApi {
   }
 
   login(credentials: Auth.Login.Body){
-    console.log(credentials)
+    return this.http.post<Auth.Response>('login', credentials);
   }
 }

@@ -12,7 +12,7 @@ export class HomeRouteGuard implements CanActivate {
   ) {}
 
   canActivate(): Observable<boolean> {
-    return this.authService.isLoggedIn$.pipe(
+    return this.authService.isLoggedIn().pipe(
       map((isLoggedIn) => {
         if (isLoggedIn) {
           this.navigationService.toHome();

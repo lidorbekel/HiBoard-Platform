@@ -1,6 +1,21 @@
 {
   "version": 1,
   "projects": {
+    "api": {
+      "root": "libs/api",
+      "sourceRoot": "libs/api/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "auth": {
       "root": "libs/auth",
       "sourceRoot": "libs/auth/src",
@@ -106,8 +121,8 @@
             "tsConfig": "apps/platform/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "styles": [
-              "apps/platform/src/styles.scss",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/platform/src/styles.scss"
             ],
             "scripts": []
           },
@@ -244,6 +259,21 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["libs/ui/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "users": {
+      "root": "libs/users",
+      "sourceRoot": "libs/users/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/users/**/*.ts"]
           }
         }
       },

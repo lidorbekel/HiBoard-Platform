@@ -17,6 +17,17 @@
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/no-namespace": "off"
+      },
+      "plugins": [
+        "eslint-plugin-import",
+        "@angular-eslint/eslint-plugin",
+        "@typescript-eslint"
+      ]
     }
   ]
 }
