@@ -22,10 +22,11 @@
     text-align: center;
   }
 
-  .login-form-forgot {
-    float: right;
-    font-size: var(--text12);
-    transform: translateY(-20px);
+  .auth-form-error {
+    margin-top: 5px;
+    color: var(--error-color);
+    font-size: var(--text14);
+    text-align: center;
   }
 }
 

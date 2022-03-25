@@ -4,8 +4,10 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {AuthService} from "@hiboard/auth/state/auth.service";
-import {switchMap} from "rxjs";
 import {loadingFor} from "@ngneat/loadoff";
+import {HotToastService} from "@ngneat/hot-toast";
+import {switchMap} from "rxjs";
+import {ErrorTailorModule} from "@ngneat/error-tailor";
 
 @Component({
   selector: 'hbd-auth-login-page',
@@ -21,24 +23,35 @@ export class AuthLoginPageComponent {
   loading = loadingFor('login');
   error: string;
 
-  constructor(private navigationService: NavigationService, private authService: AuthService,
+  constructor(private navigationService: NavigationService,
+              private authService: AuthService,
+              private toast: HotToastService,
               private cdr: ChangeDetectorRef) {}
 
   login(){
+    this.error = '';
     if(this.loginForm.invalid){
       return;
     }
 
-    this.authService.login(this.loginForm.value)
+    const { username, password } = this.loginForm.value;
+
+    this.authService.login(username, password)
       .pipe(
-        switchMap(() => {
-          return this.navigationService.toHome();
+        this.toast.observe({
+          success: 'Logged in successfully',
+          loading: 'Logging in...'
         }),
-        this.loading.login.track()
+        switchMap(() => {
+            return this.navigationService.toHome();
+          }
+        )
       )
       .subscribe({
-        error: (error) => {
-          this.error = error;
+        error: () => {
+          console.log('hi')
+          this.toast.close();
+          this.error = "Invalid credentials";
           this.cdr.markForCheck();
         },
       });
@@ -58,7 +71,7 @@ export class AuthLoginPageComponent {
 }
 
 @NgModule({
-  imports: [MaterialModule, ReactiveFormsModule, CommonModule],
+  imports: [MaterialModule, ReactiveFormsModule, CommonModule, ErrorTailorModule],
   declarations: [AuthLoginPageComponent]
 })
 export class AuthLoginPageModule {}

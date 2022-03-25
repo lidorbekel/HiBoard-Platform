@@ -7,6 +7,12 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {SvgIconsModule} from "@ngneat/svg-icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {environment} from "@hiboard/env";
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {HotToastModule} from "@ngneat/hot-toast";
+import {ApiModule} from "@hiboard/api//api.module";
+import {ErrorTailorModule} from "@ngneat/error-tailor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,9 +22,23 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    ApiModule,
+    ErrorTailorModule.forRoot({
+      errors: {
+        useValue: {
+          required: () => 'This field is required',
+          email: () => 'Invalid email',
+          minlength: ({ requiredLength, actualLength }) =>
+            `Expected at least ${requiredLength} characters but got only ${actualLength}`,
+        }
+      }
+    }),
     SvgIconsModule.forRoot({
       defaultSize: 'xxl'
-    })
+    }),
+    HotToastModule.forRoot(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
     ],
   providers: [],
   bootstrap: [AppComponent],

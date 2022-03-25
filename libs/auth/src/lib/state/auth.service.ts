@@ -1,35 +1,47 @@
-import {from, Observable, tap} from "rxjs";
+import {from, Observable, switchMap, tap} from "rxjs";
 import {Injectable} from "@angular/core";
-import {Auth} from "../auth.types";
-import {AuthApi} from "@hiboard/auth/api/auth.api";
-import {map} from "rxjs/operators";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {Auth, authState, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "@angular/fire/auth";
+import {UserService} from "../../../../user/src/lib/state/user.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private authApi: AuthApi, private navigationService: NavigationService) {
+  constructor(private auth: Auth, private userService: UserService, private navigationService: NavigationService) {
   }
 
-  login(credentials: Auth.Login.Body){
-    return this.authApi.login(credentials).pipe(
-      map((user) => {
-        if (user && user.token) {
-          // update user store
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
+  login(username: string, password: string){
+    return from(signInWithEmailAndPassword(this.auth, username, password)).pipe(
+      tap(({ user }) => {
+        console.log(user)
+        user.getIdToken().then(token => {
+          console.log(token)
+          localStorage.setItem('token', token)
+        });
       }),
-      tap({ error: () => this.logout() })
+      switchMap(() => {
+        return this.userService.getUser()
+          .pipe(tap({ error: () => this.logout() }));
+      })
     )
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+    this.auth.signOut();
+    localStorage.removeItem('token');
     this.navigationService.toLogin();
   }
 
   isLoggedIn() {
     return new Observable<boolean>((observer) => {
-      observer.next(!!localStorage.getItem('currentUser'))
-    });
+      if(this.auth.currentUser && localStorage.getItem('token')){
+        observer.next(true);
+      } else {
+        observer.next(false)
+      }
+    })
+  }
+
+  getToken() {
+    return from(this.auth.currentUser!.getIdToken());
   }
 }

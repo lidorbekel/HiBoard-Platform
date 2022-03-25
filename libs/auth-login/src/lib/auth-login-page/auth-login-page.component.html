@@ -1,19 +1,38 @@
 <h1 class="auth-title mb-4">Log In to your Account</h1>
 
-<form [formGroup]="loginForm">
-  <mat-label class="primary">Username</mat-label>
-  <mat-form-field appearance="outline" class="w-full">
-    <input matInput type="email" formControlName="username">
-    <mat-error *ngIf="username?.errors?.['required']">This field is required</mat-error>
-    <mat-error *ngIf="username?.errors?.['email']">Invalid email</mat-error>
-  </mat-form-field>
+<form [formGroup]="loginForm" errorTailor>
+  <div class="form-control">
+    <mat-label class="primary">Username</mat-label>
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        formControlName="username"
+        [controlErrorAnchor]="emailAnchor"
+      >
+    </mat-form-field>
 
-  <mat-label>Password</mat-label>
-  <mat-form-field appearance="outline"class="w-full">
-    <input matInput type="password" formControlName="password">
-    <mat-error *ngIf="password?.errors?.['required']">This field is required</mat-error>
-    <mat-error *ngIf="password?.errors?.['minlength']">This field must have at least 6 characters</mat-error>
-  </mat-form-field>
+    <ng-template
+      controlErrorAnchor
+      #emailAnchor="controlErrorAnchor"
+    ></ng-template>
+  </div>
+
+  <div class="form-control">
+    <mat-label >Password</mat-label>
+    <mat-form-field appearance="outline"class="w-full">
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        [controlErrorAnchor]="passwordAnchor"
+      >
+    </mat-form-field>
+
+    <ng-template
+      controlErrorAnchor
+      #passwordAnchor="controlErrorAnchor"
+    ></ng-template>
+  </div>
 
   <button class="login-form-forgot mb-4" (click)="toForgotPassword()">Forgot password</button>
 
@@ -26,4 +45,11 @@
   >
     Login
   </button>
+
+  <p
+    class="auth-form-error"
+    *ngIf="error"
+  >
+    {{ error }}
+  </p>
 </form>
