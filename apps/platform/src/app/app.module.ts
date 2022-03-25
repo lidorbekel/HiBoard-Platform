@@ -13,6 +13,7 @@ import {getAuth, provideAuth} from "@angular/fire/auth";
 import {HotToastModule} from "@ngneat/hot-toast";
 import {ApiModule} from "@hiboard/api//api.module";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
+import {AngularFireModule} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,7 @@ import {ErrorTailorModule} from "@ngneat/error-tailor";
       defaultSize: 'xxl'
     }),
     HotToastModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireModule.initializeApp(environment.firebase),
     provideAuth(() => getAuth())
     ],
   providers: [],

@@ -39,8 +39,7 @@ export class AuthLoginPageComponent {
     this.authService.login(username, password)
       .pipe(
         this.toast.observe({
-          success: 'Logged in successfully',
-          loading: 'Logging in...'
+          loading: 'Logging in...',
         }),
         switchMap(() => {
             return this.navigationService.toHome();
@@ -49,11 +48,11 @@ export class AuthLoginPageComponent {
       )
       .subscribe({
         error: () => {
-          console.log('hi')
-          this.toast.close();
+          this.toast.close()
           this.error = "Invalid credentials";
           this.cdr.markForCheck();
         },
+        next: () => this.toast.close()
       });
   }
 

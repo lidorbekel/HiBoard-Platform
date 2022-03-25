@@ -59,6 +59,21 @@
       },
       "tags": []
     },
+    "dashboard": {
+      "root": "libs/dashboard",
+      "sourceRoot": "libs/dashboard/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/dashboard/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "env": {
       "projectType": "library",
       "root": "libs/env",

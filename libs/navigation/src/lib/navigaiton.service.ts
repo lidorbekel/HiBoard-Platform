@@ -15,7 +15,7 @@ export class NavigationService {
   }
 
   toHome() {
-    return this.navigate('dashboard');
+    return this.navigate('');
   }
 
   toLogin() {

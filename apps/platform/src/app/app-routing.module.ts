@@ -9,8 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '',
+    loadChildren: () => import('@hiboard/dashboard/dashboard.module').then(({ DashboardModule }) => DashboardModule),
     canActivate: [HomeRouteGuard],
   },
 ]

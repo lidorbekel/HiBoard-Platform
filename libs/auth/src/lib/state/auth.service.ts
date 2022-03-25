@@ -1,22 +1,22 @@
 import {from, Observable, switchMap, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
-import {Auth, authState, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "@angular/fire/auth";
 import {UserService} from "../../../../user/src/lib/state/user.service";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private auth: Auth, private userService: UserService, private navigationService: NavigationService) {
+  constructor(private auth: AngularFireAuth, private userService: UserService, private navigationService: NavigationService) {
   }
 
   login(username: string, password: string){
-    return from(signInWithEmailAndPassword(this.auth, username, password)).pipe(
+    return from(this.auth.signInWithEmailAndPassword(username, password)).pipe(
       tap(({ user }) => {
-        console.log(user)
-        user.getIdToken().then(token => {
-          console.log(token)
-          localStorage.setItem('token', token)
-        });
+        if(user){
+          user.getIdToken().then(token => {
+            localStorage.setItem('token', token)
+          });
+        }
       }),
       switchMap(() => {
         return this.userService.getUser()
@@ -26,22 +26,27 @@ export class AuthService {
   }
 
   logout() {
-    this.auth.signOut();
-    localStorage.removeItem('token');
-    this.navigationService.toLogin();
+    this.auth.signOut().then(() => {
+      localStorage.removeItem('token');
+      this.navigationService.toLogin();
+    })
   }
 
   isLoggedIn() {
     return new Observable<boolean>((observer) => {
-      if(this.auth.currentUser && localStorage.getItem('token')){
-        observer.next(true);
-      } else {
-        observer.next(false)
-      }
-    })
+      this.auth.onAuthStateChanged((user) => {
+          if(user){
+            observer.next(true);
+          } else {
+            observer.next(false)
+          }
+      })
+    });
   }
 
   getToken() {
-    return from(this.auth.currentUser!.getIdToken());
+    return from(this.auth.currentUser.then(user => {
+      return user?.getIdToken();
+    }))
   }
 }
