@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/c
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
+import {SubscribeModule} from "@ngneat/subscribe";
 
 interface NavItem {
   title: string,
@@ -16,6 +18,7 @@ interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
+  user$ = this.userRepo.user$;
 
   navItems: NavItem[] = [
     {
@@ -25,7 +28,7 @@ export class NavigationComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private userRepo: UserRepository) {}
 
   ngOnInit(): void {
   }
@@ -34,7 +37,7 @@ export class NavigationComponent implements OnInit {
 
 @NgModule({
   declarations: [NavigationComponent],
-  imports: [MaterialModule, RouterModule, CommonModule],
+  imports: [MaterialModule, RouterModule, CommonModule, SubscribeModule],
   exports: [NavigationComponent]
 })
 export class NavigationComponentModule {

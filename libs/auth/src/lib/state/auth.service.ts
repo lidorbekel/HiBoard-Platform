@@ -16,12 +16,13 @@ export class AuthService {
           user.getIdToken().then(token => {
             localStorage.setItem('token', token)
           });
+          //this.userService.getUser(); // TODO remove mock
         }
       }),
-      // switchMap(() => {
-      //   return this.userService.getUser()
-      //     .pipe(tap({ error: () => this.logout() }));
-      // })
+      switchMap(() => {
+        return this.userService.getUser()
+          .pipe(tap({ error: () => this.logout() }));
+      })
     )
   }
 

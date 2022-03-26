@@ -1,11 +1,13 @@
-import {BaseResponse} from "../../api/src/lib/api.types";
+import {BaseResponse} from "@hiboard/api/api.types";
 
-export namespace Users {
+export namespace User {
   export type Role = 'employee' | 'manager';
 
   export interface Entity {
-    id: string;
+    id: string,
     email: string;
+    firstName: string,
+    lastName: string,
     role: Role;
   }
 
