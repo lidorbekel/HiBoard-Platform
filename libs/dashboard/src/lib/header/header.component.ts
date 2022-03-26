@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {AuthService} from "@hiboard/auth/state/auth.service";
+import {TippyModule} from "@ngneat/helipopper";
 
 @Component({
   selector: 'hbd-header',
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
 @NgModule({
   declarations: [HeaderComponent],
-  imports: [MaterialModule],
+    imports: [MaterialModule, TippyModule],
   exports: [HeaderComponent]
 })
 export class HeaderComponentModule {

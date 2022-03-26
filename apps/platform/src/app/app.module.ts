@@ -14,6 +14,7 @@ import {HotToastModule} from "@ngneat/hot-toast";
 import {ApiModule} from "@hiboard/api//api.module";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {AngularFireModule} from "@angular/fire/compat";
+import {popperVariation, TippyModule, tooltipVariation} from "@ngneat/helipopper";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,14 @@ import {AngularFireModule} from "@angular/fire/compat";
           minlength: ({ requiredLength, actualLength }) =>
             `Expected at least ${requiredLength} characters but got only ${actualLength}`,
         }
+      }
+    }),
+    TippyModule.forRoot({
+      defaultVariation: 'tooltip',
+      variations: {
+        tooltip: tooltipVariation,
+        popper: popperVariation,
+        menu: popperVariation
       }
     }),
     SvgIconsModule.forRoot({
