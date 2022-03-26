@@ -1,12 +1,10 @@
 <hbd-header></hbd-header>
 
-<main class="flex">
-  <hbd-navigation></hbd-navigation>
-
-  <section>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <hbd-navigation></hbd-navigation>
+  </mat-drawer>
+  <mat-drawer-content>
     <router-outlet></router-outlet>
-  </section>
-
-</main>
-
-<router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

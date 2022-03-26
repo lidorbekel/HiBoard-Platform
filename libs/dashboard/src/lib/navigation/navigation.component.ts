@@ -1,5 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
+
+interface NavItem {
+  title: string,
+  icon: string,
+  link: string
+}
 
 @Component({
   selector: 'hbd-navigation',
@@ -8,6 +16,14 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
+
+  navItems: NavItem[] = [
+    {
+      title: 'Home',
+      icon: 'home',
+      link: 'home'
+    }
+  ]
 
   constructor() { }
 
@@ -18,7 +34,7 @@ export class NavigationComponent implements OnInit {
 
 @NgModule({
   declarations: [NavigationComponent],
-  imports: [MaterialModule],
+  imports: [MaterialModule, RouterModule, CommonModule],
   exports: [NavigationComponent]
 })
 export class NavigationComponentModule {

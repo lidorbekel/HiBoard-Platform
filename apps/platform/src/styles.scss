@@ -2,11 +2,14 @@
 @tailwind utilities;
 @import "./assets/styles";
 
-
-
+html,
 body {
-  --error-color: red;
+  height: 100%;
 }
+
+//body {
+//  height: 100%;
+//}
 
 .J-bg {
   background-color: var(--J);

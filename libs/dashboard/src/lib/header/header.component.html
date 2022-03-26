@@ -1,7 +1,23 @@
-<mat-toolbar>
-  <span>HiBoard</span>
+<mat-toolbar color="primary">
+    <span> HiBoard </span>
+
+      <ul class="flex">
+        <li>
+            <button class="ml-2" (click)="logout()">
+              logout
+            </button>
+        </li>
+        <li>
+          <button mat-icon-button>
+            <mat-icon>settings</mat-icon>
+          </button>
+        </li>
+        <li>
+          <button mat-button>
+            <mat-icon>person_outline</mat-icon>
+          </button>
+
+        </li>
+      </ul>
 </mat-toolbar>
 
-<button class="ml-2" (click)="logout()">
-  logout
-</button>

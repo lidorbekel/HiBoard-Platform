@@ -98,6 +98,21 @@
         }
       }
     },
+    "home": {
+      "root": "libs/home",
+      "sourceRoot": "libs/home/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/home/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "navigation": {
       "root": "libs/navigation",
       "sourceRoot": "libs/navigation/src",

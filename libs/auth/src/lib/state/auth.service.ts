@@ -18,10 +18,10 @@ export class AuthService {
           });
         }
       }),
-      switchMap(() => {
-        return this.userService.getUser()
-          .pipe(tap({ error: () => this.logout() }));
-      })
+      // switchMap(() => {
+      //   return this.userService.getUser()
+      //     .pipe(tap({ error: () => this.logout() }));
+      // })
     )
   }
 
