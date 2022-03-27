@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import {CompletedTasksComponentModule} from "@hiboard/ui/completed-tasks/completed-tasks.component";
 
 @Component({
   selector: 'hbd-home-page',
@@ -17,7 +18,7 @@ export class HomePageComponent implements OnInit {
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [],
+  imports: [CompletedTasksComponentModule],
   exports: [HomePageComponent]
 })
 export class HomePageComponentModule {

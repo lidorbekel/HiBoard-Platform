@@ -32,7 +32,7 @@
       "@hiboard/svg/*": ["libs/svg/*"],
       "@hiboard/theme/*": ["libs/theme/src/lib/*"],
       "@hiboard/ui/*": ["libs/ui/src/lib/*"],
-      "@hiboard/users/*": ["libs/users/src/lib/*"]
+      "@hiboard/users/*": ["libs/users/src/lib/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]
