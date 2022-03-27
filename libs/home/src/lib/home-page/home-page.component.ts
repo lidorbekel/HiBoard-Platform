@@ -1,5 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import {CompletedTasksComponentModule} from "@hiboard/ui/completed-tasks/completed-tasks.component";
+import {TaskViewComponentModule} from "@hiboard/ui/task-view/task-view.component";
+import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'hbd-home-page',
@@ -8,6 +11,7 @@ import {CompletedTasksComponentModule} from "@hiboard/ui/completed-tasks/complet
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit {
+  taskViews = [1,1,1,1,1];
 
   constructor() { }
 
@@ -18,7 +22,7 @@ export class HomePageComponent implements OnInit {
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [CompletedTasksComponentModule],
+  imports: [CompletedTasksComponentModule, TaskViewComponentModule, MaterialModule, CommonModule],
   exports: [HomePageComponent]
 })
 export class HomePageComponentModule {

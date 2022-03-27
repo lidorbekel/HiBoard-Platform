@@ -9,6 +9,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 
@@ -22,7 +23,8 @@ const modules = [
   MatListModule,
   MatDividerModule,
   MatCardModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatGridListModule
 ];
 
 @NgModule({
