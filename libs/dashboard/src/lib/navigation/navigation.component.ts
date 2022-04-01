@@ -1,5 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
+import {SubscribeModule} from "@ngneat/subscribe";
+
+interface NavItem {
+  title: string,
+  icon: string,
+  link: string
+}
 
 @Component({
   selector: 'hbd-navigation',
@@ -8,8 +18,17 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent implements OnInit {
+  user$ = this.userRepo.user$;
 
-  constructor() { }
+  navItems: NavItem[] = [
+    {
+      title: 'Home',
+      icon: 'home',
+      link: 'home'
+    }
+  ]
+
+  constructor(private userRepo: UserRepository) {}
 
   ngOnInit(): void {
   }
@@ -18,7 +37,7 @@ export class NavigationComponent implements OnInit {
 
 @NgModule({
   declarations: [NavigationComponent],
-  imports: [MaterialModule],
+  imports: [MaterialModule, RouterModule, CommonModule, SubscribeModule],
   exports: [NavigationComponent]
 })
 export class NavigationComponentModule {

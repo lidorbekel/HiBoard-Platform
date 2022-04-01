@@ -27,6 +27,7 @@
       "@hiboard/auth/*": ["libs/auth/src/lib/*"],
       "@hiboard/dashboard/*": ["libs/dashboard/src/lib/*"],
       "@hiboard/env": ["libs/env/src/index.ts"],
+      "@hiboard/home/*": ["libs/home/src/lib/*"],
       "@hiboard/navigation/*": ["libs/navigation/src/lib/*"],
       "@hiboard/svg/*": ["libs/svg/*"],
       "@hiboard/theme/*": ["libs/theme/src/lib/*"],

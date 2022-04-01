@@ -1,3 +1,21 @@
 :host {
   display: block;
 }
+
+ul li {
+  list-style: none;
+}
+
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+mat-nav-list {
+  width: 150px;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}

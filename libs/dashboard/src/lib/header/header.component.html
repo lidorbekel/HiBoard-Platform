@@ -1,7 +1,30 @@
-<mat-toolbar>
-  <span>HiBoard</span>
+<mat-toolbar color="primary">
+  <span> HiBoard </span>
+
+  <ul class="flex">
+    <li>
+      <button mat-icon-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+    </li>
+    <li>
+      <button
+        mat-button
+        [tippy]="menu"
+        variation="popper"
+        placement="bottom-end"
+      >
+        <mat-icon>person_outline</mat-icon>
+      </button>
+    </li>
+  </ul>
 </mat-toolbar>
 
-<button class="ml-2" (click)="logout()">
-  logout
-</button>
+<ng-template #menu let-hide>
+  <mat-nav-list>
+    <button mat-list-item (click)="logout()">
+      <mat-icon class="mr-4">logout</mat-icon>
+      logout
+    </button>
+  </mat-nav-list>
+</ng-template>

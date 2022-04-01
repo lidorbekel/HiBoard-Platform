@@ -16,6 +16,7 @@ export class AuthService {
           user.getIdToken().then(token => {
             localStorage.setItem('token', token)
           });
+          // this.userService.getUser(); // TODO remove mock
         }
       }),
       switchMap(() => {

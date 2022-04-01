@@ -14,6 +14,7 @@ import {HotToastModule} from "@ngneat/hot-toast";
 import {ApiModule} from "@hiboard/api//api.module";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {AngularFireModule} from "@angular/fire/compat";
+import {popperVariation, TippyModule, tooltipVariation } from '@ngneat/helipopper';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,14 @@ import {AngularFireModule} from "@angular/fire/compat";
     }),
     SvgIconsModule.forRoot({
       defaultSize: 'xxl'
+    }),
+    TippyModule.forRoot({
+      defaultVariation: 'tooltip',
+      variations: {
+        tooltip: tooltipVariation,
+        popper: popperVariation,
+        menu: popperVariation
+      }
     }),
     HotToastModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),

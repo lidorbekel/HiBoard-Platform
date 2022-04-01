@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.task-view-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.task-view-btn {
+  width: 100px;
+}

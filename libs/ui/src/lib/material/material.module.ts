@@ -5,6 +5,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatGridListModule} from "@angular/material/grid-list";
+
+
 
 const modules = [
   MatButtonModule,
@@ -12,7 +19,12 @@ const modules = [
   MatIconModule,
   MatInputModule,
   MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatListModule,
+  MatDividerModule,
+  MatCardModule,
+  MatProgressBarModule,
+  MatGridListModule
 ];
 
 @NgModule({
