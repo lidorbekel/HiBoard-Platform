@@ -21,7 +21,8 @@
     {
       "files": ["*.ts"],
       "rules": {
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/no-empty-interface": "off"
       },
       "plugins": [
         "eslint-plugin-import",

@@ -1,3 +1,7 @@
+import { devTools } from '@ngneat/elf-devtools';
+
+devTools();
+
 export const environment = {
   production: false,
   firebase: {

@@ -13,6 +13,8 @@
     "module": "esnext",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
@@ -25,6 +27,7 @@
       "@hiboard/auth-login/*": ["libs/auth-login/src/lib/*"],
       "@hiboard/auth-signup/*": ["libs/auth-signup/src/lib/*"],
       "@hiboard/auth/*": ["libs/auth/src/lib/*"],
+      "@hiboard/core/*": ["libs/core/src/lib/*"],
       "@hiboard/dashboard/*": ["libs/dashboard/src/lib/*"],
       "@hiboard/env": ["libs/env/src/index.ts"],
       "@hiboard/home/*": ["libs/home/src/lib/*"],

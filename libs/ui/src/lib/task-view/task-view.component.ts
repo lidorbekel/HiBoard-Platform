@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, NgModule, Input} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {Tasks} from "@hiboard/home/types/tasks.type";
 
 @Component({
   selector: 'hbd-task-view',
@@ -8,6 +9,7 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskViewComponent implements OnInit {
+  @Input() task: Tasks.Entity;
 
   constructor() { }
 

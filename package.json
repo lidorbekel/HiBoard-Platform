@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@ngneat/elf": "1.2.0",
+    "@ngneat/elf-devtools": "^1.2.1",
     "@ngneat/elf-entities": "4.1.1",
     "@ngneat/elf-persist-state": "^1.1.1",
     "@ngneat/error-tailor": "^2.1.0",
