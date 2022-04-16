@@ -9,10 +9,12 @@
     <h2 matSubheader>Pages</h2>
 
     <ng-container *ngFor="let item of navItems">
-      <a mat-list-item routerLinkActive="list-item-active" [routerLink]="item.link">
-        <mat-icon>{{ item.icon }}</mat-icon>
-        {{ item.title }}
-      </a>
+      <ng-container *ngIf="hasAccess(item.permission)">
+        <a mat-list-item routerLinkActive="list-item-active" [routerLink]="item.link">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          {{ item.title }}
+        </a>
+      </ng-container>
     </ng-container>
 
     <mat-divider></mat-divider>

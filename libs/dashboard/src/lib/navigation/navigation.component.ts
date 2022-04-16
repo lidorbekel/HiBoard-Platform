@@ -1,14 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import {ChangeDetectionStrategy, Component, NgModule, OnInit} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {SubscribeModule} from "@ngneat/subscribe";
+import {AuthQuery} from "@hiboard/auth/state/auth.query";
+import {User} from "../../../../user/src/users.types";
 
 interface NavItem {
   title: string,
   icon: string,
-  link: string
+  link: string,
+  permission: User.Role[] | User.Role
 }
 
 @Component({
@@ -24,13 +27,19 @@ export class NavigationComponent implements OnInit {
     {
       title: 'Home',
       icon: 'home',
-      link: 'home'
+      link: 'home',
+      permission: 'employee'
     }
-  ]
+  ];
 
-  constructor(private userRepo: UserRepository) {}
+  constructor(private userRepo: UserRepository, private authQuery: AuthQuery) {
+  }
 
   ngOnInit(): void {
+  }
+
+  hasAccess(permission: User.Role | User.Role[]) {
+    return this.authQuery.hasAccess(permission);
   }
 
 }

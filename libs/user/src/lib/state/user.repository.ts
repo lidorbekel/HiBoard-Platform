@@ -29,7 +29,7 @@ export class UserRepository {
     }));
   }
 
-  getUser() {
+  getCurrentUser() {
     return store.getValue().user;
   }
 

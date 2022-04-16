@@ -14,7 +14,7 @@ export class RoleGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
-    const isAuth = route.data['roles'].includes(this.userRepo.getUser()?.role);
+    const isAuth = route.data['roles'].includes(this.userRepo.getCurrentUser()?.role);
 
     if (!isAuth) {
       this.authService.logout();
