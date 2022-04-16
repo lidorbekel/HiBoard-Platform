@@ -279,6 +279,21 @@
       },
       "tags": []
     },
+    "tasks": {
+      "root": "libs/tasks",
+      "sourceRoot": "libs/tasks/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/tasks/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "theme": {
       "root": "libs/theme",
       "sourceRoot": "libs/theme/src",

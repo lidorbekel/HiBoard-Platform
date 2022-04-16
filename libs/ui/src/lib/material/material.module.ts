@@ -10,8 +10,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
-
-
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 const modules = [
   MatButtonModule,
@@ -24,11 +24,14 @@ const modules = [
   MatDividerModule,
   MatCardModule,
   MatProgressBarModule,
-  MatGridListModule
+  MatGridListModule,
+  MatProgressSpinnerModule,
+  MatAutocompleteModule
 ];
 
 @NgModule({
   imports: modules,
   exports: modules
 })
-export class MaterialModule {}
+export class MaterialModule {
+}

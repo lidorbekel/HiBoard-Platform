@@ -1,4 +1,4 @@
-import {Tasks} from "@hiboard/home/types/tasks.type";
+import {Tasks} from "../types/tasks.type";
 
 export const tasksApiMock: Tasks.Entity[] = [
   {
@@ -6,7 +6,7 @@ export const tasksApiMock: Tasks.Entity[] = [
     title: 'title1',
     description: 'description1',
     tag: 'HR',
-    status: 'in-progress',
+    status: 'done',
   },
   {
     id: 'id2',
@@ -20,7 +20,7 @@ export const tasksApiMock: Tasks.Entity[] = [
     title: 'title3',
     description: 'description3',
     tag: 'HR',
-    status: 'in-progress',
+    status: 'done',
   },
   {
     id: 'id4',
@@ -34,6 +34,6 @@ export const tasksApiMock: Tasks.Entity[] = [
     title: 'title5',
     description: 'description5',
     tag: 'HR',
-    status: 'in-progress',
+    status: 'done',
   },
 ]

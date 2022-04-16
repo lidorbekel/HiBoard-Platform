@@ -1,14 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
-import {tap} from "rxjs";
-import {User} from "../../users.types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   static userUrl = 'user';
+
   constructor(private http: HttpClient, private userRepo: UserRepository) {
   }
 
@@ -27,7 +26,7 @@ export class UserService {
     this.userRepo.setLoading(false);
     // return this.http.get<User.Response>(UserService.userUrl)
     //   .pipe(
-    //     tap(({ data }) => {
+    //     tap(({data}) => {
     //       this.userRepo.update(data);
     //     })
     //   )

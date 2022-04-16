@@ -1,0 +1,53 @@
+<form errorTailor class="tasks-filters">
+  <mat-form-field appearance="outline">
+    <div class="flex flex-row" [class.loading]="!loading">
+      <input
+        class="w-4/5"
+        matInput
+        placeholder="Task name"
+        type="text"
+        [matAutocomplete]="nameAuto"
+        [disabled]="!loading"
+      >
+      <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
+    </div>
+    <mat-autocomplete #nameAuto="matAutocomplete">
+      <mat-option *ngFor="let option of names" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" [class.appe]="loading">
+    <input
+      #tagsValue
+      type="text"
+      matInput
+      placeholder="Task tag"
+      [matAutocomplete]="tagAuto"
+      [formControl]="tagsControl"
+    >
+    <button *ngIf="tagsValue.value" matSuffix mat-icon-button (click)="tagsValue.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-autocomplete autoActiveFirstOption #tagAuto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" [class.appe]="loading">
+    <input
+      matInput
+      type="text"
+      placeholder="Task status"
+      [matAutocomplete]="statusAuto"
+    >
+    <mat-autocomplete #statusAuto="matAutocomplete">
+      <mat-option *ngFor="let option of statuses" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

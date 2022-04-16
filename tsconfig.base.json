@@ -33,6 +33,7 @@
       "@hiboard/home/*": ["libs/home/src/lib/*"],
       "@hiboard/navigation/*": ["libs/navigation/src/lib/*"],
       "@hiboard/svg/*": ["libs/svg/*"],
+      "@hiboard/tasks/*": ["libs/tasks/src/lib/*"],
       "@hiboard/theme/*": ["libs/theme/src/lib/*"],
       "@hiboard/ui/*": ["libs/ui/src/lib/*"],
       "@hiboard/users/*": ["libs/users/src/lib/*"]

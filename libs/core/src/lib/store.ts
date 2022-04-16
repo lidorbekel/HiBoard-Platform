@@ -4,5 +4,5 @@ export interface StoreStatus {
 }
 
 export const defaultStoreStatus: StoreStatus = {
-  loading: false
+  loading: true
 }

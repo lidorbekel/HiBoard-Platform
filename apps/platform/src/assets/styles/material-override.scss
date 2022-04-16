@@ -3,7 +3,7 @@
 }
 
 .mat-form-field-infix {
-  padding: 0.25rem 0rem 0.75rem 0rem !important;
+  padding: 0.25rem 0 0.75rem 0 !important;
 }
 
 .mat-form-field-subscript-wrapper {
@@ -24,4 +24,8 @@ mat-drawer {
 
 .mat-list-base {
   padding: 0 !important;
+}
+
+.mat-form-field-suffix {
+  padding-top: 5px;
 }
