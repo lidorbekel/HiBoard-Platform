@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>Create New User</h2>
+
+<hr class="my-2">
+
+<mat-dialog-content>
+  <form [formGroup]="createUserForm" errorTailor>
+    <div class="flex mb-3">
+      <div class="mr-7">
+        <p class="text14 font-bold">First Name</p>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="firstName"
+            placeholder="First Name"
+            [controlErrorAnchor]="nameAnchor"
+          >
+        </mat-form-field>
+
+        <ng-template
+          controlErrorAnchor
+          #nameAnchor="controlErrorAnchor"
+        ></ng-template>
+      </div>
+
+      <div>
+        <p class="text14 font-bold">Last Name</p>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="Last Name"
+            [controlErrorAnchor]="lastNameAnchor"
+          >
+        </mat-form-field>
+
+        <ng-template
+          controlErrorAnchor
+          #lastNameAnchor="controlErrorAnchor"
+        ></ng-template>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <p class="text14 font-bold">Email Address</p>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          formControlName="email"
+          placeholder="Email Address"
+          [controlErrorAnchor]="emailAnchor"
+        >
+      </mat-form-field>
+
+      <ng-template
+        controlErrorAnchor
+        #emailAnchor="controlErrorAnchor"
+      ></ng-template>
+    </div>
+
+    <div class="flex-align-center">
+      <p class="text14 font-bold mr-3">Role: </p>
+      <mat-radio-group formControlName="role">
+        <mat-radio-button value="employee" class="mr-3">Employee</mat-radio-button>
+        <mat-radio-button value="manager">Manager</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<hr class="my-2">
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    (loadstart)="loading"
+    color="primary"
+    (click)="createUser()"
+    [class.hbd-spinner]="loading"
+    [disabled]="loading"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

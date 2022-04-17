@@ -11,7 +11,6 @@ interface NavItem {
   title: string,
   icon: string,
   link: string,
-  permission: User.Role[] | User.Role
 }
 
 @Component({
@@ -22,20 +21,34 @@ interface NavItem {
 })
 export class NavigationComponent implements OnInit {
   user$ = this.userRepo.user$;
+  navItems: NavItem[] = [];
 
-  navItems: NavItem[] = [
+  employeeNavItems: NavItem[] = [
     {
       title: 'Home',
       icon: 'home',
       link: 'home',
-      permission: 'employee'
     }
   ];
+
+  managerNavItems: NavItem[] = [
+    {
+      title: 'Employees',
+      icon: 'supervised_user_circle',
+      link: 'employees'
+    }
+  ]
 
   constructor(private userRepo: UserRepository, private authQuery: AuthQuery) {
   }
 
   ngOnInit(): void {
+    const userRole = this.userRepo.getCurrentUser()!.role;
+    if (userRole === 'employee') {
+      this.navItems = this.employeeNavItems;
+    } else {
+      this.navItems = this.managerNavItems;
+    }
   }
 
   hasAccess(permission: User.Role | User.Role[]) {

@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, NgModule, ChangeDetectorRef} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
@@ -26,15 +26,16 @@ export class AuthLoginPageComponent {
   constructor(private navigationService: NavigationService,
               private authService: AuthService,
               private toast: HotToastService,
-              private cdr: ChangeDetectorRef) {}
+              private cdr: ChangeDetectorRef) {
+  }
 
-  login(){
+  login() {
     this.error = '';
-    if(this.loginForm.invalid){
+    if (this.loginForm.invalid) {
       return;
     }
 
-    const { username, password } = this.loginForm.value;
+    const {username, password} = this.loginForm.value;
 
     this.authService.login(username, password)
       .pipe(
@@ -42,7 +43,7 @@ export class AuthLoginPageComponent {
           loading: 'Logging in...',
         }),
         switchMap(() => {
-            return this.navigationService.toHome();
+            return this.navigationService.toDefaultByRole();
           }
         )
       )
@@ -56,7 +57,7 @@ export class AuthLoginPageComponent {
       });
   }
 
-  get username(){
+  get username() {
     return this.loginForm.get('username');
   }
 
@@ -73,4 +74,5 @@ export class AuthLoginPageComponent {
   imports: [MaterialModule, ReactiveFormsModule, CommonModule, ErrorTailorModule],
   declarations: [AuthLoginPageComponent]
 })
-export class AuthLoginPageModule {}
+export class AuthLoginPageModule {
+}

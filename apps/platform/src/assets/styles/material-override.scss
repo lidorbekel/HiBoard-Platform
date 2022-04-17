@@ -29,3 +29,12 @@ mat-drawer {
 .mat-form-field-suffix {
   padding-top: 5px;
 }
+
+.mat-dialog-container {
+  padding: 10px 20px !important;
+  overflow: hidden !important;
+}
+
+.mat-dialog-actions {
+  padding: 0 !important;
+}

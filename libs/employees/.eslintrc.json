@@ -10,7 +10,7 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["libs/home/tsconfig.*?.json"]
+        "project": ["libs/employees/tsconfig.*?.json"]
       }
     }
   ]

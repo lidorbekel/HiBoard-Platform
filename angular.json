@@ -89,6 +89,21 @@
       },
       "tags": []
     },
+    "employees": {
+      "root": "libs/employees",
+      "sourceRoot": "libs/employees/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/employees/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "env": {
       "projectType": "library",
       "root": "libs/env",

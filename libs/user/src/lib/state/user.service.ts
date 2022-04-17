@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
+import {User} from "../../users.types";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,21 @@ export class UserService {
     //       this.userRepo.update(data);
     //     })
     //   )
+  }
+
+  createUser(user: Omit<User.Entity, 'id'>) {
+    // return this.http.post<User.Entity>(UserService.userUrl, user);
+    return new Observable<User.Response>((observer) => {
+      setTimeout(() => {
+        observer.next({
+          data: {
+            user: {
+              id: '1',
+              ...user
+            }
+          }
+        })
+      }, 2000)
+    })
   }
 }

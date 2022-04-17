@@ -11,5 +11,6 @@ export namespace User {
     role: Role;
   }
 
-  export interface Response extends BaseResponse<Entity> {}
+  export interface Response extends BaseResponse<{ user: Entity }> {
+  }
 }

@@ -12,6 +12,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatRadioModule} from "@angular/material/radio";
 
 const modules = [
   MatButtonModule,
@@ -26,7 +28,9 @@ const modules = [
   MatProgressBarModule,
   MatGridListModule,
   MatProgressSpinnerModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDialogModule,
+  MatRadioModule
 ];
 
 @NgModule({

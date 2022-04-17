@@ -15,6 +15,17 @@ const children: Routes = [
     data: {
       roles: ['employee']
     }
+  },
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('@hiboard/employees/employees.module').then(
+        ({EmployeesModule}) => EmployeesModule
+      ),
+    canActivate: [RoleGuard],
+    data: {
+      roles: ['manager']
+    }
   }
 ]
 
