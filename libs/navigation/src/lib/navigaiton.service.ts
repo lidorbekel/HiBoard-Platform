@@ -30,7 +30,7 @@ export class NavigationService {
   toDefaultByRole() {
     const {role} = this.userRepo.getCurrentUser()!;
 
-    if (role === 'employee') {
+    if (role === 'Employee') {
       return this.toTasks();
     } else {
       return this.toEmployees();

@@ -2,7 +2,6 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TasksModule} from "@hiboard/tasks/tasks.module";
-import {RoleGuard} from "@hiboard/auth/guards/role.guard";
 
 const children: Routes = [
   {
@@ -11,7 +10,7 @@ const children: Routes = [
       import('@hiboard/tasks/tasks.module').then(
         ({TasksModule}) => TasksModule
       ),
-    canActivate: [RoleGuard],
+    // canActivate: [RoleGuard],
     data: {
       roles: ['employee']
     }
@@ -22,9 +21,9 @@ const children: Routes = [
       import('@hiboard/employees/employees.module').then(
         ({EmployeesModule}) => EmployeesModule
       ),
-    canActivate: [RoleGuard],
+    // canActivate: [RoleGuard],
     data: {
-      roles: ['manager']
+      roles: ['Manager']
     }
   }
 ]

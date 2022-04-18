@@ -4,7 +4,6 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {AuthService} from "@hiboard/auth/state/auth.service";
-import {loadingFor} from "@ngneat/loadoff";
 import {HotToastService} from "@ngneat/hot-toast";
 import {switchMap} from "rxjs";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
@@ -20,8 +19,9 @@ export class AuthLoginPageComponent {
     username: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-  loading = loadingFor('login');
   error: string;
+
+  loading = false;
 
   constructor(private navigationService: NavigationService,
               private authService: AuthService,
@@ -37,11 +37,10 @@ export class AuthLoginPageComponent {
 
     const {username, password} = this.loginForm.value;
 
+    this.loading = true;
+
     this.authService.login(username, password)
       .pipe(
-        this.toast.observe({
-          loading: 'Logging in...',
-        }),
         switchMap(() => {
             return this.navigationService.toDefaultByRole();
           }
@@ -51,9 +50,11 @@ export class AuthLoginPageComponent {
         error: () => {
           this.toast.close()
           this.error = "Invalid credentials";
+          this.loading = false
           this.cdr.markForCheck();
         },
-        next: () => this.toast.close()
+        next: () => this.toast.close(),
+        complete: () => this.loading = false
       });
   }
 

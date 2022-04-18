@@ -64,7 +64,6 @@
         <mat-radio-button value="manager">Manager</mat-radio-button>
       </mat-radio-group>
     </div>
-
   </form>
 </mat-dialog-content>
 
@@ -79,6 +78,7 @@
     (click)="createUser()"
     [class.hbd-spinner]="loading"
     [disabled]="loading"
+    type="submit"
   >
     Create
   </button>

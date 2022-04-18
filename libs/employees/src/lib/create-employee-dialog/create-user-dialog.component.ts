@@ -6,6 +6,7 @@ import {UserService} from "../../../../user/src/lib/state/user.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CommonModule} from "@angular/common";
 import {HotToastService} from "@ngneat/hot-toast";
+import {ErrorOnSubmitMatcher} from "@hiboard/ui/material/error-state-matcher";
 
 @Component({
   selector: 'hbd-create-user-dialog',
@@ -20,6 +21,8 @@ export class CreateUserDialogComponent {
     email: new FormControl('', Validators.email),
     role: new FormControl('employee'),
   })
+
+  matcher = new ErrorOnSubmitMatcher();
 
   loading = false;
 

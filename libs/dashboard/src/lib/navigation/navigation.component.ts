@@ -25,9 +25,9 @@ export class NavigationComponent implements OnInit {
 
   employeeNavItems: NavItem[] = [
     {
-      title: 'Home',
-      icon: 'home',
-      link: 'home',
+      title: 'Tasks',
+      icon: 'assignment',
+      link: 'tasks',
     }
   ];
 
@@ -43,12 +43,13 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userRole = this.userRepo.getCurrentUser()!.role;
-    if (userRole === 'employee') {
-      this.navItems = this.employeeNavItems;
-    } else {
-      this.navItems = this.managerNavItems;
-    }
+    this.navItems = this.employeeNavItems;
+    // const userRole = this.userRepo.getCurrentUser()!.role;
+    // if (userRole === 'employee') {
+    //   this.navItems = this.employeeNavItems;
+    // } else {
+    //   this.navItems = this.managerNavItems;
+    // }
   }
 
   hasAccess(permission: User.Role | User.Role[]) {

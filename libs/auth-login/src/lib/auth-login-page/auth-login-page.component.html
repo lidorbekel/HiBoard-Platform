@@ -18,8 +18,8 @@
   </div>
 
   <div class="form-control">
-    <mat-label >Password</mat-label>
-    <mat-form-field appearance="outline"class="w-full">
+    <mat-label>Password</mat-label>
+    <mat-form-field appearance="outline" class="w-full">
       <input
         matInput
         formControlName="password"
@@ -42,6 +42,9 @@
     color="primary"
     class="w-full"
     (click)="login()"
+    type="submit"
+    [class.hbd-spinner]="loading"
+    [disabled]="loading"
   >
     Login
   </button>
