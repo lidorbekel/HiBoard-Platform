@@ -7,6 +7,8 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {CommonModule} from "@angular/common";
 import {HotToastService} from "@ngneat/hot-toast";
 import {ErrorOnSubmitMatcher} from "@hiboard/ui/material/error-state-matcher";
+import {TippyModule} from "@ngneat/helipopper";
+import {User} from "../../../../user/src/users.types";
 
 @Component({
   selector: 'hbd-create-user-dialog',
@@ -19,8 +21,18 @@ export class CreateUserDialogComponent {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
+    password: new FormControl('', Validators.required),
+    department: new FormControl('Product', Validators.required),
     role: new FormControl('employee'),
   })
+
+  departments: User.Department[] = [
+    'R&D',
+    'Product',
+    'Sales'
+  ];
+
+  hidePassword = true;
 
   matcher = new ErrorOnSubmitMatcher();
 
@@ -54,7 +66,7 @@ export class CreateUserDialogComponent {
 
 @NgModule({
   declarations: [CreateUserDialogComponent],
-  imports: [MaterialModule, ReactiveFormsModule, ErrorTailorModule, CommonModule],
+  imports: [MaterialModule, ReactiveFormsModule, ErrorTailorModule, CommonModule, TippyModule],
   exports: [CreateUserDialogComponent]
 })
 export class CreateUserDialogComponentModule {

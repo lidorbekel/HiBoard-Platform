@@ -1,4 +1,4 @@
-import {from, Observable, tap} from "rxjs";
+import {from, Observable, switchMap, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {UserService} from "../../../../user/src/lib/state/user.service";
@@ -16,13 +16,13 @@ export class AuthService {
           user.getIdToken().then(token => {
             localStorage.setItem('token', token)
           });
-          this.userService.getUser(); // TODO remove mock
+          // this.userService.getUser(); // TODO remove mock
         }
       }),
-      // switchMap(() => {
-      //   return this.userService.getUser()
-      //     .pipe(tap({error: () => this.logout()}));
-      // })
+      switchMap(() => {
+        return this.userService.getUser()
+          .pipe(tap({error: () => this.logout()}));
+      })
     )
   }
 

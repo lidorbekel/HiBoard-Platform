@@ -2,13 +2,14 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
 import {User} from "../../users.types";
-import {Observable} from "rxjs";
+import {tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  static userUrl = 'userinfo';
+  static userInfoUrl = 'userinfo';
+  static userUrl = 'user';
 
   constructor(private http: HttpClient, private userRepo: UserRepository) {
   }
@@ -16,35 +17,16 @@ export class UserService {
   getUser() {
     this.userRepo.setLoading(true);
 
-    // // TODO remove mock
-    this.userRepo.update({
-      firstName: 'Ido',
-      lastName: 'Golan',
-      id: '1',
-      email: 'idogo@gmail.com',
-      role: 'Employee'
-    });
-
-    // this.userRepo.setLoading(false);
-    // return this.http.get<User.Response>(UserService.userUrl)
-    //   .pipe(
-    //     tap(({data}) => {
-    //       this.userRepo.update(data);
-    //     })
-    //   )
+    return this.http.get<User.Response>(UserService.userInfoUrl)
+      .pipe(
+        tap(({data}) => {
+          this.userRepo.setLoading(false);
+          this.userRepo.update(data);
+        })
+      )
   }
 
   createUser(user: Omit<User.Entity, 'id'>) {
-    // return this.http.post<User.Entity>(UserService.userUrl, user);
-    return new Observable<User.Response>((observer) => {
-      setTimeout(() => {
-        observer.next({
-          data: {
-            id: '1',
-            ...user
-          }
-        })
-      }, 2000)
-    })
+    return this.http.post<User.Entity>(UserService.userUrl, user);
   }
 }

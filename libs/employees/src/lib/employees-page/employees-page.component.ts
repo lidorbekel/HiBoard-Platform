@@ -23,7 +23,7 @@ export class EmployeesPageComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateUserDialogComponent);
 
     dialogRef.afterClosed().subscribe(res => {
-      if (res?.data?.user) {
+      if (res?.data) {
         this.toast.success('User created successfully')
       }
     })

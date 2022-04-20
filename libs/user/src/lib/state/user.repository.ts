@@ -29,9 +29,9 @@ export class UserRepository {
     }));
   }
 
-  getCurrentUser() {
-    return store.getValue().user;
-  }
+  // getCurrentUser() {
+  //   return store.getValue().user;
+  // }
 
   setLoading(isLoading: boolean) {
     store.update((state) => ({

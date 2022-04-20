@@ -14,7 +14,7 @@ import {ApiModule} from "@hiboard/api//api.module";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {AngularFireModule} from "@angular/fire/compat";
 import {popperVariation, TippyModule, tooltipVariation} from '@ngneat/helipopper';
-import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {CoreModule} from "@hiboard/core/core.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +25,7 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
     MaterialModule,
     HttpClientModule,
     ApiModule,
-    NgxSkeletonLoaderModule,
+    CoreModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {

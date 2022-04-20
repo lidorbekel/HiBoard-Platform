@@ -4,8 +4,7 @@ import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {SubscribeModule} from "@ngneat/subscribe";
-import {AuthQuery} from "@hiboard/auth/state/auth.query";
-import {User} from "../../../../user/src/users.types";
+import {map} from "rxjs";
 
 interface NavItem {
   title: string,
@@ -39,23 +38,23 @@ export class NavigationComponent implements OnInit {
     }
   ]
 
-  constructor(private userRepo: UserRepository, private authQuery: AuthQuery) {
+  constructor(private userRepo: UserRepository) {
   }
 
   ngOnInit(): void {
-    this.navItems = this.employeeNavItems;
-    // const userRole = this.userRepo.getCurrentUser()!.role;
-    // if (userRole === 'employee') {
-    //   this.navItems = this.employeeNavItems;
-    // } else {
-    //   this.navItems = this.managerNavItems;
-    // }
+    this.userRepo.user$.pipe(
+      map((user) => {
+        if (user) {
+          const {role} = user;
+          if (role === 'Employee') {
+            this.navItems = this.employeeNavItems;
+          } else {
+            this.navItems = this.managerNavItems;
+          }
+        }
+      })
+    ).subscribe();
   }
-
-  hasAccess(permission: User.Role | User.Role[]) {
-    return this.authQuery.hasAccess(permission);
-  }
-
 }
 
 @NgModule({
