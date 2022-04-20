@@ -46,7 +46,7 @@ export class NavigationComponent implements OnInit {
       map((user) => {
         if (user) {
           const {role} = user;
-          if (role === 'Employee') {
+          if (role === 'employee') {
             this.navItems = this.employeeNavItems;
           } else {
             this.navItems = this.managerNavItems;

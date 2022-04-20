@@ -59,6 +59,21 @@
       },
       "tags": []
     },
+    "company": {
+      "root": "libs/company",
+      "sourceRoot": "libs/company/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/company/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "core": {
       "root": "libs/core",
       "sourceRoot": "libs/core/src",
@@ -138,6 +153,21 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["libs/home/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "join": {
+      "root": "libs/join",
+      "sourceRoot": "libs/join/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/join/**/*.ts"]
           }
         }
       },

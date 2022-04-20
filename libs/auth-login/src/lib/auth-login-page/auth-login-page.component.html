@@ -42,11 +42,18 @@
     color="primary"
     class="w-full"
     (click)="login()"
-    type="submit"
     [class.hbd-spinner]="loading"
     [disabled]="loading"
   >
     Login
+  </button>
+
+
+  <button
+    class="flex mt-6 text14 mx-auto"
+    (click)="onJoin()"
+  >
+    Join to HiBoard !
   </button>
 
   <p

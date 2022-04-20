@@ -69,6 +69,10 @@ export class AuthLoginPageComponent {
   toForgotPassword() {
     this.navigationService.forgotPassword();
   }
+
+  onJoin() {
+    this.navigationService.toJoinHiboard();
+  }
 }
 
 @NgModule({

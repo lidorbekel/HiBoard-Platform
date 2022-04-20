@@ -2,7 +2,15 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
 import {User} from "../../users.types";
-import {tap} from "rxjs";
+import {Observable, tap} from "rxjs";
+
+const adminUserMock: User.Entity = {
+  firstName: 'adminFirst',
+  lastName: 'adminLast',
+  role: 'admin',
+  id: '15',
+  email: 'admin@gmail.com'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +34,12 @@ export class UserService {
       )
   }
 
-  createUser(user: Omit<User.Entity, 'id'>) {
-    return this.http.post<User.Entity>(UserService.userUrl, user);
+  createUser(user: Omit<User.Entity, 'id'> & { password: string }) {
+    // return this.http.post<User.Entity>(UserService.userUrl, user);
+    return new Observable<User.Entity>((observer) => {
+      setTimeout(() => {
+        observer.next(adminUserMock);
+      }, 2000)
+    })
   }
 }

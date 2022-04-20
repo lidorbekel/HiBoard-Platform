@@ -28,8 +28,12 @@ export class NavigationService {
     return this.navigate('employees');
   }
 
+  toJoinHiboard() {
+    return this.navigate('join')
+  }
+
   toDefaultByRole(role: User.Role) {
-    if (role === 'Employee') {
+    if (role === 'employee') {
       return this.toTasks();
     } else {
       return this.toEmployees();
