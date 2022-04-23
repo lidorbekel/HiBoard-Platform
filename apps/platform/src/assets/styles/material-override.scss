@@ -3,11 +3,7 @@
 }
 
 .mat-form-field-infix {
-  padding: 0.25rem 0rem 0.75rem 0rem !important;
-}
-
-.mat-form-field-subscript-wrapper {
-  padding: 0 !important;
+  padding: 0.25rem 0 0.75rem 0 !important;
 }
 
 mat-label {
@@ -16,4 +12,21 @@ mat-label {
 
 .mat-form-field-wrapper {
   padding-bottom: 0 !important;
+}
+
+mat-drawer {
+  width: 250px !important;
+}
+
+.mat-list-base {
+  padding: 0 !important;
+}
+
+.mat-dialog-container {
+  padding: 10px 20px !important;
+  overflow: hidden !important;
+}
+
+.mat-dialog-actions {
+  padding: 0 !important;
 }

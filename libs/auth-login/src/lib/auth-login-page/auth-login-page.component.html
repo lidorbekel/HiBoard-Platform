@@ -18,8 +18,8 @@
   </div>
 
   <div class="form-control">
-    <mat-label >Password</mat-label>
-    <mat-form-field appearance="outline"class="w-full">
+    <mat-label>Password</mat-label>
+    <mat-form-field appearance="outline" class="w-full">
       <input
         matInput
         formControlName="password"
@@ -42,8 +42,18 @@
     color="primary"
     class="w-full"
     (click)="login()"
+    [class.hbd-spinner]="loading"
+    [disabled]="loading"
   >
     Login
+  </button>
+
+
+  <button
+    class="flex mt-6 text14 mx-auto"
+    (click)="onJoin()"
+  >
+    Join to HiBoard !
   </button>
 
   <p

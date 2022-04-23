@@ -4,14 +4,19 @@ import {HomeRouteGuard} from "@hiboard/auth/guards/protected-route.guard";
 
 const routes: Routes = [
   {
-    path: 'auth',
-    loadChildren: () => import('@hiboard/auth/auth.module').then(({ AuthModule }) => AuthModule),
-  },
-  {
     path: '',
-    loadChildren: () => import('@hiboard/dashboard/dashboard.module').then(({ DashboardModule }) => DashboardModule),
+    loadChildren: () => import('@hiboard/dashboard/dashboard.module').then(({DashboardModule}) => DashboardModule),
     canActivate: [HomeRouteGuard],
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('@hiboard/auth/auth.module').then(({AuthModule}) => AuthModule),
+  },
+  {
+    path: 'join',
+    loadChildren: () => import('@hiboard/join/join.module').then(({JoinModule}) => JoinModule),
+  },
+
 ]
 
 @NgModule({
@@ -22,4 +27,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -1,3 +1,7 @@
+import {devTools} from '@ngneat/elf-devtools';
+
+devTools();
+
 export const environment = {
   production: false,
   firebase: {
@@ -8,5 +12,6 @@ export const environment = {
     messagingSenderId: "597993545195",
     appId: "1:597993545195:web:233722b0f85923e2908dae",
     measurementId: "G-ZPKKWKSQYY"
-  }
+  },
+  baseUrl: 'http://193.106.55.129:5727'
 };

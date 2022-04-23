@@ -1,0 +1,67 @@
+<ng-container *subscribe="company$; let company">
+  <mat-spinner *ngIf="!company" class="page-spinner-loader"></mat-spinner>
+  <ng-container *ngIf="company">
+    <h1 class="text-center font-bold mb-6">{{ company.name }}</h1>
+
+    <form [formGroup]="form" errorTailor>
+      <div class="mb-4">
+        <p class="text14 font-bold">Name</p>
+        <mat-form-field appearance="outline" class="w-1/4">
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Name"
+            [controlErrorAnchor]="nameAnchor"
+          >
+        </mat-form-field>
+
+        <ng-template
+          controlErrorAnchor
+          #nameAnchor="controlErrorAnchor"
+        ></ng-template>
+      </div>
+
+      <div class="mb-4">
+        <p class="text14 font-bold">Departments</p>
+        <mat-form-field class="w-1/2" appearance="outline">
+          <mat-chip-list #chipList aria-label="Department selection">
+            <mat-chip *ngFor="let department of departments" (removed)="remove(department)">
+              {{department}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input placeholder="New Department..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-4">
+        <p class="text14 font-bold">Description</p>
+        <mat-form-field appearance="outline" class="w-1/2 description">
+          <textarea
+            matInput
+            formControlName="description"
+            placeholder="Description"
+            rows="10"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="w-full flex mt-8">
+        <button mat-raised-button color="primary" type="submit"
+                (click)="onEdit()"
+                [class.hbd-spinner]="loading"
+                [disabled]="loading || form.invalid"
+        >
+          <mat-icon>edit</mat-icon>
+          Save
+        </button>
+      </div>
+    </form>
+  </ng-container>
+</ng-container>

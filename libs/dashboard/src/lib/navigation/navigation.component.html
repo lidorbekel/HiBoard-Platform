@@ -1,12 +1,22 @@
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-  </mat-drawer>
+<ng-container *subscribe="user$; let user">
+  <mat-nav-list>
+    <div class="profile-card" *ngIf="user">
+      Hi {{ user.firstName }} {{ user.lastName }} !
+    </div>
 
-<!--  <div class="example-sidenav-content">-->
-<!--    <button type="button" mat-button (click)="drawer.toggle()">-->
-<!--      Toggle sidenav-->
-<!--    </button>-->
-<!--  </div>-->
+    <mat-divider></mat-divider>
 
-</mat-drawer-container>
+    <h2 matSubheader>Pages</h2>
+
+    <ng-container *ngFor="let item of topNavItems">
+      <a mat-list-item routerLinkActive="list-item-active" [routerLink]="item.link">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        {{ item.title }}
+      </a>
+    </ng-container>
+
+    <mat-divider></mat-divider>
+
+  </mat-nav-list>
+
+</ng-container>

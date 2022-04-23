@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpRequest, HttpHandler } from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {AuthService} from "@hiboard/auth/state/auth.service";
 import {switchMap} from "rxjs";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.getToken().pipe(
@@ -13,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
         req = req.clone({
           setHeaders: {
             Authorization: "Bearer " + token
-          }
+          },
         });
         return next.handle(req);
       })

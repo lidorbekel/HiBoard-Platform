@@ -1,6 +1,21 @@
 {
   "version": 1,
   "projects": {
+    "admin": {
+      "root": "libs/admin",
+      "sourceRoot": "libs/admin/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/admin/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "api": {
       "root": "libs/api",
       "sourceRoot": "libs/api/src",
@@ -59,6 +74,36 @@
       },
       "tags": []
     },
+    "company": {
+      "root": "libs/company",
+      "sourceRoot": "libs/company/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/company/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "dashboard": {
       "root": "libs/dashboard",
       "sourceRoot": "libs/dashboard/src",
@@ -69,6 +114,21 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["libs/dashboard/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "employees": {
+      "root": "libs/employees",
+      "sourceRoot": "libs/employees/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/employees/**/*.ts"]
           }
         }
       },
@@ -97,6 +157,36 @@
           }
         }
       }
+    },
+    "home": {
+      "root": "libs/home",
+      "sourceRoot": "libs/home/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/home/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "join": {
+      "root": "libs/join",
+      "sourceRoot": "libs/join/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/join/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
     },
     "navigation": {
       "root": "libs/navigation",
@@ -244,6 +334,21 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["libs/svg/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "tasks": {
+      "root": "libs/tasks",
+      "sourceRoot": "libs/tasks/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/tasks/**/*.ts"]
           }
         }
       },

@@ -1,11 +1,56 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {TasksModule} from "@hiboard/tasks/tasks.module";
+
+const children: Routes = [
+  {
+    path: 'tasks',
+    loadChildren: () =>
+      import('@hiboard/tasks/tasks.module').then(
+        ({TasksModule}) => TasksModule
+      ),
+    // canActivate: [RoleGuard],
+    data: {
+      roles: ['employee']
+    }
+  },
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('@hiboard/employees/employees.module').then(
+        ({EmployeesModule}) => EmployeesModule
+      ),
+    // canActivate: [RoleGuard],
+    data: {
+      roles: ['manager']
+    }
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('@hiboard/admin/admin.module').then(
+        ({AdminModule}) => AdminModule
+      ),
+    // canActivate: [RoleGuard],
+    data: {
+      roles: ['admin']
+    }
+  }
+]
 
 const dashboardRoutes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'tasks'
+      },
+      ...children
+    ]
   }
 ]
 
@@ -13,4 +58,5 @@ const dashboardRoutes: Routes = [
   imports: [RouterModule.forChild(dashboardRoutes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule {
+}

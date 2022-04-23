@@ -1,3 +1,18 @@
 :host {
   display: block;
 }
+
+.mat-icon {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 20px;
+  font-weight: var(--font-bold);
+}
+
+.list-item-active {
+  background: rgba(0, 0, 0, .04);
+}
