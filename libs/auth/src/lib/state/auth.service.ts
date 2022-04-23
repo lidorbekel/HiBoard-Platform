@@ -3,10 +3,12 @@ import {Injectable} from "@angular/core";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {UserService} from "../../../../user/src/lib/state/user.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  constructor(private auth: AngularFireAuth, private userService: UserService, private navigationService: NavigationService) {
+  constructor(private auth: AngularFireAuth, private userService: UserService, private navigationService: NavigationService,
+              private userRepo: UserRepository) {
   }
 
   login(username: string, password: string) {
@@ -16,7 +18,6 @@ export class AuthService {
           user.getIdToken().then(token => {
             localStorage.setItem('token', token)
           });
-          // this.userService.getUser(); // TODO remove mock
         }
       }),
       switchMap(() => {
@@ -29,6 +30,7 @@ export class AuthService {
   logout() {
     this.auth.signOut().then(() => {
       localStorage.removeItem('token');
+      this.userRepo.update(null);
       this.navigationService.toLogin();
     })
   }

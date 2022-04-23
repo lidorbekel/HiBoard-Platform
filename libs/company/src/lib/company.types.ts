@@ -2,9 +2,10 @@ import {BaseResponse} from "@hiboard/api/api.types";
 
 export namespace Company {
   export interface Entity {
-    name: string,
+    id: string;
+    name: string;
     departments?: string[];
-    admin: string;
+    description?: string;
   }
 
   export interface Response extends BaseResponse<Entity> {

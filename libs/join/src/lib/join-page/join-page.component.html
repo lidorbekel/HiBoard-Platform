@@ -1,10 +1,10 @@
 <div class="container">
-  <h1 class="mb-10">Welcome to <span class="font-bold">HiBoard</span> !</h1>
+  <h1 class="mb-10">Join <span class="font-bold">HiBoard</span> !</h1>
 
   <form [formGroup]="form" errorTailor class="form">
     <div class="details">
       <section class="w-[450px]">
-        <h2 class="text20 mb-6">Personal Information</h2>
+        <h2 class="text20 mb-6">Admin Information</h2>
         <div class="flex mb-2 justify-between">
           <div>
             <p class="text14 font-bold">First Name</p>
@@ -104,17 +104,22 @@
             #companyNameAnchor="controlErrorAnchor"
           ></ng-template>
         </div>
-        
+
       </section>
     </div>
 
-    <button mat-raised-button color="primary" class="take-me mx-auto flex-align-center" type="submit"
-            (click)="register()"
-            [class.hbd-spinner]="loading"
-            [disabled]="loading || form.invalid"
-    >
-      Take me to HiBoard
-    </button>
+    <div class="w-full flex justify-end mt-8">
+      <button mat-stroked-button color="primary" style="margin-right: 8px" (click)="toLogin()">
+        Back to login
+      </button>
+      <button mat-raised-button color="primary" type="submit"
+              (click)="register()"
+              [class.hbd-spinner]="loading"
+              [disabled]="loading || form.invalid"
+      >
+        Take me to HiBoard
+      </button>
+    </div>
   </form>
 </div>
 

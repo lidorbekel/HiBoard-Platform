@@ -5,11 +5,13 @@ import {CommonModule} from "@angular/common";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {SubscribeModule} from "@ngneat/subscribe";
 import {map} from "rxjs";
+import {User} from "../../../../user/src/users.types";
 
 interface NavItem {
   title: string,
   icon: string,
   link: string,
+  role?: User.Role
 }
 
 @Component({
@@ -20,23 +22,28 @@ interface NavItem {
 })
 export class NavigationComponent implements OnInit {
   user$ = this.userRepo.user$;
-  navItems: NavItem[] = [];
-
-  employeeNavItems: NavItem[] = [
+  navItems: NavItem[] = [
     {
       title: 'Tasks',
       icon: 'assignment',
       link: 'tasks',
-    }
-  ];
-
-  managerNavItems: NavItem[] = [
+      role: 'employee'
+    },
     {
       title: 'Employees',
       icon: 'supervised_user_circle',
-      link: 'employees'
+      link: 'employees',
+      role: 'manager'
+    },
+    {
+      title: 'Company Details',
+      icon: 'library_books',
+      link: 'admin/company-details',
+      role: 'admin'
     }
-  ]
+  ];
+
+  topNavItems: NavItem[] = [];
 
   constructor(private userRepo: UserRepository) {
   }
@@ -45,12 +52,7 @@ export class NavigationComponent implements OnInit {
     this.userRepo.user$.pipe(
       map((user) => {
         if (user) {
-          const {role} = user;
-          if (role === 'employee') {
-            this.navItems = this.employeeNavItems;
-          } else {
-            this.navItems = this.managerNavItems;
-          }
+          this.topNavItems = this.navItems.filter((item) => item.role === user.role);
         }
       })
     ).subscribe();

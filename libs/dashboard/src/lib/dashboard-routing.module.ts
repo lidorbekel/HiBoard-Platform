@@ -23,7 +23,18 @@ const children: Routes = [
       ),
     // canActivate: [RoleGuard],
     data: {
-      roles: ['Manager']
+      roles: ['manager']
+    }
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('@hiboard/admin/admin.module').then(
+        ({AdminModule}) => AdminModule
+      ),
+    // canActivate: [RoleGuard],
+    data: {
+      roles: ['admin']
     }
   }
 ]

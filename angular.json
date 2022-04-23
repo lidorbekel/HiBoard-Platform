@@ -1,6 +1,21 @@
 {
   "version": 1,
   "projects": {
+    "admin": {
+      "root": "libs/admin",
+      "sourceRoot": "libs/admin/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/admin/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "api": {
       "root": "libs/api",
       "sourceRoot": "libs/api/src",

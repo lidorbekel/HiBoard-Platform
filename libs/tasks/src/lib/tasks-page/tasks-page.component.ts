@@ -72,7 +72,6 @@ export class TasksPageComponent implements OnInit, OnDestroy {
       untilDestroyed(this)
     )
       .subscribe((filteredTasks) => {
-        console.log(filteredTasks);
         this.filteredTasks = filteredTasks;
       });
 

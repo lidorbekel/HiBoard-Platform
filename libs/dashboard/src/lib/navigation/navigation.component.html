@@ -8,7 +8,7 @@
 
     <h2 matSubheader>Pages</h2>
 
-    <ng-container *ngFor="let item of navItems">
+    <ng-container *ngFor="let item of topNavItems">
       <a mat-list-item routerLinkActive="list-item-active" [routerLink]="item.link">
         <mat-icon>{{ item.icon }}</mat-icon>
         {{ item.title }}

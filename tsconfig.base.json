@@ -18,6 +18,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@hiboard/admin/*": ["libs/admin/src/lib/*"],
       "@hiboard/api/*": ["libs/api/src/lib/*"],
       "@hiboard/auth": ["libs/auth/src/index.ts"],
       "@hiboard/auth-change-password/*": [

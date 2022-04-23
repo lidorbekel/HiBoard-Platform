@@ -9,6 +9,9 @@ import {UserService} from "../../../../user/src/lib/state/user.service";
 import {CompanyService} from "@hiboard/company/state/company.service";
 import {Company} from "@hiboard/company/company.types";
 import {HotToastService} from "@ngneat/hot-toast";
+import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {switchMap} from "rxjs";
+import {AuthService} from "@hiboard/auth/state/auth.service";
 
 @Component({
   selector: 'hbd-join-page',
@@ -32,7 +35,10 @@ export class JoinPageComponent implements OnInit {
   constructor(private userService: UserService,
               private companyService: CompanyService,
               private cdr: ChangeDetectorRef,
-              private toast: HotToastService) {
+              private toast: HotToastService,
+              private navigationService: NavigationService,
+              private authService: AuthService
+  ) {
   }
 
   register() {
@@ -42,7 +48,7 @@ export class JoinPageComponent implements OnInit {
 
     this.loading = true;
 
-    const {firstName, lastName, email, password, company, departments} = this.form.value;
+    const {firstName, lastName, email, password, company} = this.form.value;
 
     const adminUser = {
       firstName,
@@ -54,16 +60,23 @@ export class JoinPageComponent implements OnInit {
 
     const newCompany = {
       name: company,
-      admin: email
-    } as Company.Entity;
+    } as Omit<Company.Entity, 'id'>;
 
     this.userService.createUser(adminUser).subscribe({
       next: () => {
         this.companyService.createCompany(newCompany).subscribe({
           next: () => {
-            this.toast.success('User and Company Created Successfully');
-            this.loading = false;
-            this.cdr.detectChanges();
+            this.authService.login(email, password)
+              .pipe(
+                switchMap((user) => {
+                    return this.navigationService.toDefaultByRole(user.data.role);
+                  }
+                )
+              ).subscribe(({
+              next: () => {
+                this.toast.success(`Welcome to HiBoard, ${company} !`)
+              }
+            }))
           },
           error: () => {
             this.toast.error('Unable to create company, please try again later');
@@ -78,6 +91,10 @@ export class JoinPageComponent implements OnInit {
         this.cdr.detectChanges();
       }
     })
+  }
+
+  toLogin() {
+    this.navigationService.toLogin();
   }
 
   ngOnInit(): void {

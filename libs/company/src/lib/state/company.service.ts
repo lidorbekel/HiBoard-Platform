@@ -3,10 +3,11 @@ import {HttpClient} from "@angular/common/http";
 import {Company} from "../company.types";
 import {Observable} from "rxjs";
 
-const companyMock: Company.Entity = {
-  name: 'company Mock',
-  departments: ['Hello', 'World'],
-  admin: 'admin@gmail.com'
+export const companyMock: Company.Entity = {
+  id: '123',
+  name: 'Bagira',
+  departments: ['R&D', 'Sales', 'Marketing'],
+  description: 'This is a cool company !'
 }
 
 @Injectable({providedIn: 'root'})
@@ -17,14 +18,31 @@ export class CompanyService {
   constructor(private http: HttpClient) {
   }
 
-  createCompany(company: Company.Entity) {
+  createCompany(company: Omit<Company.Entity, 'id'>) {
     // return this.http.post<Company.Response>(CompanyService.companyUrl, company);
-    return new Observable<Company.Entity>((observer) => {
+    return new Observable<Company.Response>((observer) => {
       setTimeout(() => {
-        observer.next(companyMock);
+        observer.next({data: companyMock});
       }, 2000)
     })
   }
 
+  updateCompany(company: Company.Entity) {
+    // return this.http.put<Company.Response>(`${CompanyService.companyUrl}/${company.id}`, company);
 
+    return new Observable<Company.Response>((observer) => {
+      setTimeout(() => {
+        observer.next({data: company})
+      }, 2000)
+    })
+  }
+
+  getCompany(companyId: string) {
+    console.log(companyId);
+    return new Observable<Company.Response>((observer) => {
+      setTimeout(() => {
+        observer.next({data: companyMock});
+      }, 1000)
+    })
+  }
 }

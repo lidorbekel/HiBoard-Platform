@@ -15,6 +15,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
+import {MatChipsModule} from "@angular/material/chips";
 
 const modules = [
   MatButtonModule,
@@ -32,7 +33,8 @@ const modules = [
   MatAutocompleteModule,
   MatDialogModule,
   MatRadioModule,
-  MatSelectModule
+  MatSelectModule,
+  MatChipsModule
 ];
 
 @NgModule({

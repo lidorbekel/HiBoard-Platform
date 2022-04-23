@@ -10,8 +10,9 @@ export namespace User {
     email: string;
     firstName: string;
     lastName: string;
-    role: Role,
-    department?: Department
+    role: Role;
+    companyId: string;
+    department?: Department;
   }
 
   export interface Response extends BaseResponse<Entity> {

@@ -32,11 +32,18 @@ export class NavigationService {
     return this.navigate('join')
   }
 
+  toAdmin() {
+    return this.navigate('admin');
+  }
+
   toDefaultByRole(role: User.Role) {
+    if (role === 'admin') {
+      return this.toAdmin();
+    }
     if (role === 'employee') {
       return this.toTasks();
-    } else {
-      return this.toEmployees();
     }
+
+    return this.toEmployees();
   }
 }
