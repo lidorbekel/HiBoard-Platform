@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TasksModule} from "@hiboard/tasks/tasks.module";
 import {RoleGuard} from "@hiboard/auth/guards/role.guard";
+import {UserProfilePageComponent} from "@hiboard/user-profile/user-profile-page/user-profile-page.component";
 
 const children: Routes = [
   {
@@ -34,6 +35,10 @@ const children: Routes = [
     data: {
       roles: ['admin']
     }
+  },
+  {
+    path: 'profile',
+    component: UserProfilePageComponent
   }
 ];
 

@@ -3,11 +3,6 @@
 
   <ul class="flex">
     <li>
-      <button mat-icon-button>
-        <mat-icon>settings</mat-icon>
-      </button>
-    </li>
-    <li>
       <button
         mat-button
         [tippy]="menu"
@@ -22,6 +17,10 @@
 
 <ng-template #menu let-hide>
   <mat-nav-list>
+    <button mat-list-item (click)="toProfile()">
+      <mat-icon class="mr-4">account_box</mat-icon>
+      Profile
+    </button>
     <button mat-list-item (click)="logout()">
       <mat-icon class="mr-4">logout</mat-icon>
       logout
