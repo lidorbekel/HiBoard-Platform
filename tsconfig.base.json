@@ -28,6 +28,8 @@
       "@hiboard/auth-login/*": ["libs/auth-login/src/lib/*"],
       "@hiboard/auth-signup/*": ["libs/auth-signup/src/lib/*"],
       "@hiboard/auth/*": ["libs/auth/src/lib/*"],
+      "@hiboard/company-details/*": ["libs/company-details/src/lib/*"],
+      "@hiboard/company-users/*": ["libs/company-users/src/lib/*"],
       "@hiboard/company/*": ["libs/company/src/lib/*"],
       "@hiboard/core/*": ["libs/core/src/lib/*"],
       "@hiboard/dashboard/*": ["libs/dashboard/src/lib/*"],

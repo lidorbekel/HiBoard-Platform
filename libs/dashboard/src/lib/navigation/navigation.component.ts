@@ -40,6 +40,12 @@ export class NavigationComponent implements OnInit {
       icon: 'library_books',
       link: 'admin/company-details',
       role: 'admin'
+    },
+    {
+      title: 'Company Users',
+      icon: 'supervised_user_circle',
+      link: 'admin/company-users',
+      role: 'admin'
     }
   ];
 

@@ -7,8 +7,8 @@ import {CompanyService} from "@hiboard/company/state/company.service";
 import {CompanyRepository} from "@hiboard/company/state/company.repository";
 
 const adminUserMock: User.Entity = {
-  firstName: 'adminFirst',
-  lastName: 'adminLast',
+  firstName: 'Ido',
+  lastName: 'Golan',
   role: 'admin',
   id: '15',
   email: 'admin@gmail.com',

@@ -1,6 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {CompanyPageComponent} from "@hiboard/admin/company-page/company-page.component";
+import {CompanyUsersPageComponent} from "@hiboard/company-users/company-users-page/company-users-page.component";
+import {
+  CompanyDetailsPageComponent
+} from "@hiboard/company-details/company-details-page/company-details-page.component";
 
 const routes: Routes = [
   {
@@ -10,7 +13,11 @@ const routes: Routes = [
   },
   {
     path: 'company-details',
-    component: CompanyPageComponent
+    component: CompanyDetailsPageComponent
+  },
+  {
+    path: 'company-users',
+    component: CompanyUsersPageComponent
   }
 ];
 
