@@ -69,7 +69,7 @@ export class JoinPageComponent implements OnInit {
             this.authService.login(email, password)
               .pipe(
                 switchMap((user) => {
-                    return this.navigationService.toDefaultByRole(user.data.role);
+                    return this.navigationService.toDefaultByRole();
                   }
                 )
               ).subscribe(({

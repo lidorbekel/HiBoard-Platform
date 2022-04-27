@@ -41,8 +41,8 @@ export class AuthLoginPageComponent {
 
     this.authService.login(username, password)
       .pipe(
-        switchMap((user) => {
-            return this.navigationService.toDefaultByRole(user.data.role);
+        switchMap(() => {
+            return this.navigationService.toDefaultByRole();
           }
         )
       )

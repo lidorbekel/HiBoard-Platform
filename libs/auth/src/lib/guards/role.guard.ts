@@ -15,22 +15,43 @@ export class RoleGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.userRepo.user$.pipe(
-      map((user) => {
-        if (user) {
-          const {role} = user;
+    return this.authService.isLoggedIn().pipe(
+      map((isLoggedIn) => {
+        if (isLoggedIn) {
+          const user = this.userRepo.getCurrentUser();
+          if (user) {
+            const {role} = user;
 
-          const isAuth = route.data['roles'].includes(role);
+            const isAuth = route.data['roles'].includes(role);
 
-          if (!isAuth) {
-            this.navigationService.toDefaultByRole(role);
+            if (!isAuth) {
+              this.navigationService.toDefaultByRole();
+            }
+
+            return isAuth;
+          } else {
+            return of(false);
           }
-          
-          return isAuth;
-        } else {
-          return of(false);
         }
       })
     )
+    // return this.userRepo.user$.pipe(
+    //   map((user) => {
+    //
+    //     if (user) {
+    //       const {role} = user;
+    //
+    //       const isAuth = route.data['roles'].includes(role);
+    //
+    //       if (!isAuth) {
+    //         this.navigationService.toDefaultByRole(role);
+    //       }
+    //
+    //       return isAuth;
+    //     } else {
+    //       return of(false);
+    //     }
+    //   })
+    // )
   }
 }

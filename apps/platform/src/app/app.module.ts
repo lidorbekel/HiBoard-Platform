@@ -19,13 +19,13 @@ import {CoreModule} from "@hiboard/core/core.module";
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
     ApiModule,
-    CoreModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {

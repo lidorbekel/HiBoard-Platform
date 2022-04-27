@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TasksModule} from "@hiboard/tasks/tasks.module";
+import {RoleGuard} from "@hiboard/auth/guards/role.guard";
 
 const children: Routes = [
   {
@@ -10,7 +11,6 @@ const children: Routes = [
       import('@hiboard/tasks/tasks.module').then(
         ({TasksModule}) => TasksModule
       ),
-    // canActivate: [RoleGuard],
     data: {
       roles: ['employee']
     }
@@ -21,7 +21,6 @@ const children: Routes = [
       import('@hiboard/employees/employees.module').then(
         ({EmployeesModule}) => EmployeesModule
       ),
-    // canActivate: [RoleGuard],
     data: {
       roles: ['manager']
     }
@@ -32,12 +31,11 @@ const children: Routes = [
       import('@hiboard/admin/admin.module').then(
         ({AdminModule}) => AdminModule
       ),
-    // canActivate: [RoleGuard],
     data: {
       roles: ['admin']
     }
   }
-]
+];
 
 const dashboardRoutes: Routes = [
   {
@@ -49,7 +47,7 @@ const dashboardRoutes: Routes = [
         pathMatch: 'full',
         redirectTo: 'tasks'
       },
-      ...children
+      ...children.map((child) => ({...child, canActivate: [RoleGuard]}))
     ]
   }
 ]

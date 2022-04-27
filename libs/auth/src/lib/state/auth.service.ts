@@ -38,12 +38,9 @@ export class AuthService {
   isLoggedIn() {
     return new Observable<boolean>((observer) => {
       this.auth.onAuthStateChanged((user) => {
-        if (user) {
-          observer.next(true);
-        } else {
-          observer.next(false)
-        }
-      })
+        observer.next(!!user);
+        observer.complete();
+      });
     });
   }
 
