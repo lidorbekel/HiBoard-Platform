@@ -1,16 +1,15 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-
-import {AppInit} from "@hiboard/core/app-init/app-init";
+import {AppInitializer} from "@hiboard/core/app-init/app-initializer";
 
 @NgModule({
   providers: [
     {
       provide: APP_INITIALIZER,
       multi: true,
-      useFactory(appInitializer: AppInit) {
+      useFactory(appInitializer: AppInitializer) {
         return () => appInitializer.init();
       },
-      deps: [AppInit],
+      deps: [AppInitializer],
     },
   ],
 })

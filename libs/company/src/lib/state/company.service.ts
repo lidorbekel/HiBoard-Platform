@@ -38,7 +38,6 @@ export class CompanyService {
   }
 
   getCompany(companyId: string) {
-    console.log(companyId);
     return new Observable<Company.Response>((observer) => {
       setTimeout(() => {
         observer.next({data: companyMock});

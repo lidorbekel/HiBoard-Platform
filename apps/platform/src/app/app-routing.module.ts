@@ -1,6 +1,8 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {HomeRouteGuard} from "@hiboard/auth/guards/protected-route.guard";
+import {RedirectGuard} from "@hiboard/navigation/redirect.guard";
+import {PageNotFoundComponent} from "@hiboard/ui/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -16,6 +18,11 @@ const routes: Routes = [
     path: 'join',
     loadChildren: () => import('@hiboard/join/join.module').then(({JoinModule}) => JoinModule),
   },
+  {
+    path: '**',
+    canActivate: [RedirectGuard],
+    component: PageNotFoundComponent
+  }
 
 ]
 

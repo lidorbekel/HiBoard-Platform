@@ -89,6 +89,36 @@
       },
       "tags": []
     },
+    "company-details": {
+      "root": "libs/company-details",
+      "sourceRoot": "libs/company-details/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/company-details/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "company-users": {
+      "root": "libs/company-users",
+      "sourceRoot": "libs/company-users/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/company-users/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "core": {
       "root": "libs/core",
       "sourceRoot": "libs/core/src",

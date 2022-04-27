@@ -1,7 +1,6 @@
 import {Router} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {UserRepository} from "../../../user/src/lib/state/user.repository";
-import {User} from "../../../user/src/users.types";
 
 @Injectable({providedIn: 'root'})
 export class NavigationService {
@@ -36,7 +35,8 @@ export class NavigationService {
     return this.navigate('admin');
   }
 
-  toDefaultByRole(role: User.Role) {
+  toDefaultByRole() {
+    const {role} = this.userRepo.getCurrentUser()!;
     if (role === 'admin') {
       return this.toAdmin();
     }

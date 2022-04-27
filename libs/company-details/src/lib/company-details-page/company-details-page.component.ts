@@ -16,12 +16,12 @@ import {HotToastService} from "@ngneat/hot-toast";
 
 @UntilDestroy()
 @Component({
-  selector: 'hbd-company-page',
-  templateUrl: './company-page.component.html',
-  styleUrls: ['./company-page.component.scss'],
+  selector: 'hbd-company-details-page',
+  templateUrl: './company-details-page.component.html',
+  styleUrls: ['./company-details-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CompanyPageComponent implements OnInit {
+export class CompanyDetailsPageComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   loading = false;
@@ -116,7 +116,7 @@ export class CompanyPageComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [CompanyPageComponent],
+  declarations: [CompanyDetailsPageComponent],
   imports: [
     CommonModule,
     SubscribeModule,
@@ -124,7 +124,7 @@ export class CompanyPageComponent implements OnInit {
     ReactiveFormsModule,
     ErrorTailorModule
   ],
-  exports: [CompanyPageComponent]
+  exports: [CompanyDetailsPageComponent]
 })
-export class CompanyPageComponentModule {
+export class CompanyDetailsPageComponentModule {
 }
