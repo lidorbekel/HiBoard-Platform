@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import {ChangeDetectionStrategy, Component, NgModule, OnInit} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {AuthService} from "@hiboard/auth/state/auth.service";
 import {TippyModule} from "@ngneat/helipopper";
+import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 
 @Component({
   selector: 'hbd-header',
@@ -11,13 +12,18 @@ import {TippyModule} from "@ngneat/helipopper";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private navigationService: NavigationService) {
+  }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.auth.logout();
+  }
+
+  toProfile() {
+    this.navigationService.toProfile();
   }
 
 }

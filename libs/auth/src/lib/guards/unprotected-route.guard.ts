@@ -21,7 +21,7 @@ export class UnProtectedRouteGuard implements CanLoad, CanActivate {
     return this.authService.isLoggedIn().pipe(
       map((isLoggedIn) => {
         if (isLoggedIn) {
-          this.navigationService.toTasks();
+          this.navigationService.toDefaultByRole();
         }
 
         return true;

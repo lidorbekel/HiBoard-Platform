@@ -35,6 +35,10 @@ export class NavigationService {
     return this.navigate('admin');
   }
 
+  toProfile() {
+    return this.navigate('profile');
+  }
+
   toDefaultByRole() {
     const {role} = this.userRepo.getCurrentUser()!;
     if (role === 'admin') {

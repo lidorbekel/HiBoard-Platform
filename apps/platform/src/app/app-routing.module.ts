@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {HomeRouteGuard} from "@hiboard/auth/guards/protected-route.guard";
 import {RedirectGuard} from "@hiboard/navigation/redirect.guard";
 import {PageNotFoundComponent} from "@hiboard/ui/page-not-found/page-not-found.component";
+import {UnProtectedRouteGuard} from "@hiboard/auth/guards/unprotected-route.guard";
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   {
     path: 'join',
     loadChildren: () => import('@hiboard/join/join.module').then(({JoinModule}) => JoinModule),
+    canActivate: [UnProtectedRouteGuard]
   },
   {
     path: '**',

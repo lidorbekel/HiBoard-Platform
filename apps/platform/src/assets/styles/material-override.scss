@@ -1,5 +1,10 @@
 .mat-form-field {
   font-size: var(--text16) !important;
+
+  .mat-form-field-outline {
+    background-color: #fff;
+    border-radius: 5px;
+  }
 }
 
 .mat-form-field-infix {

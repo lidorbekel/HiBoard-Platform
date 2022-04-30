@@ -414,6 +414,21 @@
       },
       "tags": []
     },
+    "user-profile": {
+      "root": "libs/user-profile",
+      "sourceRoot": "libs/user-profile/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/user-profile/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "users": {
       "root": "libs/users",
       "sourceRoot": "libs/users/src",

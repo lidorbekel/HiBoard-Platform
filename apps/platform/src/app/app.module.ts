@@ -15,6 +15,7 @@ import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {AngularFireModule} from "@angular/fire/compat";
 import {popperVariation, TippyModule, tooltipVariation} from '@ngneat/helipopper';
 import {CoreModule} from "@hiboard/core/core.module";
+import {AgGridModule} from "ag-grid-angular";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {CoreModule} from "@hiboard/core/core.module";
     MaterialModule,
     HttpClientModule,
     ApiModule,
+    AgGridModule.withComponents([]),
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {

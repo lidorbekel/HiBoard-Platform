@@ -10,7 +10,6 @@ export class AppInitializer {
   }
 
   init() {
-    console.log('init')
     return this.authService.isLoggedIn().pipe(
       switchMap((isLoggedIn) => {
         if (isLoggedIn) {

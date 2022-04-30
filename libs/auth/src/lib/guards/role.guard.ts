@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {AuthService} from "@hiboard/auth/state/auth.service";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
-import {map, Observable, of} from "rxjs";
+import {map, Observable} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class RoleGuard implements CanActivate {
@@ -20,17 +20,20 @@ export class RoleGuard implements CanActivate {
         if (isLoggedIn) {
           const user = this.userRepo.getCurrentUser();
           if (user) {
-            const {role} = user;
+            if (route.data['roles']) {
+              const {role} = user;
 
-            const isAuth = route.data['roles'].includes(role);
+              const isAuth = route.data['roles'].includes(role);
+              if (!isAuth) {
+                this.navigationService.toDefaultByRole();
+              }
 
-            if (!isAuth) {
-              this.navigationService.toDefaultByRole();
+              return isAuth;
+            } else {
+              return true;
             }
-
-            return isAuth;
           } else {
-            return of(false);
+            return false;
           }
         }
       })
