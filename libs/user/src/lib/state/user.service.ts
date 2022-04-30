@@ -53,4 +53,28 @@ export class UserService {
       }, 2000)
     })
   }
+
+  updateUser(user: Omit<User.Entity, 'id'> & { password?: string, newPassword?: string }) {
+    // const url = `${UserService.userUrl}/${this.userRepo.getCurrentUser()!.id}`;
+    // return this.http.patch<User.Response>(url, user).pipe(
+    //   tap((userRes) => {
+    //     if (userRes.data.email) {
+    //       this.userRepo.update(userRes.data);
+    //     }
+    //   })
+    // );
+
+    return new Observable<User.Entity>((observer) => {
+      console.log(user);
+      setTimeout(() => {
+        observer.next({...adminUserMock, ...user});
+      }, 2000)
+    }).pipe(
+      tap((userRes) => {
+        if (userRes.email) {
+          this.userRepo.update({...userRes, ...user});
+        }
+      })
+    );
+  }
 }

@@ -1,1 +1,136 @@
-<p>user-profile-page works!</p>
+<ng-container *subscribe="user$; let user">
+  <mat-spinner *ngIf="!user" class="page-spinner-loader"></mat-spinner>
+
+  <ng-container *ngIf="user">
+    <h1 class=" font-bold mb-6">Profile Settings</h1>
+
+    <form [formGroup]="form" errorTailor class="form">
+      <div class="details">
+        <section class="w-[450px]">
+          <div class="flex mb-2 justify-between">
+            <div>
+              <p class="text14 font-bold">First Name</p>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="firstName"
+                  placeholder="First Name"
+                  [controlErrorAnchor]="nameAnchor"
+                >
+              </mat-form-field>
+
+              <ng-template
+                controlErrorAnchor
+                #nameAnchor="controlErrorAnchor"
+              ></ng-template>
+            </div>
+
+            <div>
+              <p class="text14 font-bold">Last Name</p>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="lastName"
+                  placeholder="Last Name"
+                  [controlErrorAnchor]="lastNameAnchor"
+                >
+              </mat-form-field>
+
+              <ng-template
+                controlErrorAnchor
+                #lastNameAnchor="controlErrorAnchor"
+              ></ng-template>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <p class="text14 font-bold">Email Address</p>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Email Address"
+                [controlErrorAnchor]="emailAnchor"
+              >
+            </mat-form-field>
+
+            <ng-template
+              controlErrorAnchor
+              #emailAnchor="controlErrorAnchor"
+            ></ng-template>
+          </div>
+
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="text14 font-bold primary">
+                  Change Password
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="mb-2">
+                <p class="text14 font-bold">Current Password</p>
+                <mat-form-field appearance="outline" class="w-2/3">
+                  <input
+                    [type]="hideCurrentPassword ? 'password' : 'text'"
+                    matInput
+                    formControlName="currentPassword"
+                    placeholder="Current Password"
+                    [controlErrorAnchor]="passwordAnchor"
+                  >
+                  <button mat-icon-button matSuffix (click)="hideCurrentPassword = !hideCurrentPassword" color="primary"
+                          [lazy]="true"
+                          [tippy]="hideCurrentPassword ? 'Show Password' : 'Hide Password'"
+                  >
+                    <mat-icon>{{hideCurrentPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <ng-template
+                  controlErrorAnchor
+                  #passwordAnchor="controlErrorAnchor"
+                ></ng-template>
+              </div>
+
+              <div>
+                <p class="text14 font-bold">New Password</p>
+                <mat-form-field appearance="outline" class="w-2/3">
+                  <input
+                    [type]="hideNewPassword ? 'password' : 'text'"
+                    matInput
+                    formControlName="newPassword"
+                    placeholder="New Password"
+                    [controlErrorAnchor]="newPasswordAnchor"
+                  >
+                  <button mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword" color="primary"
+                          [lazy]="true"
+                          [tippy]="hideNewPassword ? 'Show Password' : 'Hide Password'"
+                  >
+                    <mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <ng-template
+                  controlErrorAnchor
+                  #newPasswordAnchor="controlErrorAnchor"
+                ></ng-template>
+              </div>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <button mat-raised-button color="primary" type="submit"
+                  (click)="onEdit()"
+                  [class.hbd-spinner]="loading"
+                  [disabled]="loading || form.invalid"
+                  class="float-right"
+          >
+            <mat-icon>edit</mat-icon>
+            Save
+          </button>
+        </section>
+      </div>
+    </form>
+  </ng-container>
+</ng-container>

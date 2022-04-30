@@ -62,13 +62,13 @@ export class JoinPageComponent implements OnInit {
       name: company,
     } as Omit<Company.Entity, 'id'>;
 
-    this.userService.createUser(adminUser).subscribe({
+    this.companyService.createCompany(newCompany).subscribe({
       next: () => {
-        this.companyService.createCompany(newCompany).subscribe({
+        this.userService.createUser(adminUser).subscribe({
           next: () => {
             this.authService.login(email, password)
               .pipe(
-                switchMap((user) => {
+                switchMap(() => {
                     return this.navigationService.toDefaultByRole();
                   }
                 )
@@ -79,14 +79,14 @@ export class JoinPageComponent implements OnInit {
             }))
           },
           error: () => {
-            this.toast.error('Unable to create company, please try again later');
+            this.toast.error('Unable to create user, please try again later');
             this.loading = false;
             this.cdr.detectChanges();
           }
         })
       },
       error: () => {
-        this.toast.error('Unable to create user, please try again later');
+        this.toast.error('Unable to create company, please try again later');
         this.loading = false;
         this.cdr.detectChanges();
       }

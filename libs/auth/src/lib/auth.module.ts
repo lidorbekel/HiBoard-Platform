@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AuthRoutingModule } from './auth-routing.module';
+import {AuthRoutingModule} from './auth-routing.module';
 import {SvgIconsModule} from "@ngneat/svg-icon";
 
 @NgModule({
   imports: [
     AuthRoutingModule,
-    SvgIconsModule.forChild([])
+    SvgIconsModule
   ],
 })
-export class AuthModule {}
+export class AuthModule {
+}

@@ -16,6 +16,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 const modules = [
   MatButtonModule,
@@ -34,7 +35,8 @@ const modules = [
   MatDialogModule,
   MatRadioModule,
   MatSelectModule,
-  MatChipsModule
+  MatChipsModule,
+  MatExpansionModule
 ];
 
 @NgModule({
