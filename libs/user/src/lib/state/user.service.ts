@@ -9,17 +9,16 @@ import {CompanyRepository} from "@hiboard/company/state/company.repository";
 const adminUserMock: User.Entity = {
   firstName: 'Ido',
   lastName: 'Golan',
-  role: 'admin',
+  role: 'Admin',
   id: '15',
-  email: 'admin@gmail.com',
-  companyId: '123'
+  email: 'ido@lumigo.io',
+  companyId: '7'
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  static userInfoUrl = 'userinfo';
   static userUrl = 'user';
 
   constructor(private http: HttpClient, private userRepo: UserRepository, private companyService: CompanyService, private companyRepo: CompanyRepository) {
@@ -29,10 +28,9 @@ export class UserService {
     this.userRepo.setLoading(true);
     this.companyRepo.setLoading(true);
 
-    return this.http.get<User.Response>(UserService.userInfoUrl)
+    return this.http.get<User.Response>(UserService.userUrl)
       .pipe(
         tap(({data}) => {
-          data = adminUserMock; //TODO change
           this.userRepo.setLoading(false);
           this.userRepo.update(data);
 
@@ -46,12 +44,7 @@ export class UserService {
   }
 
   createUser(user: Omit<User.Entity, 'id'> & { password: string }) {
-    // return this.http.post<User.Entity>(UserService.userUrl, user);
-    return new Observable<User.Entity>((observer) => {
-      setTimeout(() => {
-        observer.next(adminUserMock);
-      }, 2000)
-    })
+    return this.http.post<User.Entity>(UserService.userUrl, user);
   }
 
   updateUser(user: Omit<User.Entity, 'id'> & { password?: string, newPassword?: string }) {

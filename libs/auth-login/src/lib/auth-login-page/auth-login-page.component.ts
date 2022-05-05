@@ -7,6 +7,7 @@ import {AuthService} from "@hiboard/auth/state/auth.service";
 import {HotToastService} from "@ngneat/hot-toast";
 import {switchMap} from "rxjs";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
+import {TippyModule} from "@ngneat/helipopper";
 
 @Component({
   selector: 'hbd-auth-login-page',
@@ -20,7 +21,7 @@ export class AuthLoginPageComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
   error: string;
-
+  hidePassword = true;
   loading = false;
 
   constructor(private navigationService: NavigationService,
@@ -76,7 +77,7 @@ export class AuthLoginPageComponent {
 }
 
 @NgModule({
-  imports: [MaterialModule, ReactiveFormsModule, CommonModule, ErrorTailorModule],
+  imports: [MaterialModule, ReactiveFormsModule, CommonModule, ErrorTailorModule, TippyModule],
   declarations: [AuthLoginPageComponent]
 })
 export class AuthLoginPageModule {

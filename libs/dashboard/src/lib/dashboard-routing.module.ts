@@ -13,7 +13,7 @@ const children: Routes = [
         ({TasksModule}) => TasksModule
       ),
     data: {
-      roles: ['employee']
+      roles: ['Employee']
     }
   },
   {
@@ -23,7 +23,7 @@ const children: Routes = [
         ({EmployeesModule}) => EmployeesModule
       ),
     data: {
-      roles: ['manager']
+      roles: ['Manager']
     }
   },
   {
@@ -33,7 +33,7 @@ const children: Routes = [
         ({AdminModule}) => AdminModule
       ),
     data: {
-      roles: ['admin']
+      roles: ['Admin']
     }
   },
   {

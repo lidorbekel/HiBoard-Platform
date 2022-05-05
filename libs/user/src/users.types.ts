@@ -1,9 +1,9 @@
 import {BaseResponse} from "@hiboard/api/api.types";
 
 export namespace User {
-  export type Role = 'employee' | 'manager' | 'admin';
+  export type Role = 'Employee' | 'Manager' | 'Admin';
 
-  export type Department = 'R&D' | 'Product' | 'Sales';
+  export type Department = 'R&D' | 'Product' | 'Sales' | 'Unspecified';
 
   export interface Entity {
     id: string;

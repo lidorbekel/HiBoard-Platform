@@ -55,7 +55,7 @@ export class JoinPageComponent implements OnInit {
       lastName,
       email,
       password,
-      role: 'admin',
+      role: 'Admin',
     } as User.Entity & { password: string };
 
     const newCompany = {
@@ -63,8 +63,10 @@ export class JoinPageComponent implements OnInit {
     } as Omit<Company.Entity, 'id'>;
 
     this.companyService.createCompany(newCompany).subscribe({
-      next: () => {
-        this.userService.createUser(adminUser).subscribe({
+      next: (companyRes) => {
+        console.log('companyResInJoin', companyRes)
+        const companyId = companyRes.data.id;
+        this.userService.createUser({...adminUser, companyId}).subscribe({
           next: () => {
             this.authService.login(email, password)
               .pipe(
