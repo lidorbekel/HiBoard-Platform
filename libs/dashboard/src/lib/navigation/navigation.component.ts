@@ -27,25 +27,25 @@ export class NavigationComponent implements OnInit {
       title: 'Tasks',
       icon: 'assignment',
       link: 'tasks',
-      role: 'employee'
+      role: 'Employee'
     },
     {
       title: 'Employees',
       icon: 'supervised_user_circle',
       link: 'employees',
-      role: 'manager'
+      role: 'Manager'
     },
     {
       title: 'Company Details',
       icon: 'library_books',
       link: 'admin/company-details',
-      role: 'admin'
+      role: 'Admin'
     },
     {
       title: 'Company Users',
       icon: 'supervised_user_circle',
       link: 'admin/company-users',
-      role: 'admin'
+      role: 'Admin'
     }
   ];
 

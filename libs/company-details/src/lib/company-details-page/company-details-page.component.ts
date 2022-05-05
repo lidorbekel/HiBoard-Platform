@@ -49,9 +49,7 @@ export class CompanyDetailsPageComponent implements OnInit {
       untilDestroyed(this)
     ).subscribe((company) => {
       if (company) {
-        if (company.departments) {
-          this.departments = company.departments;
-        }
+        this.departments = company.departments;
         this.form.get('name')!.setValue(company.name);
         this.form.get('description')!.setValue(company.description || '');
       }
@@ -68,8 +66,6 @@ export class CompanyDetailsPageComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-
-    // Add our fruit
     if (value) {
       this.departments.push(value);
     }
@@ -90,11 +86,11 @@ export class CompanyDetailsPageComponent implements OnInit {
         this.loading = true;
         this.cdr.detectChanges();
 
-        const {name, departments, description} = this.form.value;
+        const {name, description} = this.form.value;
         const updatedCompany = {
           id: this.companyRepo.companyId,
           name,
-          departments,
+          departments: this.departments,
           description
         } as Company.Entity;
 
