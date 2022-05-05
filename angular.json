@@ -8,9 +8,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/admin/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/admin/**/*.ts"
+            ]
           }
         }
       },
@@ -23,9 +27,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/api/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/api/**/*.ts"
+            ]
           }
         }
       },
@@ -39,7 +47,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/auth/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/auth/**/*.ts"
+            ]
           }
         }
       }
@@ -51,9 +61,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/auth-change-password/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/auth-change-password/**/*.ts"
+            ]
           }
         }
       },
@@ -66,9 +80,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/auth-login/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/auth-login/**/*.ts"
+            ]
           }
         }
       },
@@ -81,9 +99,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/company/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/company/**/*.ts"
+            ]
           }
         }
       },
@@ -96,9 +118,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/company-details/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/company-details/**/*.ts"
+            ]
           }
         }
       },
@@ -111,9 +137,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/company-users/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/company-users/**/*.ts"
+            ]
           }
         }
       },
@@ -126,9 +156,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/core/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/core/**/*.ts"
+            ]
           }
         }
       },
@@ -141,9 +175,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/dashboard/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/dashboard/**/*.ts"
+            ]
           }
         }
       },
@@ -156,9 +194,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/employees/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/employees/**/*.ts"
+            ]
           }
         }
       },
@@ -195,9 +237,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/home/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/home/**/*.ts"
+            ]
           }
         }
       },
@@ -210,9 +256,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/join/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/join/**/*.ts"
+            ]
           }
         }
       },
@@ -225,9 +275,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/navigation/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/navigation/**/*.ts"
+            ]
           }
         }
       },
@@ -349,7 +403,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/platform-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/platform-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -361,9 +417,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/svg/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/svg/**/*.ts"
+            ]
           }
         }
       },
@@ -376,9 +436,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/tasks/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/tasks/**/*.ts"
+            ]
           }
         }
       },
@@ -391,9 +455,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/theme/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/theme/**/*.ts"
+            ]
           }
         }
       },
@@ -406,9 +474,13 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/ui/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/ui/**/*.ts"
+            ]
           }
         }
       },
@@ -421,24 +493,32 @@
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/user-profile/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/user-profile/**/*.ts"
+            ]
           }
         }
       },
       "tags": []
     },
-    "users": {
-      "root": "libs/users",
-      "sourceRoot": "libs/users/src",
+    "user": {
+      "root": "libs/user",
+      "sourceRoot": "libs/user/src",
       "projectType": "library",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/users/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/user/**/*.ts"
+            ]
           }
         }
       },

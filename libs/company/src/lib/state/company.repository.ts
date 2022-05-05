@@ -29,6 +29,10 @@ export class CompanyRepository {
     }));
   }
 
+  get currentCompany() {
+    return store.query((state) => state.company);
+  }
+
   get companyId() {
     return store.query((state) => state.company!.id);
   }

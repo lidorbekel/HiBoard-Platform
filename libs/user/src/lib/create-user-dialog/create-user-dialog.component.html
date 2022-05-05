@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Create New User</h2>
+<h2 mat-dialog-title>Create New {{ data.role }}</h2>
 
 <hr class="my-2">
 
@@ -90,7 +90,7 @@
     <div class="mb-2">
       <p class="text14 font-bold mr-1">Department</p>
       <mat-form-field appearance="outline" class="w-1/2">
-        <mat-select formControlName="department">
+        <mat-select formControlName="department" placeholder="Select Department">
           <mat-option *ngFor="let dep of departments" [value]="dep">
             {{ dep }}
           </mat-option>
@@ -101,14 +101,6 @@
         controlErrorAnchor
         #passwordAnchor="controlErrorAnchor"
       ></ng-template>
-    </div>
-
-    <div class="flex-align-center">
-      <p class="text14 font-bold mr-3">Role: </p>
-      <mat-radio-group formControlName="role" color="primary">
-        <mat-radio-button value="employee" class="mr-3">Employee</mat-radio-button>
-        <mat-radio-button value="manager">Manager</mat-radio-button>
-      </mat-radio-group>
     </div>
   </form>
 </mat-dialog-content>

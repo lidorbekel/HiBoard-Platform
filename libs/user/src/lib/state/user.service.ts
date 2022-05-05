@@ -2,18 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
 import {User} from "../../users.types";
-import {Observable, tap} from "rxjs";
+import {tap} from "rxjs";
 import {CompanyService} from "@hiboard/company/state/company.service";
 import {CompanyRepository} from "@hiboard/company/state/company.repository";
-
-const adminUserMock: User.Entity = {
-  firstName: 'Ido',
-  lastName: 'Golan',
-  role: 'Admin',
-  id: '15',
-  email: 'ido@lumigo.io',
-  companyId: '7'
-}
 
 @Injectable({
   providedIn: 'root'
@@ -48,24 +39,11 @@ export class UserService {
   }
 
   updateUser(user: Omit<User.Entity, 'id'> & { password?: string, newPassword?: string }) {
-    // const url = `${UserService.userUrl}/${this.userRepo.getCurrentUser()!.id}`;
-    // return this.http.patch<User.Response>(url, user).pipe(
-    //   tap((userRes) => {
-    //     if (userRes.data.email) {
-    //       this.userRepo.update(userRes.data);
-    //     }
-    //   })
-    // );
-
-    return new Observable<User.Entity>((observer) => {
-      console.log(user);
-      setTimeout(() => {
-        observer.next({...adminUserMock, ...user});
-      }, 2000)
-    }).pipe(
+    const url = `${UserService.userUrl}/${this.userRepo.getCurrentUser()!.id}`;
+    return this.http.patch<User.Response>(url, user).pipe(
       tap((userRes) => {
-        if (userRes.email) {
-          this.userRepo.update({...userRes, ...user});
+        if (userRes.data.email) {
+          this.userRepo.update(userRes.data);
         }
       })
     );
