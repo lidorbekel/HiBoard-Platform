@@ -2,13 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Company} from "../company.types";
 
-export const companyMock: Company.Entity = {
-  id: '123',
-  name: 'Bagira',
-  departments: ['R&D', 'Sales', 'Marketing'],
-  description: 'This is a cool company !'
-}
-
 @Injectable({providedIn: 'root'})
 export class CompanyService {
 

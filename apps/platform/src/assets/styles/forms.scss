@@ -6,3 +6,7 @@ control-error {
 .form-control {
   margin-bottom: 5px;
 }
+
+.form-submitted .ng-invalid {
+  border-color: var(--error-color);
+}

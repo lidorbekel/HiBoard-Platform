@@ -1,14 +1,6 @@
 :host {
   display: block;
-
-}
-
-.mat-dialog-container {
-  overflow: hidden !important;
-}
-
-.mat-dialog-content {
-  overflow: hidden;
+  max-height: 600px;
 }
 
 .mat-dialog-title,

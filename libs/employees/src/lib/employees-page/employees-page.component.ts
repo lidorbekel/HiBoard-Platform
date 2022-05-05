@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component, NgModule, OnInit} from '@angular/cor
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateUserDialogComponent} from "../create-employee-dialog/create-user-dialog.component";
 import {HotToastService} from "@ngneat/hot-toast";
+import {CreateUserDialogComponent} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
 
 @Component({
   selector: 'hbd-employees-page',
