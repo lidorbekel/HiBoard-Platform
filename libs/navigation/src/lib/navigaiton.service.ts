@@ -15,8 +15,8 @@ export class NavigationService {
     return this.router.navigateByUrl('auth/reset-password/change-password')
   }
 
-  toTasks() {
-    return this.navigate('tasks');
+  toactivities() {
+    return this.navigate('activities');
   }
 
   toLogin() {
@@ -45,7 +45,7 @@ export class NavigationService {
       return this.toAdmin();
     }
     if (role === 'Employee') {
-      return this.toTasks();
+      return this.toactivities();
     }
 
     return this.toEmployees();

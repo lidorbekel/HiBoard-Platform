@@ -429,9 +429,9 @@
       },
       "tags": []
     },
-    "tasks": {
-      "root": "libs/tasks",
-      "sourceRoot": "libs/tasks/src",
+    "activities": {
+      "root": "libs/activities",
+      "sourceRoot": "libs/activities/src",
       "projectType": "library",
       "architect": {
         "lint": {
@@ -441,7 +441,7 @@
           ],
           "options": {
             "lintFilePatterns": [
-              "libs/tasks/**/*.ts"
+              "libs/activities/**/*.ts"
             ]
           }
         }
