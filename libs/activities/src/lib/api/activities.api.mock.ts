@@ -1,6 +1,6 @@
-import {Tasks} from "../types/tasks.type";
+import {activities} from "../types/activities.type";
 
-export const tasksApiMock: Tasks.Entity[] = [
+export const activitiesApiMock: activities.Entity[] = [
   {
     id: 'id1',
     title: 'title1',

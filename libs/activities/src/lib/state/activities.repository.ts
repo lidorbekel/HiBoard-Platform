@@ -1,20 +1,20 @@
 import {defaultStoreStatus, StoreStatus} from "@hiboard/core/store";
 import {createState, Store, withProps} from "@ngneat/elf";
 import {selectAllEntities, setEntities, withActiveId, withEntities} from "@ngneat/elf-entities";
-import {Tasks} from "../types/tasks.type";
+import {activities} from "../types/activities.type";
 import {Injectable, OnDestroy} from "@angular/core";
 
-export interface TasksState extends StoreStatus {
+export interface activitiesState extends StoreStatus {
 }
 
 const {state, config} = createState(
-  withEntities<Tasks.Entity>(),
-  withProps<TasksState>(defaultStoreStatus),
+  withEntities<activities.Entity>(),
+  withProps<activitiesState>(defaultStoreStatus),
   withActiveId()
 );
-const store = new Store({state, name: 'tasks', config});
+const store = new Store({state, name: 'activities', config});
 
-// export const tasksStatus = {
+// export const activitiesStatus = {
 //   loading$: store.pipe(select(({ loading }) => loading)),
 //   error$: store.pipe(select(({ error }) => error)),
 // }
@@ -22,11 +22,11 @@ const store = new Store({state, name: 'tasks', config});
 @Injectable({
   providedIn: 'root'
 })
-export class TasksRepository implements OnDestroy {
-  tasks$ = store.pipe(selectAllEntities());
+export class ActivitiesRepository implements OnDestroy {
+  activities$ = store.pipe(selectAllEntities());
 
-  setTasks(tasks: Tasks.Entity[]) {
-    store.update(setEntities(tasks));
+  setactivities(activities: activities.Entity[]) {
+    store.update(setEntities(activities));
   }
 
   setLoading(loading: boolean) {

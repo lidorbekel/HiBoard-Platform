@@ -4,16 +4,16 @@ import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {CommonModule} from "@angular/common";
 import {AsyncState, isLoading} from "@ngneat/loadoff";
-import {Tasks} from "@hiboard/tasks/types/tasks.type";
+import {activities} from "@hiboard/activities/types/activities.type";
 import {map, Observable, startWith} from "rxjs";
 
 @Component({
-  selector: 'hbd-tasks-filters',
-  templateUrl: './tasks-filters.component.html',
-  styleUrls: ['./tasks-filters.component.scss'],
+  selector: 'hbd-activities-filters',
+  templateUrl: './activities-filters.component.html',
+  styleUrls: ['./activities-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksFiltersComponent implements OnInit {
+export class ActivitiesFiltersComponent implements OnInit {
   loading: boolean;
   names: string[];
   statuses: string[];
@@ -23,9 +23,9 @@ export class TasksFiltersComponent implements OnInit {
   tagsControl = new FormControl();
 
 
-  @Input() set tasks(tasks: AsyncState<Tasks.Response>) {
-    const data = tasks.res?.data.tasks;
-    this.loading = isLoading(tasks);
+  @Input() set activities(activities: AsyncState<activities.Response>) {
+    const data = activities.res?.data.activities;
+    this.loading = isLoading(activities);
     if (data) {
       // this.initFilterValues(data);
     }
@@ -50,14 +50,14 @@ export class TasksFiltersComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [TasksFiltersComponent],
+  declarations: [ActivitiesFiltersComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ErrorTailorModule,
     MaterialModule,
   ],
-  exports: [TasksFiltersComponent]
+  exports: [ActivitiesFiltersComponent]
 })
-export class TasksFiltersComponentModule {
+export class ActivitiesFiltersComponentModule {
 }

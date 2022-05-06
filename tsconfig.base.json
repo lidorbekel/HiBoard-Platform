@@ -11,40 +11,92 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@hiboard/admin/*": ["libs/admin/src/lib/*"],
-      "@hiboard/api/*": ["libs/api/src/lib/*"],
-      "@hiboard/auth": ["libs/auth/src/index.ts"],
+      "@hiboard/admin/*": [
+        "libs/admin/src/lib/*"
+      ],
+      "@hiboard/api/*": [
+        "libs/api/src/lib/*"
+      ],
+      "@hiboard/auth": [
+        "libs/auth/src/index.ts"
+      ],
       "@hiboard/auth-change-password/*": [
         "libs/auth-change-password/src/lib/*"
       ],
-      "@hiboard/auth-login": ["libs/auth-login/src/index.ts"],
-      "@hiboard/auth-login/*": ["libs/auth-login/src/lib/*"],
-      "@hiboard/auth-signup/*": ["libs/auth-signup/src/lib/*"],
-      "@hiboard/auth/*": ["libs/auth/src/lib/*"],
-      "@hiboard/company-details/*": ["libs/company-details/src/lib/*"],
-      "@hiboard/company-users/*": ["libs/company-users/src/lib/*"],
-      "@hiboard/company/*": ["libs/company/src/lib/*"],
-      "@hiboard/core/*": ["libs/core/src/lib/*"],
-      "@hiboard/dashboard/*": ["libs/dashboard/src/lib/*"],
-      "@hiboard/employees/*": ["libs/employees/src/lib/*"],
-      "@hiboard/env": ["libs/env/src/index.ts"],
-      "@hiboard/home/*": ["libs/home/src/lib/*"],
-      "@hiboard/join/*": ["libs/join/src/lib/*"],
-      "@hiboard/navigation/*": ["libs/navigation/src/lib/*"],
-      "@hiboard/svg/*": ["libs/svg/*"],
-      "@hiboard/tasks/*": ["libs/tasks/src/lib/*"],
-      "@hiboard/theme/*": ["libs/theme/src/lib/*"],
-      "@hiboard/ui/*": ["libs/ui/src/lib/*"],
-      "@hiboard/user-profile/*": ["libs/user-profile/src/lib/*"],
-      "@hiboard/users/*": ["libs/users/src/lib/*"]
+      "@hiboard/auth-login": [
+        "libs/auth-login/src/index.ts"
+      ],
+      "@hiboard/auth-login/*": [
+        "libs/auth-login/src/lib/*"
+      ],
+      "@hiboard/auth-signup/*": [
+        "libs/auth-signup/src/lib/*"
+      ],
+      "@hiboard/auth/*": [
+        "libs/auth/src/lib/*"
+      ],
+      "@hiboard/company-details/*": [
+        "libs/company-details/src/lib/*"
+      ],
+      "@hiboard/company-users/*": [
+        "libs/company-users/src/lib/*"
+      ],
+      "@hiboard/company/*": [
+        "libs/company/src/lib/*"
+      ],
+      "@hiboard/core/*": [
+        "libs/core/src/lib/*"
+      ],
+      "@hiboard/dashboard/*": [
+        "libs/dashboard/src/lib/*"
+      ],
+      "@hiboard/employees/*": [
+        "libs/employees/src/lib/*"
+      ],
+      "@hiboard/env": [
+        "libs/env/src/index.ts"
+      ],
+      "@hiboard/home/*": [
+        "libs/home/src/lib/*"
+      ],
+      "@hiboard/join/*": [
+        "libs/join/src/lib/*"
+      ],
+      "@hiboard/navigation/*": [
+        "libs/navigation/src/lib/*"
+      ],
+      "@hiboard/svg/*": [
+        "libs/svg/*"
+      ],
+      "@hiboard/activities/*": [
+        "libs/activities/src/lib/*"
+      ],
+      "@hiboard/theme/*": [
+        "libs/theme/src/lib/*"
+      ],
+      "@hiboard/ui/*": [
+        "libs/ui/src/lib/*"
+      ],
+      "@hiboard/user-profile/*": [
+        "libs/user-profile/src/lib/*"
+      ],
+      "@hiboard/users/*": [
+        "libs/users/src/lib/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

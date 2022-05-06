@@ -1,4 +1,4 @@
-<form errorTailor class="tasks-filters">
+<form errorTailor class="activities-filters">
   <mat-form-field appearance="outline">
     <div class="flex flex-row" [class.loading]="!loading">
       <input
@@ -7,7 +7,7 @@
         placeholder="Task name"
         type="text"
         [matAutocomplete]="nameAuto"
-        [disabled]="!loading"
+        [disabled]="loading"
       >
       <mat-spinner [diameter]="20" *ngIf="loading"></mat-spinner>
     </div>

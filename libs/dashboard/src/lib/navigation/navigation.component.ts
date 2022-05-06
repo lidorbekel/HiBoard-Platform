@@ -24,9 +24,9 @@ export class NavigationComponent implements OnInit {
   user$ = this.userRepo.user$;
   navItems: NavItem[] = [
     {
-      title: 'Tasks',
+      title: 'Activities',
       icon: 'assignment',
-      link: 'tasks',
+      link: 'activities',
       role: 'Employee'
     },
     {

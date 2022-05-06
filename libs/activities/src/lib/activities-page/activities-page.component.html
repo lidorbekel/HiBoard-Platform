@@ -1,0 +1,17 @@
+<div class="flex justify-between mb-8">
+  <hbd-activities-filters [activities]="activities"></hbd-activities-filters>
+
+  <hbd-completed-activities [value]="completedActivitiesPercent"></hbd-completed-activities>
+</div>
+
+<mat-spinner *ngIf="activities.loading" class="mx-auto "></mat-spinner>
+
+<div *ngIf="!activities.loading">
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <hbd-activity-view
+      *ngFor="let activity of activities.res!.data.activities"
+      [activity]="activity"
+      class="transition-transform transform hover:scale-105 duration-300 ease-in-out"
+    ></hbd-activity-view>
+  </div>
+</div>
