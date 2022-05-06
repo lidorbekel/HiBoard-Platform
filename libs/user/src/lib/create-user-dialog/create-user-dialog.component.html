@@ -87,7 +87,7 @@
       ></ng-template>
     </div>
 
-    <div class="mb-2">
+    <div class="mb-2" *ngIf="data.role === 'Manager'">
       <p class="text14 font-bold mr-1">Department</p>
       <mat-form-field appearance="outline" class="w-1/2">
         <mat-select formControlName="department" placeholder="Select Department">

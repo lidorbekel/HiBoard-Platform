@@ -10,8 +10,9 @@ import {TippyModule} from "@ngneat/helipopper";
 import {User} from "../../users.types";
 import {UserService} from "../state/user.service";
 import {CompanyRepository} from "@hiboard/company/state/company.repository";
+import {UserRepository} from "../state/user.repository";
 
-interface CreateUserDialogData {
+export interface CreateUserDialogData {
   role: User.Role
 }
 
@@ -27,7 +28,7 @@ export class CreateUserDialogComponent {
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
     password: new FormControl('', Validators.minLength(6)),
-    department: new FormControl('', Validators.required),
+    department: new FormControl(''),
   })
 
   departments = [...this.companyRepo.currentCompany!.departments, 'Sales', 'product']; //Todo remove
@@ -40,6 +41,7 @@ export class CreateUserDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: CreateUserDialogData,
               private userService: UserService,
+              private userRepo: UserRepository,
               public dialogRef: MatDialogRef<CreateUserDialogComponent>,
               private toast: HotToastService,
               private cdr: ChangeDetectorRef,
@@ -55,6 +57,7 @@ export class CreateUserDialogComponent {
 
     const newUser: Omit<User.Entity, 'id'> & { password: string } = {
       ...this.createUserForm.value,
+      department: this.data.role === 'Manager' ? this.createUserForm.get('department')!.value : this.userRepo.getCurrentUser()!.department,
       role: this.data.role,
       companyId: this.companyRepo.currentCompany!.id
     }

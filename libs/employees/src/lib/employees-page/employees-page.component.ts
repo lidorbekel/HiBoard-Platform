@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngneat/hot-toast";
-import {CreateUserDialogComponent} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
+import {CreateUserDialogComponent,} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
 
 @Component({
   selector: 'hbd-employees-page',
@@ -20,11 +20,13 @@ export class EmployeesPageComponent implements OnInit {
   }
 
   openCreateEmployeeDialog() {
-    const dialogRef = this.dialog.open(CreateUserDialogComponent);
+    const dialogRef = this.dialog.open(CreateUserDialogComponent, {
+      data: {role: 'Employee'}
+    });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res?.data) {
-        this.toast.success('User created successfully')
+        this.toast.success('Employee created successfully')
       }
     })
   }
