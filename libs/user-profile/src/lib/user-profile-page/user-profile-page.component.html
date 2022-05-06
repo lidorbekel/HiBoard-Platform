@@ -120,11 +120,13 @@
             </mat-expansion-panel>
           </mat-accordion>
 
-          <button mat-raised-button color="primary" type="submit"
+          <button mat-raised-button
+                  color="primary"
+                  type="submit"
                   (click)="onEdit()"
                   [class.hbd-spinner]="loading"
                   [disabled]="loading || form.invalid"
-                  class="float-right"
+                  class="float-right submit-btn"
           >
             <mat-icon>edit</mat-icon>
             Save
