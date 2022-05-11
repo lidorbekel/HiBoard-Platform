@@ -17,6 +17,9 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 const modules = [
   MatButtonModule,
@@ -36,7 +39,10 @@ const modules = [
   MatRadioModule,
   MatSelectModule,
   MatChipsModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

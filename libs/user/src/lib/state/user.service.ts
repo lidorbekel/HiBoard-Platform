@@ -48,4 +48,11 @@ export class UserService {
       })
     );
   }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${UserService.userUrl}/${id}`)
+    // return new Observable(obs => {
+    //   obs.next(id)
+    // })
+  }
 }
