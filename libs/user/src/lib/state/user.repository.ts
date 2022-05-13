@@ -33,6 +33,10 @@ export class UserRepository {
     return store.query((state) => state.user);
   }
 
+  get userId() {
+    return this.getCurrentUser()!.id;
+  }
+
   setLoading(isLoading: boolean) {
     store.update((state) => ({
       ...state,

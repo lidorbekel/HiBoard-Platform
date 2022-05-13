@@ -34,8 +34,8 @@ export class UserService {
       )
   }
 
-  createUser(user: Omit<User.Entity, 'id'> & { password: string }) {
-    return this.http.post<User.Entity>(UserService.userUrl, user);
+  createUser(user: User.NewEntity) {
+    return this.http.post<User.Response>(UserService.userUrl, user);
   }
 
   updateUser(user: Omit<User.Entity, 'id'> & { password?: string, newPassword?: string }) {
@@ -47,5 +47,12 @@ export class UserService {
         }
       })
     );
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${UserService.userUrl}/${id}`)
+    // return new Observable(obs => {
+    //   obs.next(id)
+    // })
   }
 }
