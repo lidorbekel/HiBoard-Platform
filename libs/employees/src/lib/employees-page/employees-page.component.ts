@@ -71,11 +71,9 @@ export class EmployeesPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if (res?.data) {
-        this.employeesService.addEmployee(res.data);
-        this.cdr.detectChanges();
-        this.toast.success('Employee added successfully')
-      }
+      this.employeesService.addEmployee(res);
+      this.cdr.detectChanges();
+      this.toast.success('Employee added successfully')
     })
   }
 

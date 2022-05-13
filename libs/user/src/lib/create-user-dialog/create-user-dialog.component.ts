@@ -27,7 +27,7 @@ export class CreateUserDialogComponent {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
-    password: new FormControl('', Validators.minLength(6)),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     department: new FormControl(''),
   })
 
@@ -55,16 +55,16 @@ export class CreateUserDialogComponent {
     }
     this.loading = true;
 
-    const newUser: Omit<User.Entity, 'id'> & { password: string } = {
+    const newUser: User.NewEntity = {
       ...this.createUserForm.value,
-      department: this.data.role === 'Manager' ? this.createUserForm.get('department')!.value : this.userRepo.getCurrentUser()!.department,
+      department: this.data.role === 'Employee' ? this.userRepo.getCurrentUser()!.department : this.createUserForm.get('department')!.value,
       role: this.data.role,
-      companyId: this.companyRepo.currentCompany!.id
+      companyId: this.companyRepo.currentCompany!.id,
     }
 
     this.userService.createUser(newUser).subscribe({
       next: (res) => {
-        this.dialogRef.close(res)
+        this.dialogRef.close(res.data)
       },
       error: () => {
         this.loading = false;

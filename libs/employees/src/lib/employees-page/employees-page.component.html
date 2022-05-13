@@ -38,7 +38,7 @@
 
   <ng-container matColumnDef="done">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Activities Done</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.done}} %</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.done ? element.done : 0}} %</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="actions">

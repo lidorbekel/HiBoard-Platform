@@ -14,6 +14,10 @@ export namespace User {
     done: number
   }
 
+  export interface NewEntity extends Omit<User.Entity, 'id'> {
+    password: string;
+  }
+
   export interface Response extends BaseResponse<Entity> {
   }
 
