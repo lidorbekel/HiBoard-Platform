@@ -15,7 +15,7 @@ import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {AngularFireModule} from "@angular/fire/compat";
 import {popperVariation, TippyModule, tooltipVariation} from '@ngneat/helipopper';
 import {CoreModule} from "@hiboard/core/core.module";
-import {AgGridModule} from "ag-grid-angular";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +27,12 @@ import {AgGridModule} from "ag-grid-angular";
     MaterialModule,
     HttpClientModule,
     ApiModule,
-    AgGridModule.withComponents([]),
+    NgxSkeletonLoaderModule.forRoot({
+      animation: 'pulse',
+      theme: {
+        margin: '2px'
+      }
+    }),
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {

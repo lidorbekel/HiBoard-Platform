@@ -1,15 +1,15 @@
 import {defaultStoreStatus, StoreStatus} from "@hiboard/core/store";
 import {createState, Store, withProps} from "@ngneat/elf";
 import {selectAllEntities, setEntities, withActiveId, withEntities} from "@ngneat/elf-entities";
-import {activities} from "../types/activities.type";
+import {Activities} from "../types/activities.type";
 import {Injectable, OnDestroy} from "@angular/core";
 
-export interface activitiesState extends StoreStatus {
+export interface ActivitiesState extends StoreStatus {
 }
 
 const {state, config} = createState(
-  withEntities<activities.Entity>(),
-  withProps<activitiesState>(defaultStoreStatus),
+  withEntities<Activities.Entity>(),
+  withProps<ActivitiesState>(defaultStoreStatus),
   withActiveId()
 );
 const store = new Store({state, name: 'activities', config});
@@ -25,7 +25,7 @@ const store = new Store({state, name: 'activities', config});
 export class ActivitiesRepository implements OnDestroy {
   activities$ = store.pipe(selectAllEntities());
 
-  setactivities(activities: activities.Entity[]) {
+  setActivities(activities: Activities.Entity[]) {
     store.update(setEntities(activities));
   }
 

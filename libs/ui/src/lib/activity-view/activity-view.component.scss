@@ -1,5 +1,6 @@
 :host {
   display: block;
+  overflow-y: hidden;
 }
 
 .activity-view-card {
@@ -9,3 +10,26 @@
 .activity-view-btn {
   width: 100px;
 }
+
+.mat-standard-chip {
+  border-radius: 4px;
+}
+
+.done {
+  background-color: forestgreen !important;
+}
+
+.in-progress {
+  background-color: darkorange !important;
+}
+
+.backlog {
+  background-color: lightskyblue !important;
+}
+
+.description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+

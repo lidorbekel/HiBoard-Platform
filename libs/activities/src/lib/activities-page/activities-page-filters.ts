@@ -1,11 +1,25 @@
-import {activities, activitiestatus, TaskTag} from "@hiboard/activities/types/activities.type";
+import {Activities, ActivityStatus} from "@hiboard/activities/types/activities.type";
 
-export interface activitiesFilters {
-  names: string;
-  tags: TaskTag;
-  statuses: activitiestatus;
+export interface ActivitiesFilters {
+  name: string;
+  tag: string;
+  status: ActivityStatus[];
 }
 
-export function activitiesFilters(activities: activities.Entity[], filters: any): activities.Entity[] {
+export const activitiesFilters = (activities: Activities.Entity[], filters: ActivitiesFilters) => {
+  console.log(filters)
+  if (filters.name?.length) {
+    console.log('im in')
+    activities = activities.filter(({title}) => filters.name.includes(title));
+  }
+
+  if (filters.tag?.length) {
+    activities = activities.filter(({tag}) => filters.tag.includes(tag));
+  }
+
+  if (filters.status?.length) {
+    activities = activities.filter(({status}) => filters.status.includes(status));
+  }
+
   return activities;
 }

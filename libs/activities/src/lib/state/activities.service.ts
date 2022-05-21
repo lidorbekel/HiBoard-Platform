@@ -11,13 +11,10 @@ export class ActivitiesService {
   constructor(private activitiesRepo: ActivitiesRepository, private api: ActivitiesApi) {
   }
 
-  getactivities() {
+  getActivities() {
     return this.api.getactivities().pipe(
-      tap(() => {
-        this.activitiesRepo.setLoading(true)
-      }),
       tap(({data}) => {
-        this.activitiesRepo.setactivities(data.activities);
+        this.activitiesRepo.setActivities(data.activities);
       }),
       toAsyncState()
     );

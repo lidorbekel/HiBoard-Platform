@@ -1,29 +1,27 @@
 import {BaseResponse} from "@hiboard/api/api.types";
 
-export namespace activities {
-  export interface PageQueryParams {
-    names: string[],
-    tags: string[],
-    statuses: string[]
-  }
+export namespace Activities {
 
   export interface Entity {
     id: string;
     title: string;
     description: string;
-    tag: TaskTag;
-    status: activitiestatus;
-    dependence?: string;
+    tag: string;
+    status: ActivityStatus;
     estimation?: string;
   }
 
   export interface Response extends BaseResponse<{ activities: Entity[] }> {
   }
+
+  export interface PageQueryParams {
+    name?: string;
+    tag?: string;
+    status?: string;
+  }
 }
 
-export type TaskTag = "HR" | "R&D" | "Sales";
-
-export type activitiestatus = "backlog" | "in-progress" | "done";
+export type ActivityStatus = "backlog" | "in-progress" | "done";
 
 
 

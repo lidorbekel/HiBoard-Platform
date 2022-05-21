@@ -25,7 +25,7 @@ export class UserProfilePageComponent implements OnInit {
   hideNewPassword = true;
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
+    email: new FormControl({value: null, disabled: true}),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     currentPassword: new FormControl(''),

@@ -8,7 +8,18 @@
 }
 
 .mat-form-field-infix {
-  padding: 0.25rem 0 0.75rem 0 !important;
+  padding: 8px !important;
+  padding-bottom: 4px !important;
+  height: 40px !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+}
+
+.mat-form-field-flex {
+  padding: 0 !important;
 }
 
 mat-label {
@@ -36,7 +47,7 @@ mat-drawer {
   padding: 0 !important;
 }
 
-//.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
-//  color: rgba(0, 0, 0, .12);
-//  border: none;
-//}
+.myPanelClass {
+  margin: 30px 0 0 30px !important;
+  min-width: calc(100% + 20px) !important;
+}
