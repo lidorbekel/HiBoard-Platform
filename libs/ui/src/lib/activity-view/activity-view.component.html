@@ -1,7 +1,40 @@
-<mat-card class="activity-view-card">
-  <p class="font-bold text20 mb-4">{{ activity.title }}</p>
+<mat-card class="activity-view-card" *ngIf="!loading">
+  <div class="flex justify-between">
+    <p class="font-bold text20 mb-4">{{ activity.title }}</p>
 
-  <p class="text14 light-grey mb-2">{{ activity.description }}</p>
+    <mat-chip color="accent" selected>{{ activity.tag }}</mat-chip>
+  </div>
 
-  <button mat-stroked-button class="activity-view-btn float-right">See more</button>
+  <p
+    class="text14 light-grey mb-4 description"
+    [tippy]="activity.description"
+    placement="top-start"
+  >{{ activity.description }}</p>
+
+  <div class="flex justify-between">
+    <mat-chip
+      selected
+      [ngClass]="activity.status"
+    >
+      {{ activity.status }}
+    </mat-chip>
+
+    <button mat-stroked-button class="activity-view-btn float-right">See more</button>
+  </div>
 </mat-card>
+
+<div *ngIf="loading">
+  <mat-card class="activity-view-card">
+    <div class="flex-align-center justify-between">
+      <ngx-skeleton-loader count="1" appearance="line" class="w-2/3"></ngx-skeleton-loader>
+      <ngx-skeleton-loader count="1" appearance="circle"></ngx-skeleton-loader>
+    </div>
+
+    <ngx-skeleton-loader count="1" appearance="line"></ngx-skeleton-loader>
+
+    <div class="flex-align-center justify-between">
+      <ngx-skeleton-loader count="1" appearance="line" class="w-1/5"></ngx-skeleton-loader>
+      <ngx-skeleton-loader count="1" appearance="circle"></ngx-skeleton-loader>
+    </div>
+  </mat-card>
+</div>

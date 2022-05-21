@@ -1,19 +1,19 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {ActivitiesRepository} from "@hiboard/activities/state/activities.repository";
-import {BindQueryParamsFactory} from "@ngneat/bind-query-params";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
-import {activities} from "@hiboard/activities/types/activities.type";
+import {Activities} from "@hiboard/activities/types/activities.type";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {map, switchMap} from "rxjs";
-import {activitiesFilters} from "@hiboard/activities/activities-page/activities-page-filters";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {TaskViewComponentModule} from "@hiboard/ui/activity-view/activity-view.component";
 import {AsyncState} from "@ngneat/loadoff";
 import {ActivitiesFiltersComponentModule} from "@hiboard/activities/activities-filters/activities-filters.component";
 import {SubscribeModule} from "@ngneat/subscribe";
 import {CompletedactivitiesComponentModule} from "@hiboard/ui/completed-activities/completed-activities.component";
+import {BindQueryParamsFactory} from "@ngneat/bind-query-params";
+import {map, startWith, switchMap} from "rxjs";
+import {activitiesFilters} from "@hiboard/activities/activities-page/activities-page-filters";
 
 @UntilDestroy()
 @Component({
@@ -26,71 +26,64 @@ import {CompletedactivitiesComponentModule} from "@hiboard/ui/completed-activiti
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActivitiesPageComponent implements OnInit, OnDestroy {
-  activities: AsyncState<activities.Response>;
-  filteredActivities: any;
-  completedActivitiesPercent = 0;
-
+export class ActivitiesPageComponent implements OnInit {
+  activities: AsyncState<Activities.Response>;
+  filteredActivities: Activities.Entity[];
+  completedActivitiesPercent = 70; //TODO remove
+  loadingArray = Array(9);
 
   filters = new FormGroup({
-    names: new FormControl(),
-    tags: new FormControl(),
-    statuses: new FormControl()
+    name: new FormControl(),
+    tag: new FormControl(),
+    status: new FormControl()
   });
 
   queryParamsManager = this.factory
-    .create<activities.PageQueryParams>([
+    .create<Activities.PageQueryParams>([
       {
-        queryKey: 'names',
+        queryKey: 'name',
         type: 'array'
       },
       {
-        queryKey: 'tags',
+        queryKey: 'tag',
         type: 'array'
       },
       {
-        queryKey: 'statuses',
+        queryKey: 'status',
         type: 'array'
-      },
-    ]).connect(this.filters);
+      }
+    ])
+    .connect(this.filters);
 
   constructor(
     private service: ActivitiesService,
     private activitiesRepo: ActivitiesRepository,
-    private factory: BindQueryParamsFactory,
     private cdr: ChangeDetectorRef,
+    private factory: BindQueryParamsFactory,
   ) {
   }
 
   ngOnInit(): void {
     this.filters.valueChanges.pipe(
-      switchMap((filters) => {
+      startWith(this.activities),
+      switchMap(() => {
         return this.activitiesRepo.activities$.pipe(
-          map((activities) => activitiesFilters(activities, filters))
-        );
-      }),
-      untilDestroyed(this)
-    )
-      .subscribe((filteredActivities) => {
-        this.filteredActivities = filteredActivities;
-      });
+          map((activities) => activitiesFilters(activities, this.filters.value))
+        )
+      })
+    ).subscribe((filteredActivities) => {
+      this.filteredActivities = filteredActivities;
+    })
 
-    this.fetchactivities();
+    this.fetchActivities();
   }
 
-  ngOnDestroy() {
-    this.queryParamsManager.destroy();
-  }
-
-  private fetchactivities() {
-    this.service.getactivities().pipe(
+  private fetchActivities() {
+    this.service.getActivities().pipe(
       untilDestroyed(this)
     )
       .subscribe((activities) => {
         this.activities = activities;
-        if (activities.res) {
-          this.completedActivitiesPercent = (activities.res.data.activities.filter(({status}) => status === 'done').length / activities.res.data.activities.length) * 100;
-        }
         this.cdr.markForCheck();
       })
   }

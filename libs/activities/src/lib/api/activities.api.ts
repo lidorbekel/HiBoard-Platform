@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {activities} from "../types/activities.type";
+import {Activities} from "../types/activities.type";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {activitiesApiMock} from "./activities.api.mock";
@@ -15,7 +15,7 @@ export class ActivitiesApi {
 
   getactivities() {
     // return this.http.get<activities.Response>(activitiesApi.url);
-    return new Observable<activities.Response>((observer) => {
+    return new Observable<Activities.Response>((observer) => {
       setTimeout(() => {
         observer.next({data: {activities: activitiesApiMock}})
       }, 2000)

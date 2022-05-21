@@ -2,12 +2,31 @@
   display: block;
 }
 
-.activities-filters {
-  display: flex;
-  width: 800px;
+mat-form-field {
+  width: 350px;
+  margin-right: 20px;
+  font-size: var(--text16) !important;
 }
 
-mat-form-field {
-  width: 300px;
-  margin-right: 20px;
+.additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.mat-standard-chip {
+  width: fit-content;
+  max-width: 110px;
+  border-radius: 4px;
+  min-height: 22px;
+
+  .chip-text {
+    width: calc(100%); // calc is important here, do not use "100%" alone
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-chip-remove {
+    margin-left: 4px;
+  }
 }

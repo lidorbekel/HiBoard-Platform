@@ -1,6 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, NgModule, OnInit} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
-import {activities} from "@hiboard/activities/types/activities.type";
+import {Activities} from "@hiboard/activities/types/activities.type";
+import {CommonModule} from "@angular/common";
+import {TippyModule} from "@ngneat/helipopper";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
   selector: 'hbd-activity-view',
@@ -9,7 +12,9 @@ import {activities} from "@hiboard/activities/types/activities.type";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityViewComponent implements OnInit {
-  @Input() activity: activities.Entity;
+  @Input() activity: Activities.Entity;
+  @Input() loading = false;
+  @Input() loading2 = true;
 
   constructor() {
   }
@@ -20,7 +25,7 @@ export class ActivityViewComponent implements OnInit {
 
 @NgModule({
   declarations: [ActivityViewComponent],
-  imports: [MaterialModule],
+  imports: [MaterialModule, CommonModule, TippyModule, NgxSkeletonLoaderModule],
   exports: [ActivityViewComponent]
 })
 export class TaskViewComponentModule {
