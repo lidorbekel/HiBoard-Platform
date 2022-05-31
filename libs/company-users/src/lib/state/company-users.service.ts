@@ -7,20 +7,19 @@ import { UserService } from '../../../../user/src/lib/state/user.service';
 @Injectable({
   providedIn: 'root',
 })
-export class EmployeesService {
-  private employees = new BehaviorSubject<User.Entity[]>([]);
-  employees$ = this.employees.asObservable();
+export class CompanyUsersService {
+  private managers = new BehaviorSubject<User.Entity[]>([]);
+  managers$ = this.managers.asObservable();
 
-  private activeEmployee = new BehaviorSubject<User.Entity | null>(null);
-  activeEmployee$ = this.activeEmployee.asObservable();
+  private activeManager = new BehaviorSubject<User.Entity | null>(null);
+  activeManager$ = this.activeManager.asObservable();
 
-  static employeesUrl = (managerId: number) => {
-    return `${managerId}/employees`;
+  static ManagerUrl = (adminID: number) => {
+    return `${adminID}/Managers`;
   };
-
   constructor(private http: HttpClient, private userService: UserService) {}
 
-  fetchEmployeesByManagerId(managerId: number) {
+  fetchManagersByAdminId(adminId: number) {
     // return this.http.get<User.EmployeesResponse>(EmployeesService.employeesUrl(managerId));
 
     return new Observable<User.Entity[]>((observer) => {
@@ -49,20 +48,19 @@ export class EmployeesService {
         ]);
       }, 2000);
     }).subscribe((res) => {
-      this.employees.next(res);
+      this.managers.next(res);
     });
   }
-
-  addEmployee(user: User.Entity) {
-    this.employees.next([...this.employees.getValue(), user]);
+  addManager(user: User.Entity) {
+    this.managers.next([...this.managers.getValue(), user]);
   }
 
-  deleteEmployee(id: number) {
+  deleteManager(id: number) {
     return this.userService.deleteUser(id).pipe(
       tap((res) => {
         if (res) {
-          this.employees.next(
-            this.employees.getValue().filter((employee) => employee.id !== id)
+          this.managers.next(
+            this.managers.getValue().filter((manager) => manager.id !== id)
           );
         }
       })
