@@ -21,6 +21,6 @@ export namespace User {
   export interface Response extends BaseResponse<Entity> {
   }
 
-  export interface EmployeesResponse extends BaseResponse<Entity[]> {
+  export interface UsersResponse extends BaseResponse<Entity[]> {
   }
 }

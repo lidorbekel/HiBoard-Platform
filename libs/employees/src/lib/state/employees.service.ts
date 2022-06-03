@@ -22,37 +22,9 @@ export class EmployeesService {
   }
 
   fetchEmployeesByManagerId(managerId: number) {
-    return this.http.get<User.EmployeesResponse>(EmployeesService.employeesUrl(managerId)).subscribe(res => {
+    return this.http.get<User.UsersResponse>(EmployeesService.employeesUrl(managerId)).subscribe(res => {
       this.employees.next(res.data)
     })
-
-    // return new Observable<User.Entity[]>((observer) => {
-    //   setTimeout(() => {
-    //     observer.next([{
-    //       id: 12345,
-    //       email: 'email',
-    //       firstName: 'lidor',
-    //       lastName: 'bekel',
-    //       role: 'Employee',
-    //       companyId: '1',
-    //       department: 'Sales',
-    //       done: 70
-    //     },
-    //       {
-    //         id: 43434,
-    //         email: 'email2',
-    //         firstName: 'bar',
-    //         lastName: 'amsalem',
-    //         role: 'Employee',
-    //         companyId: '1',
-    //         department: 'Sales',
-    //         done: 35
-    //       }
-    //     ])
-    //   }, 2000)
-    // }).subscribe(res => {
-    //   this.employees.next(res)
-    // })
   }
 
   addEmployee(user: User.Entity) {
