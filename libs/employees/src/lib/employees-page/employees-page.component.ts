@@ -34,6 +34,7 @@ export class EmployeesPageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filter') filter: ElementRef;
+  loading = false;
 
   search = new FormControl('');
 
@@ -51,8 +52,11 @@ export class EmployeesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
+
     this.employeesService.employees$.subscribe(employeesGridData => {
       if (employeesGridData) {
+        this.loading = false;
         this.dataSource.data = employeesGridData;
         this.cdr.detectChanges();
       }
@@ -100,7 +104,6 @@ export class EmployeesPageComponent implements OnInit {
               this.toast.success('Employee deleted successfully');
               this.cdr.detectChanges();
             },
-            error: () => this.toast.error('There was a problem deleting the employee, please try again later')
           })
       }
     })

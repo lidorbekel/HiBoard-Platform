@@ -70,7 +70,6 @@ export class CreateUserDialogComponent {
       },
       error: () => {
         this.loading = false;
-        this.toast.error('There was a problem to create the user, please try again later.')
         this.cdr.detectChanges();
       }
     })
