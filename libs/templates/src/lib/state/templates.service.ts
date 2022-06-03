@@ -32,7 +32,7 @@ export class TemplatesService {
   templates$ = this.templates.asObservable();
 
   static templatesUrl = (companyId: string, department: string) => {
-    return `company/${companyId}/department/${department.toLowerCase()}/templates`;
+    return `companies/${companyId}/department/${department.toLowerCase()}/templates`;
   }
 
   constructor(private http: HttpClient, private companyRepo: CompanyRepository, private userRepo: UserRepository) {
