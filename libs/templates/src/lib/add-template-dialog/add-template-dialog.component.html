@@ -1,0 +1,30 @@
+<section class="p-0 w-[400px]">
+  <h1 mat-dialog-title>Add New Template</h1>
+
+  <hr class="my-2">
+
+  <form [formGroup]="form" errorTailor class="my-4">
+    <p class="text14 font-bold">Template Name</p>
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Template Name"
+        [controlErrorAnchor]="nameAnchor"
+        [controlErrorsOnBlur]="false"
+      >
+    </mat-form-field>
+
+    <ng-template
+      controlErrorAnchor
+      #nameAnchor="controlErrorAnchor"
+    ></ng-template>
+  </form>
+
+  <hr class="my-2">
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="addTemplate()" [disabled]="this.form.invalid">Add</button>
+  </mat-dialog-actions>
+</section>

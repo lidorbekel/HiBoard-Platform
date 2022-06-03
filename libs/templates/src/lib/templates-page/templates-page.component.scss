@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.mat-row:hover {
+  background-color: whitesmoke;
+  cursor: grab;
+}
+
+.mat-column-actions {
+  flex: 0 0 10% !important;
+}
+
+.template-side {
+  border-left: 1px solid darkgrey;
+  background-color: white;
+}
+
+.example-sidenav-content {
+  position: sticky;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}

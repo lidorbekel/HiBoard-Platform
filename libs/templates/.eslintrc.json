@@ -1,0 +1,17 @@
+{
+  "extends": ["../../.eslintrc.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@nrwl/nx/angular-template"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["libs/templates/tsconfig.*?.json"]
+      }
+    }
+  ]
+}

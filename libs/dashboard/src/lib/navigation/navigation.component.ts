@@ -46,6 +46,12 @@ export class NavigationComponent implements OnInit {
       icon: 'supervised_user_circle',
       link: 'admin/company-users',
       role: 'Admin'
+    },
+    {
+      title: 'Templates',
+      icon: 'view_quilt',
+      link: 'templates',
+      role: 'Manager'
     }
   ];
 
