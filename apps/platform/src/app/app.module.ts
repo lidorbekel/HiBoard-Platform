@@ -38,6 +38,7 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
         useValue: {
           required: () => 'This field is required',
           email: () => 'Invalid email',
+          min: (requiredLength) => `Max ${requiredLength}`,
           minlength: ({requiredLength, actualLength}) =>
             `Expected at least ${requiredLength} characters but got only ${actualLength}`,
         }

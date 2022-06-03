@@ -55,14 +55,16 @@ export class CreateUserDialogComponent {
     }
     this.loading = true;
 
+    const isCreateEmployee = this.data.role === 'Employee';
+
     const newUser: User.NewEntity = {
       ...this.createUserForm.value,
-      department: this.data.role === 'Employee' ? this.userRepo.getCurrentUser()!.department : this.createUserForm.get('department')!.value,
+      department: isCreateEmployee ? this.userRepo.getCurrentUser()!.department : this.createUserForm.get('department')!.value,
       role: this.data.role,
       companyId: this.companyRepo.currentCompany!.id,
     }
 
-    this.userService.createUser(newUser).subscribe({
+    this.userService.createUser(newUser, isCreateEmployee ? {managerId: this.userRepo.userId} : {}).subscribe({
       next: (res) => {
         this.dialogRef.close(res.data)
       },

@@ -71,9 +71,11 @@ export class EmployeesPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.employeesService.addEmployee(res);
-      this.cdr.detectChanges();
-      this.toast.success('Employee added successfully')
+      if (res) {
+        this.employeesService.addEmployee(res);
+        this.cdr.detectChanges();
+        this.toast.success('Employee added successfully')
+      }
     })
   }
 
@@ -91,10 +93,12 @@ export class EmployeesPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(confirm => {
       if (confirm) {
+        console.log('Im in')
         this.employeesService.deleteEmployee(user.id)
           .subscribe({
             next: () => {
-              this.toast.success('Employee deleted successfully')
+              this.toast.success('Employee deleted successfully');
+              this.cdr.detectChanges();
             },
             error: () => this.toast.error('There was a problem deleting the employee, please try again later')
           })

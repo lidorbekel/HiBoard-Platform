@@ -8,7 +8,12 @@ export namespace Activities {
     description: string;
     tag: string;
     status: ActivityStatus;
-    estimation?: string;
+    estimation?: {
+      weeks: number,
+      days: number,
+      hours: number
+    },
+    // department: string;
   }
 
   export interface Response extends BaseResponse<{ activities: Entity[] }> {

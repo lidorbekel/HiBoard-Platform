@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserRepository} from "./user.repository";
 import {User} from "../../users.types";
 import {tap} from "rxjs";
@@ -34,8 +34,18 @@ export class UserService {
       )
   }
 
-  createUser(user: User.NewEntity) {
-    return this.http.post<User.Response>(UserService.userUrl, user);
+  createUser(user: User.NewEntity, {managerId}: { managerId?: number }) {
+    let params = new HttpParams();
+
+    if (managerId) {
+      params = params.set('managerId', managerId);
+    }
+
+    return this.http.post<User.Response>(UserService.userUrl, user,
+      {
+        params
+      }
+    );
   }
 
   updateUser(user: Omit<User.Entity, 'id'> & { password?: string, newPassword?: string }) {
@@ -50,9 +60,6 @@ export class UserService {
   }
 
   deleteUser(id: number) {
-    return this.http.delete(`${UserService.userUrl}/${id}`)
-    // return new Observable(obs => {
-    //   obs.next(id)
-    // })
+    return this.http.delete(`${UserService.userUrl}/${id}`, {observe: 'response'})
   }
 }
