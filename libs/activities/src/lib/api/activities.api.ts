@@ -13,7 +13,8 @@ export class ActivitiesApi {
   constructor(private http: HttpClient) {
   }
 
-  getactivities() {
+  getActivities() {
+    //user/id/activities
     // return this.http.get<activities.Response>(activitiesApi.url);
     return new Observable<Activities.Response>((observer) => {
       setTimeout(() => {

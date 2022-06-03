@@ -66,7 +66,7 @@ export class JoinPageComponent implements OnInit {
       next: (companyRes) => {
         console.log('companyResInJoin', companyRes)
         const companyId = companyRes.data.id;
-        this.userService.createUser({...adminUser, companyId}).subscribe({
+        this.userService.createUser({...adminUser, companyId}, {}).subscribe({
           next: () => {
             this.authService.login(email, password)
               .pipe(

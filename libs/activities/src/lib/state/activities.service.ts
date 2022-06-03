@@ -12,7 +12,7 @@ export class ActivitiesService {
   }
 
   getActivities() {
-    return this.api.getactivities().pipe(
+    return this.api.getActivities().pipe(
       tap(({data}) => {
         this.activitiesRepo.setActivities(data.activities);
       }),

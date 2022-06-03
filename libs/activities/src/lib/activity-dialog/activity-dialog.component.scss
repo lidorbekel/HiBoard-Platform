@@ -1,11 +1,17 @@
 :host {
   display: block;
+  width: 600px;
 }
 
 .description {
-  width: 50%;
+  margin-top: 2px;
+  width: 584px;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #e5e7eb;
-  background-color: white;
+  background-color: whitesmoke;
+}
+
+textarea {
+  resize: none;
 }

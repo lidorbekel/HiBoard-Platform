@@ -1,0 +1,110 @@
+<h2 mat-dialog-title>{{ activity.title }}</h2>
+
+<hr class="my-2">
+
+<mat-dialog-content>
+  <form [formGroup]="form" errorTailor>
+    <section class="mb-4">
+      <p class="text14 font-bold">Description</p>
+      <textarea
+        class="description"
+        matInput
+        formControlName="description"
+        placeholder="Description..."
+        rows="5"
+        readonly
+      ></textarea>
+    </section>
+
+    <section class="my-3">
+      <p class="text14 font-bold">Tag</p>
+      <mat-form-field appearance="outline" class="w-[100px]">
+        <input
+          matInput
+          formControlName="tag"
+          placeholder="Tag"
+          maxlength="10"
+        >
+      </mat-form-field>
+    </section>
+
+    <section class="mb-3">
+      <p class="text14 font-bold">Status</p>
+      <mat-radio-group formControlName="status">
+        <mat-radio-button
+          *ngFor="let status of validStatuses"
+          [value]="status"
+          class="mr-3"
+        >{{ status }}</mat-radio-button>
+      </mat-radio-group>
+    </section>
+
+    <section class="mb-3">
+      <p class="text14 font-bold">Estimation</p>
+
+      <div class="flex-align-center">
+        <section class="mr-2">
+          <p class="text12 font-light">Weeks</p>
+          <mat-form-field appearance="outline" class="w-[50px]">
+            <input
+              matInput
+              type="number"
+              formControlName="weeks"
+              min="0"
+              max="4"
+              maxlength="1"
+            >
+          </mat-form-field>
+        </section>
+
+        <section class="mr-2">
+          <p class="text12 font-light">Days</p>
+          <mat-form-field appearance="outline" class="w-[50px]">
+            <input
+              matInput
+              type="number"
+              formControlName="days"
+              min="0"
+              max="6"
+              maxlength="1"
+            >
+          </mat-form-field>
+        </section>
+
+        <section class="mr-2">
+          <p class="text12 font-light">Hours</p>
+          <mat-form-field appearance="outline" class="w-[70px]">
+            <input
+              matInput
+              type="number"
+              formControlName="hours"
+              min="0"
+              step="0.5"
+              max="23"
+              maxlength="2"
+            >
+          </mat-form-field>
+        </section>
+      </div>
+    </section>
+  </form>
+</mat-dialog-content>
+
+<hr class="my-2">
+
+<mat-dialog-actions align="end">
+  <button
+    mat-stroked-button
+    mat-dialog-close
+  >Cancel
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    (click)="save()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

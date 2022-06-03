@@ -19,7 +19,12 @@
       {{ activity.status }}
     </mat-chip>
 
-    <button mat-stroked-button class="activity-view-btn float-right">See more</button>
+    <button
+      mat-stroked-button
+      class="activity-view-btn float-right"
+      (click)="openActivityDialog(activity)"
+    >See more
+    </button>
   </div>
 </mat-card>
 

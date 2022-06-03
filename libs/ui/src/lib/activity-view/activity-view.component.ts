@@ -1,9 +1,14 @@
-import {ChangeDetectionStrategy, Component, Input, NgModule, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {CommonModule} from "@angular/common";
 import {TippyModule} from "@ngneat/helipopper";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  ActivityDialogComponent,
+  ActivityDialogData
+} from "@hiboard/activities/activity-dialog/activity-dialog.component";
 
 @Component({
   selector: 'hbd-activity-view',
@@ -11,15 +16,20 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
   styleUrls: ['./activity-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActivityViewComponent implements OnInit {
+export class ActivityViewComponent {
   @Input() activity: Activities.Entity;
   @Input() loading = false;
   @Input() loading2 = true;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog,
+  ) {
   }
 
-  ngOnInit(): void {
+  openActivityDialog(activity: Activities.Entity) {
+    this.dialog.open<ActivityDialogComponent, ActivityDialogData>(ActivityDialogComponent, {
+      data: {activity}
+    })
   }
 }
 

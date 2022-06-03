@@ -1,12 +1,8 @@
-<!--<form [formGroup]="filters">-->
-<!--  <h1 formControlName="name">{{ this }}</h1>-->
-<!--  -->
-<!--</form>-->
-
-<div class="flex justify-between mb-8">
-  <hbd-activities-filters [formGroup]="filters" [activities]="activities"></hbd-activities-filters>
-
-  <hbd-completed-activities [value]="completedActivitiesPercent"></hbd-completed-activities>
+<div class="flex-align-center justify-between mb-8 w-full">
+  <hbd-activities-filters
+    [formGroup]="filters" [activities]="activities"></hbd-activities-filters>
+  <hbd-completed-activities
+    [value]="completedActivitiesPercent"></hbd-completed-activities>
 </div>
 
 <div *ngIf="!activities.loading">
