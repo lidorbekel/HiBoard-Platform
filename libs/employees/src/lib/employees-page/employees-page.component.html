@@ -30,11 +30,12 @@
 <table mat-table [dataSource]="dataSource" class="w-full" matSort>
   <ng-container matColumnDef="fullName">
     <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Full Name</mat-header-cell
+    >Full Name
+    </mat-header-cell
     >
     <mat-cell *matCellDef="let element">{{
       element.firstName + ' ' + element.lastName
-    }}</mat-cell>
+      }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="email">
@@ -44,17 +45,20 @@
 
   <ng-container matColumnDef="departmentName">
     <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Department</mat-header-cell
+    >Department
+    </mat-header-cell
     >
     <mat-cell *matCellDef="let element">{{ element.department }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="done">
     <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Activities Done</mat-header-cell
+    >Activities Done
+    </mat-header-cell
     >
     <mat-cell *matCellDef="let element"
-      >{{ element.done ? element.done : 0 }} %</mat-cell
+    >{{ element.done ? element.done : 0 }} %
+    </mat-cell
     >
   </ng-container>
 
@@ -71,7 +75,7 @@
   </ng-container>
 
   <ng-container matColumnDef="loading">
-    <mat-footer-cell *matFooterCellDef> Loading data... </mat-footer-cell>
+    <mat-footer-cell *matFooterCellDef> Loading data...</mat-footer-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -83,6 +87,6 @@
 
   <mat-footer-row
     *matFooterRowDef="['loading']"
-    [ngClass]="{ hide: dataSource.data.length }"
+    [ngClass]="{ hide: !loading }"
   ></mat-footer-row>
 </table>
