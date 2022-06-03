@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {TokenInterceptor} from './token.interceptor';
 import {BaseUrlInterceptor} from "@hiboard/api/base-url.interceptor";
+import {ErrorsInterceptor} from "@hiboard/api/errors.interceptor";
 
 @NgModule({
   providers: [
@@ -14,6 +15,11 @@ import {BaseUrlInterceptor} from "@hiboard/api/base-url.interceptor";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorsInterceptor,
       multi: true,
     },
   ]

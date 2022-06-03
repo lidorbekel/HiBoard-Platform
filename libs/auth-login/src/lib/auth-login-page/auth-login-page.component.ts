@@ -48,9 +48,14 @@ export class AuthLoginPageComponent {
         )
       )
       .subscribe({
-        error: () => {
+        error: (err) => {
           this.toast.close()
           this.error = "Invalid credentials";
+          if (err.code === 'auth/user-not-found') {
+            this.toast.error("User not found", {
+              duration: 10_000
+            });
+          }
           this.loading = false
           this.cdr.markForCheck();
         },

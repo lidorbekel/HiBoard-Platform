@@ -100,7 +100,6 @@ export class EmployeesPageComponent implements OnInit {
               this.toast.success('Employee deleted successfully');
               this.cdr.detectChanges();
             },
-            error: () => this.toast.error('There was a problem deleting the employee, please try again later')
           })
       }
     })
