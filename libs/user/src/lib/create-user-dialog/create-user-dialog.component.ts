@@ -31,7 +31,7 @@ export class CreateUserDialogComponent {
     department: new FormControl(''),
   })
 
-  departments = [...this.companyRepo.currentCompany!.departments, 'Sales', 'product']; //Todo remove
+  departments = this.companyRepo.currentCompany!.departments
 
   hidePassword = true;
 
@@ -64,7 +64,7 @@ export class CreateUserDialogComponent {
       companyId: this.companyRepo.currentCompany!.id,
     }
 
-    this.userService.createUser(newUser, isCreateEmployee ? {managerId: this.userRepo.userId} : {}).subscribe({
+    this.userService.createUser(newUser, {managerId: this.userRepo.userId}).subscribe({
       next: (res) => {
         this.dialogRef.close(res.data)
       },
