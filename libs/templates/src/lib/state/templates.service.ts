@@ -3,27 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {Templates} from "../templates.types";
 import {BehaviorSubject, map, tap} from "rxjs";
-import {activitiesApiMock} from "@hiboard/activities/api/activities.api.mock";
-
-const templatesMock: Templates.Response = {
-  data: [
-    {
-      id: '1',
-      name: 'Full Stack',
-      activities: activitiesApiMock
-    },
-    {
-      id: '2',
-      name: 'Frontend',
-      activities: activitiesApiMock
-    },
-    {
-      id: '3',
-      name: 'Backend',
-      activities: activitiesApiMock
-    }
-  ]
-}
+import {Activities} from "@hiboard/activities/types/activities.type";
 
 @Injectable({providedIn: 'root'})
 export class TemplatesService {
@@ -32,7 +12,7 @@ export class TemplatesService {
   activeTemplate$ = new BehaviorSubject<Templates.Entity | null>(null);
 
   static templatesUrl = (companyId: string, department: string) => {
-    return `companies/${companyId}/department/${department.toLowerCase()}/templates`;
+    return `companies/${companyId}/department/${department}/templates`;
   }
 
   constructor(private http: HttpClient, private userRepo: UserRepository) {
@@ -104,6 +84,17 @@ export class TemplatesService {
           }
         })
       )
+  }
+
+  addActivityToTemplates(activity: Omit<Activities.InventoryEntity, 'id'>, templates: Templates.Entity[]) {
+    const body: Templates.Body = {
+      templatesIds: templates.map(({id}) => id),
+      activity
+    }
+
+    const {department, companyId} = this.userRepo.getCurrentUser()!;
+
+    return this.http.patch(TemplatesService.templatesUrl(department, companyId), body);
   }
 
   setActiveTemplate(template: Templates.Entity | null) {

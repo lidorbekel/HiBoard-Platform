@@ -2,18 +2,20 @@ import {BaseResponse} from "@hiboard/api/api.types";
 
 export namespace Activities {
 
-  export interface Entity {
+  export interface InventoryEntity {
     id: string;
     title: string;
     description: string;
     tag: string;
-    status: ActivityStatus;
     estimation?: {
       weeks: number,
       days: number,
       hours: number
     },
-    // department: string;
+  }
+
+  export interface Entity extends InventoryEntity {
+    status: ActivityStatus;
   }
 
   export interface Response extends BaseResponse<{ activities: Entity[] }> {

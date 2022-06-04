@@ -8,6 +8,11 @@ export namespace Templates {
     activities: Activities.Entity[];
   }
 
+  export interface Body {
+    templatesIds: string[],
+    activity: Omit<Activities.InventoryEntity, 'id'>
+  }
+
   export interface Response extends BaseResponse<Entity[]> {
   }
 

@@ -1,5 +1,6 @@
 :host {
   display: block;
+  height: 100%;
 }
 
 .mat-row:hover {
@@ -25,3 +26,10 @@
   }
 }
 
+.add-template-button {
+  margin: 0 8px;
+}
+
+.mat-drawer-content {
+  margin: 0 !important;
+}

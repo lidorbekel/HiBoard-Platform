@@ -20,6 +20,8 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {HotToastService} from "@ngneat/hot-toast";
 import {AddTemplateDialogComponent, AddTemplateDialogData} from "../add-template-dialog/add-template-dialog.component";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {MatDrawer} from "@angular/material/sidenav";
+import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
 
 @UntilDestroy()
 @Component({
@@ -31,6 +33,7 @@ import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 export class TemplatesPageComponent implements OnInit {
   activeUserDepartment: string;
   loading = false;
+  templates: Templates.Entity[] = []
 
   @ViewChild('filter') filter: ElementRef;
   dataSource = new MatTableDataSource<Templates.Entity>();
@@ -126,11 +129,18 @@ export class TemplatesPageComponent implements OnInit {
       }
     })
   }
+
+  onTemplatesChange({save}: { save: boolean }, drawer: MatDrawer) {
+    if (save) {
+      this.fetchTemplates();
+    }
+    drawer.close();
+  }
 }
 
 @NgModule({
   declarations: [TemplatesPageComponent],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, AddActivitySidebarComponentModule],
   exports: [TemplatesPageComponent]
 })
 export class TemplatesPageComponentModule {

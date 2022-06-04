@@ -1,15 +1,13 @@
-<div class="flex w-full">
-  <div class="w-1/2">
+<mat-drawer-container class="h-full">
+  <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end">
+    <hbd-add-activity-sidebar (closeSideBar)="onTemplatesChange($event, drawer)"></hbd-add-activity-sidebar>
+  </mat-drawer>
+
+  <div class="flex-col w-1/2">
     <h1 class="font-bold"> {{ activeUserDepartment }} Templates</h1>
 
-    <div class="flex items-center my-4">
-      <button mat-raised-button color="primary" class="flex-align-center pl-0"
-              (click)="openAddTemplateDialog()">
-        <mat-icon>add</mat-icon>
-        <span>Add Template</span>
-      </button>
-
-      <mat-form-field appearance="outline" class="ml-4 w-[440px]">
+    <div class="flex-items-center my-4">
+      <mat-form-field appearance="outline" class="w-3/5">
         <input
           matInput
           placeholder="Search"
@@ -28,9 +26,26 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
+
+
+      <button mat-raised-button color="primary" class="flex-align-center pl-0 add-template-button"
+              (click)="openAddTemplateDialog()">
+        <mat-icon>add</mat-icon>
+        <span>Add Template</span>
+      </button>
+
+      <button mat-stroked-button color="primary" class="flex-align-center"
+              (click)="drawer.open()"
+
+      >
+        <mat-icon>add</mat-icon>
+        <span>Add Activity</span>
+      </button>
+
+
     </div>
 
-    <table mat-table [dataSource]="dataSource" class="w-3/4" matSort>
+    <table mat-table [dataSource]="dataSource" class="w-full" matSort>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header
         >Name
@@ -71,4 +86,6 @@
       ></mat-footer-row>
     </table>
   </div>
-</div>
+</mat-drawer-container>
+
+
