@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, NgModule, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -8,6 +8,7 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {Templates} from "../templates.types";
 import {HotToastService} from "@ngneat/hot-toast";
+import {ActivitiesService} from "@hiboard/activities/state/activities.service";
 
 @UntilDestroy()
 @Component({
@@ -18,6 +19,9 @@ import {HotToastService} from "@ngneat/hot-toast";
 })
 export class AddActivitySidebarComponent implements OnInit {
   @Output() closeSideBar = new EventEmitter();
+
+  @Input() isTemplates: boolean;
+
   templates: Templates.Entity[] = [];
 
   form = new FormGroup({
@@ -35,6 +39,7 @@ export class AddActivitySidebarComponent implements OnInit {
 
   constructor(
     private templatesService: TemplatesService,
+    private activitiesService: ActivitiesService,
     private toast: HotToastService
   ) {
   }
@@ -94,13 +99,17 @@ export class AddActivitySidebarComponent implements OnInit {
       return this.form.get('templates')!.value.includes(template.name);
     })
 
-
-    this.templatesService.addActivityToTemplates(newActivity, selectedTemplates).pipe(untilDestroyed(this)).subscribe({
-      next: () => {
-        this.toast.success('Templates Updated Successfully !')
-        this.closeSideBar.emit({save: true})
-      }
-    });
+    this.activitiesService.createInventoryActivity(newActivity).pipe(
+      untilDestroyed(this)
+    ).subscribe((res) => {
+      this.templatesService.updateTemplatesWithNewActivity(selectedTemplates, res.data.id)
+        .pipe(untilDestroyed(this)).subscribe({
+        next: () => {
+          this.toast.success('Templates Updated Successfully !')
+          this.closeSideBar.emit({save: true})
+        }
+      });
+    })
   }
 }
 

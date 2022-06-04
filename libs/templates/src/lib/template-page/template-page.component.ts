@@ -17,8 +17,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {FormControl} from "@angular/forms";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {MatDialog} from "@angular/material/dialog";
-import {ActivityDialogComponent} from "@hiboard/activities/activity-dialog/activity-dialog.component";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
+import {MatDrawer} from "@angular/material/sidenav";
 
 @UntilDestroy()
 @Component({
@@ -34,7 +35,7 @@ export class TemplatePageComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   dataSource = new MatTableDataSource<Activities.Entity>();
   search = new FormControl('');
-  displayedColumns: string[] = ['name', 'status', 'tag', 'actions'];
+  displayedColumns: string[] = ['name', 'tag', 'actions'];
 
   constructor(
     private templatesService: TemplatesService,
@@ -78,22 +79,21 @@ export class TemplatePageComponent implements OnInit {
     this.dataSource.filter = this.filter.nativeElement.value.trim().toLowerCase();
   }
 
-  openAddActivityDialog() {
-    this.dialog.open(ActivityDialogComponent).afterClosed().pipe(
-      untilDestroyed(this)
-    ).subscribe(res => {
-      console.log(res);
-    })
-  }
-
   goBack() {
     this.navigationService.toTemplates()
+  }
+
+  onTemplateChange({save}: { save: boolean }, drawer: MatDrawer) {
+    if (save) {
+      // this.fetchTemplates();
+    }
+    drawer.close();
   }
 }
 
 @NgModule({
   declarations: [TemplatePageComponent],
-  imports: [SubscribeModule, CommonModule, MaterialModule, RouterModule],
+  imports: [SubscribeModule, CommonModule, MaterialModule, RouterModule, AddActivitySidebarComponentModule],
   exports: [TemplatePageComponent]
 })
 export class TemplatePageComponentModule {

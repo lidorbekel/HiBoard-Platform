@@ -18,6 +18,9 @@ export namespace Activities {
     status: ActivityStatus;
   }
 
+  export interface InventoryResponse extends BaseResponse<InventoryEntity> {
+  }
+
   export interface Response extends BaseResponse<{ activities: Entity[] }> {
   }
 

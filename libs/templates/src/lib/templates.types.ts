@@ -8,9 +8,9 @@ export namespace Templates {
     activities: Activities.Entity[];
   }
 
-  export interface Body {
+  export interface UpdateWithNewActivityBody {
     templatesIds: string[],
-    activity: Omit<Activities.InventoryEntity, 'id'>
+    activityId: string
   }
 
   export interface Response extends BaseResponse<Entity[]> {

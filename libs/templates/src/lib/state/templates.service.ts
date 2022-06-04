@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {Templates} from "../templates.types";
 import {BehaviorSubject, map, tap} from "rxjs";
-import {Activities} from "@hiboard/activities/types/activities.type";
 
 @Injectable({providedIn: 'root'})
 export class TemplatesService {
@@ -86,16 +85,28 @@ export class TemplatesService {
       )
   }
 
-  addActivityToTemplates(activity: Omit<Activities.InventoryEntity, 'id'>, templates: Templates.Entity[]) {
-    const body: Templates.Body = {
-      templatesIds: templates.map(({id}) => id),
-      activity
-    }
-
+  updateTemplatesWithNewActivity(templates: Templates.Entity[], activityId: string) {
     const {department, companyId} = this.userRepo.getCurrentUser()!;
 
-    return this.http.patch(TemplatesService.templatesUrl(department, companyId), body);
+    const body: Templates.UpdateWithNewActivityBody = {
+      templatesIds: templates.map(({id}) => id),
+      activityId
+    }
+
+
+    return this.http.patch(TemplatesService.templatesUrl(companyId, department), body);
   }
+
+  // addActivityToTemplates(activity: Omit<Activities.InventoryEntity, 'id'>, templates: Templates.Entity[]) {
+  //   const body: Templates.Body = {
+  //     templatesIds: templates.map(({id}) => id),
+  //     activity
+  //   }
+  //
+  //   const {department, companyId} = this.userRepo.getCurrentUser()!;
+  //
+  //   return this.http.patch(TemplatesService.templatesUrl(department, companyId), body);
+  // }
 
   setActiveTemplate(template: Templates.Entity | null) {
     this.activeTemplate$.next(template);

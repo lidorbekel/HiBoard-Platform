@@ -1,6 +1,7 @@
 <mat-drawer-container class="h-full">
   <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end">
-    <hbd-add-activity-sidebar (closeSideBar)="onTemplatesChange($event, drawer)"></hbd-add-activity-sidebar>
+    <hbd-add-activity-sidebar (closeSideBar)="onTemplatesChange($event, drawer)"
+                              [isTemplates]="true"></hbd-add-activity-sidebar>
   </mat-drawer>
 
   <div class="flex-col w-1/2">
