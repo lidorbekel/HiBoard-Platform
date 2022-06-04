@@ -50,4 +50,12 @@ export class NavigationService {
 
     return this.toEmployees();
   }
+
+  toTemplate(id: string) {
+    return this.navigate(`templates/${id}`)
+  }
+
+  toTemplates() {
+    return this.navigate('templates')
+  }
 }

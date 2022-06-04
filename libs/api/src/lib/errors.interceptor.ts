@@ -13,14 +13,14 @@ export class ErrorsInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
-        const msg = errorResponse.error?.Message;
+        if (errorResponse.status !== 500) {
+          const msg = errorResponse.error?.Message;
 
-        console.log(msg);
-
-        if (msg) {
-          this.toast.error(msg, {
-            duration: 20_000
-          });
+          if (msg) {
+            this.toast.error(msg, {
+              duration: 20_000
+            });
+          }
         }
 
         return throwError(errorResponse);

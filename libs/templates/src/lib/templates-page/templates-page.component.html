@@ -36,7 +36,7 @@
         >Name
         </mat-header-cell
         >
-        <mat-cell *matCellDef="let element" (click)="toggleTemplate(element)"
+        <mat-cell *matCellDef="let element" (click)="navigateToTemplate(element)"
         >{{
           element.name
           }}</mat-cell>
@@ -45,8 +45,12 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="openEditTemplateDialog(element)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
+
           <button mat-icon-button color="warn" (click)="onDeleteTemplate(element)">
-            <mat-icon>delete_outline</mat-icon>
+            <mat-icon class="delete-icon">delete_outline</mat-icon>
           </button>
         </mat-cell>
       </ng-container>

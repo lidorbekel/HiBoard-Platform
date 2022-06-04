@@ -18,8 +18,8 @@ import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.
 import {MatDialog} from "@angular/material/dialog";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {HotToastService} from "@ngneat/hot-toast";
-import {MatSidenav} from "@angular/material/sidenav";
-import {AddTemplateDialogComponent} from "../add-template-dialog/add-template-dialog.component";
+import {AddTemplateDialogComponent, AddTemplateDialogData} from "../add-template-dialog/add-template-dialog.component";
+import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 
 @UntilDestroy()
 @Component({
@@ -29,9 +29,6 @@ import {AddTemplateDialogComponent} from "../add-template-dialog/add-template-di
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TemplatesPageComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: MatSidenav;
-
-  templates$ = this.templatesService.templates$;
   activeUserDepartment: string;
   loading = false;
 
@@ -45,7 +42,8 @@ export class TemplatesPageComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private userRepo: UserRepository,
     private dialog: MatDialog,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private navigationService: NavigationService
   ) {
   }
 
@@ -66,7 +64,7 @@ export class TemplatesPageComponent implements OnInit {
 
   fetchTemplates() {
     this.loading = true;
-    this.templatesService.getTemplates();
+    this.templatesService.getTemplates().pipe(untilDestroyed(this)).subscribe();
   }
 
   onSearchClear() {
@@ -95,11 +93,13 @@ export class TemplatesPageComponent implements OnInit {
     })
   }
 
-  toggleTemplate(template: Templates.Entity) {
+  navigateToTemplate(template: Templates.Entity) {
+    this.templatesService.setActiveTemplate(template);
+    this.navigationService.toTemplate(template.id);
   }
 
   openAddTemplateDialog() {
-    this.dialog.open(AddTemplateDialogComponent).afterClosed()
+    this.dialog.open<AddTemplateDialogComponent, AddTemplateDialogData>(AddTemplateDialogComponent, {data: {action: 'add'}}).afterClosed()
       .pipe(untilDestroyed(this)).subscribe((res) => {
       if (res) {
         this.templatesService.createTemplate({
@@ -107,6 +107,21 @@ export class TemplatesPageComponent implements OnInit {
           activities: []
         }).pipe(untilDestroyed(this)).subscribe({
           next: () => this.toast.success('Template added successfully !')
+        })
+      }
+    })
+  }
+
+  openEditTemplateDialog(template: Templates.Entity) {
+    this.dialog.open<AddTemplateDialogComponent, AddTemplateDialogData>(AddTemplateDialogComponent, {
+      data: {action: 'edit', template}
+    }).afterClosed().pipe((untilDestroyed(this))).subscribe((res) => {
+      if (res) {
+        this.templatesService.updateTemplate({
+          ...template,
+          name: res
+        }).pipe(untilDestroyed(this)).subscribe({
+          next: () => this.toast.success(`${template.name} Template renamed successfully`)
         })
       }
     })

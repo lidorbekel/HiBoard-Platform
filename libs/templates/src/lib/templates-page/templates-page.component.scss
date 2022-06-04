@@ -8,22 +8,20 @@
 }
 
 .mat-column-actions {
-  flex: 0 0 10% !important;
+  flex: 0 0 15% !important;
 }
 
-.template-side {
-  border-left: 1px solid darkgrey;
-  background-color: white;
+.edit-icon {
+  color: lightgray;
+
+  &:hover {
+    color: grey
+  }
 }
 
-.example-sidenav-content {
-  position: sticky;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.delete-icon {
+  &:hover {
+    color: red;
+  }
 }
 
-.example-sidenav {
-  padding: 20px;
-}
