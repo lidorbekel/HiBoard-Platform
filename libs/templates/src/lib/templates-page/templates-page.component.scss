@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.mat-row:hover {
+  background-color: whitesmoke;
+  cursor: grab;
+}
+
+.mat-column-actions {
+  flex: 0 0 15% !important;
+}
+
+.edit-icon {
+  color: lightgray;
+
+  &:hover {
+    color: grey
+  }
+}
+
+.delete-icon {
+  &:hover {
+    color: red;
+  }
+}
+

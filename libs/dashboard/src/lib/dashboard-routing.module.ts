@@ -26,6 +26,16 @@ const children: Routes = [
     }
   },
   {
+    path: 'templates',
+    loadChildren: () =>
+      import('@hiboard/templates/templates.module').then(
+        ({TemplatesModule}) => TemplatesModule
+      ),
+    data: {
+      roles: ['Manager']
+    }
+  },
+  {
     path: 'admin',
     loadChildren: () =>
       import('@hiboard/admin/admin.module').then(

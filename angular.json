@@ -399,6 +399,21 @@
       },
       "tags": []
     },
+    "templates": {
+      "root": "libs/templates",
+      "sourceRoot": "libs/templates/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/templates/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "theme": {
       "root": "libs/theme",
       "sourceRoot": "libs/theme/src",

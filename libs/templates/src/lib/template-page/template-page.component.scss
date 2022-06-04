@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.mat-column-actions {
+  flex: 0 0 10% !important;
+}
+
+.table-container {
+  max-height: 500px !important;
+  overflow: auto;
+}
+
+.see-all-btn {
+  margin-top: 16px;
+}

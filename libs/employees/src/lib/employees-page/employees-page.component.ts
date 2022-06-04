@@ -14,12 +14,11 @@ import {HotToastService} from "@ngneat/hot-toast";
 import {CreateUserDialogComponent,} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
 import {UserService} from "../../../../user/src/lib/state/user.service";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
-import {UntilDestroy} from "@ngneat/until-destroy";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {EmployeesService} from "@hiboard/employees/state/employees.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {User} from "../../../../user/src/users.types";
 import {MatSort} from "@angular/material/sort";
-import {MatPaginator} from "@angular/material/paginator";
 import {FormControl, FormsModule} from "@angular/forms";
 import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.component";
 
@@ -32,7 +31,6 @@ import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.
 })
 export class EmployeesPageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filter') filter: ElementRef;
   loading = false;
 
@@ -54,7 +52,10 @@ export class EmployeesPageComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.employeesService.employees$.subscribe(employeesGridData => {
+    this.employeesService.employees$
+      .pipe(
+        untilDestroyed(this)
+      ).subscribe(employeesGridData => {
       if (employeesGridData) {
         this.loading = false;
         this.dataSource.data = employeesGridData;
@@ -95,9 +96,8 @@ export class EmployeesPageComponent implements OnInit {
   onDelete(user: User.Entity) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
-    dialogRef.afterClosed().subscribe(confirm => {
+    dialogRef.afterClosed().pipe(untilDestroyed(this)).subscribe(confirm => {
       if (confirm) {
-        console.log('Im in')
         this.employeesService.deleteEmployee(user.id)
           .subscribe({
             next: () => {
