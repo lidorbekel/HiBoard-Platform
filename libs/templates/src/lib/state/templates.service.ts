@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {Templates} from "../templates.types";
 import {BehaviorSubject, map, tap} from "rxjs";
+import {Activities} from "@hiboard/activities/types/activities.type";
 
 @Injectable({providedIn: 'root'})
 export class TemplatesService {
@@ -31,7 +32,12 @@ export class TemplatesService {
   getTemplate(id: string) {
     const {department, companyId} = this.userRepo.getCurrentUser()!;
 
-    return this.http.get<Templates.TemplateResponse>(`${TemplatesService.templatesUrl(companyId, department)}/${id}`);
+    return this.http.get<Templates.TemplateResponse>(`${TemplatesService.templatesUrl(companyId, department)}/${id}`)
+      .pipe(
+        tap(res => {
+          this.activeTemplate$.next(res.data);
+        })
+      );
   }
 
   updateTemplate(template: Templates.Entity) {
@@ -85,12 +91,12 @@ export class TemplatesService {
       )
   }
 
-  updateTemplatesWithNewActivity(templates: Templates.Entity[], activityId: string) {
+  updateTemplatesWithNewActivity(templates: Templates.Entity[], activity: Activities.InventoryEntity) {
     const {department, companyId} = this.userRepo.getCurrentUser()!;
 
     const body: Templates.UpdateWithNewActivityBody = {
       templatesIds: templates.map(({id}) => id),
-      activityId
+      activity
     }
 
 

@@ -4,11 +4,11 @@
                               [isTemplates]="true"></hbd-add-activity-sidebar>
   </mat-drawer>
 
-  <div class="flex-col w-1/2">
+  <div class="flex-col w-2/3">
     <h1 class="font-bold"> {{ activeUserDepartment }} Templates</h1>
 
-    <div class="flex-items-center my-4">
-      <mat-form-field appearance="outline" class="w-3/5">
+    <div class="flex items-center my-4">
+      <mat-form-field appearance="outline" class="flex-1">
         <input
           matInput
           placeholder="Search"
@@ -28,22 +28,21 @@
         </button>
       </mat-form-field>
 
+      <section>
+        <button mat-raised-button color="primary" class="flex-align-center pl-0 add-template-button"
+                (click)="openAddTemplateDialog()">
+          <mat-icon>add</mat-icon>
+          <span>Add Template</span>
+        </button>
 
-      <button mat-raised-button color="primary" class="flex-align-center pl-0 add-template-button"
-              (click)="openAddTemplateDialog()">
-        <mat-icon>add</mat-icon>
-        <span>Add Template</span>
-      </button>
+        <button mat-stroked-button color="primary" class="flex-align-center pl-0"
+                (click)="drawer.open()"
 
-      <button mat-stroked-button color="primary" class="flex-align-center"
-              (click)="drawer.open()"
-
-      >
-        <mat-icon>add</mat-icon>
-        <span>Add Activity</span>
-      </button>
-
-
+        >
+          <mat-icon>add</mat-icon>
+          <span>Add Activity</span>
+        </button>
+      </section>
     </div>
 
     <table mat-table [dataSource]="dataSource" class="w-full" matSort>

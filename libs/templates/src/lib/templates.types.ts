@@ -10,7 +10,7 @@ export namespace Templates {
 
   export interface UpdateWithNewActivityBody {
     templatesIds: string[],
-    activityId: string
+    activity: Activities.InventoryEntity
   }
 
   export interface Response extends BaseResponse<Entity[]> {

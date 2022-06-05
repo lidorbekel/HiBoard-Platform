@@ -85,7 +85,8 @@ export class TemplatePageComponent implements OnInit {
 
   onTemplateChange({save}: { save: boolean }, drawer: MatDrawer) {
     if (save) {
-      // this.fetchTemplates();
+      this.templatesService.getTemplate(this.activeTemplate$.getValue()!.id)
+        .pipe(untilDestroyed(this)).subscribe();
     }
     drawer.close();
   }

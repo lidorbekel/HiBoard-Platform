@@ -28,7 +28,7 @@ export class AddActivitySidebarComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     tag: new FormControl('', [Validators.maxLength(10)]),
     description: new FormControl(''),
-    templates: new FormControl('', [Validators.required]),
+    templates: new FormControl(''),
     weeks: new FormControl(0, [Validators.max(4)]),
     days: new FormControl(0, [Validators.max(6)]),
     hours: new FormControl(0, [Validators.max(23)]),
@@ -46,16 +46,23 @@ export class AddActivitySidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initTemplates();
+    if (this.isTemplates) {
+      this.form.get('templates')!.setValidators(Validators.required);
+    }
   }
 
   initTemplates() {
-    this.templatesService.templates$.pipe(
-      untilDestroyed(this)
-    ).subscribe((templates) => {
-      this.templates = templates;
-      this.templatesNames = templates.map(({name}) => name);
-      this.initialTemplatesNames = this.templatesNames.slice();
-    })
+    if (this.isTemplates) {
+      this.templatesService.templates$.pipe(
+        untilDestroyed(this)
+      ).subscribe((templates) => {
+        this.templates = templates;
+        this.templatesNames = templates.map(({name}) => name);
+        this.initialTemplatesNames = this.templatesNames.slice();
+      })
+    } else {
+      this.templates = [this.templatesService.activeTemplate$.getValue()!];
+    }
   }
 
   get templatesControl() {
@@ -95,17 +102,23 @@ export class AddActivitySidebarComponent implements OnInit {
       tag: this.form.get('tag')!.value,
     };
 
-    const selectedTemplates = this.templates.filter((template) => {
-      return this.form.get('templates')!.value.includes(template.name);
-    })
+    let selectedTemplates: Templates.Entity[];
+
+    if (this.isTemplates) {
+      selectedTemplates = this.templates.filter((template) => {
+        return this.form.get('templates')!.value.includes(template.name);
+      })
+    } else {
+      selectedTemplates = this.templates;
+    }
 
     this.activitiesService.createInventoryActivity(newActivity).pipe(
       untilDestroyed(this)
     ).subscribe((res) => {
-      this.templatesService.updateTemplatesWithNewActivity(selectedTemplates, res.data.id)
+      this.templatesService.updateTemplatesWithNewActivity(selectedTemplates, res.data)
         .pipe(untilDestroyed(this)).subscribe({
         next: () => {
-          this.toast.success('Templates Updated Successfully !')
+          this.toast.success(`Template${selectedTemplates.length > 1 ? 's' : ''} Updated Successfully !`)
           this.closeSideBar.emit({save: true})
         }
       });

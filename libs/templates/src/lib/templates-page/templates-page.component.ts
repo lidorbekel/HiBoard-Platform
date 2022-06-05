@@ -51,6 +51,8 @@ export class TemplatesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.templatesService.setActiveTemplate(null);
+
     this.activeUserDepartment = this.userRepo.getCurrentUser()!.department;
     this.activeUserDepartment = this.activeUserDepartment[0].toUpperCase() + this.activeUserDepartment.substr(1);
 
