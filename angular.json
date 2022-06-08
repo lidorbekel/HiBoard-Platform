@@ -119,6 +119,21 @@
       },
       "tags": []
     },
+    "company-employees": {
+      "root": "libs/company-employees",
+      "sourceRoot": "libs/company-employees/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/company-employees/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "company-users": {
       "root": "libs/company-users",
       "sourceRoot": "libs/company-users/src",
