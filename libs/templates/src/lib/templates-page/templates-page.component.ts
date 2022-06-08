@@ -20,6 +20,9 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {HotToastService} from "@ngneat/hot-toast";
 import {AddTemplateDialogComponent, AddTemplateDialogData} from "../add-template-dialog/add-template-dialog.component";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+import {MatDrawer} from "@angular/material/sidenav";
+import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
+import {BehaviorSubject} from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -31,11 +34,14 @@ import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 export class TemplatesPageComponent implements OnInit {
   activeUserDepartment: string;
   loading = false;
+  templates: Templates.Entity[] = []
 
   @ViewChild('filter') filter: ElementRef;
   dataSource = new MatTableDataSource<Templates.Entity>();
   search = new FormControl('');
   displayedColumns: string[] = ['name', 'actions'];
+
+  sidenavClose = new BehaviorSubject(true);
 
   constructor(
     private templatesService: TemplatesService,
@@ -48,6 +54,8 @@ export class TemplatesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.templatesService.setActiveTemplate(null);
+
     this.activeUserDepartment = this.userRepo.getCurrentUser()!.department;
     this.activeUserDepartment = this.activeUserDepartment[0].toUpperCase() + this.activeUserDepartment.substr(1);
 
@@ -82,7 +90,7 @@ export class TemplatesPageComponent implements OnInit {
       if (confirm) {
         this.templatesService.deleteTemplate(template.id).pipe(untilDestroyed(this)).subscribe({
           next: () => {
-            this.toast.success('Employee deleted successfully');
+            this.toast.success('Template deleted successfully');
             this.cdr.detectChanges();
           },
           error: () => {
@@ -99,6 +107,7 @@ export class TemplatesPageComponent implements OnInit {
   }
 
   openAddTemplateDialog() {
+    this.sidenavClose.next(false);
     this.dialog.open<AddTemplateDialogComponent, AddTemplateDialogData>(AddTemplateDialogComponent, {data: {action: 'add'}}).afterClosed()
       .pipe(untilDestroyed(this)).subscribe((res) => {
       if (res) {
@@ -126,11 +135,22 @@ export class TemplatesPageComponent implements OnInit {
       }
     })
   }
+
+  onTemplatesChange({save}: { save: boolean }, drawer: MatDrawer) {
+    if (save) {
+      this.fetchTemplates();
+    }
+    drawer.close();
+  }
+
+  onClose() {
+    this.sidenavClose.next(true);
+  }
 }
 
 @NgModule({
   declarations: [TemplatesPageComponent],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, AddActivitySidebarComponentModule],
   exports: [TemplatesPageComponent]
 })
 export class TemplatesPageComponentModule {

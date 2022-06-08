@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.description {
+  margin-top: 2px;
+  width: 584px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #e5e7eb;
+}
+
+textarea {
+  resize: none;
+}
+
+.mat-standard-chip {
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 4px;
+  min-height: 22px;
+
+  .chip-text {
+    width: calc(100%); // calc is important here, do not use "100%" alone
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-chip-remove {
+    margin-left: 4px;
+  }
+}
+
+.trigger-select {
+  display: flex;
+  align-items: center;
+}
+
+.chip-list {
+  max-width: calc(100% - 50px);
+  display: flex;
+  align-items: center;
+}

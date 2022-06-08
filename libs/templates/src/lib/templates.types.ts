@@ -8,6 +8,11 @@ export namespace Templates {
     activities: Activities.Entity[];
   }
 
+  export interface UpdateWithNewActivityBody {
+    templatesIds: string[],
+    activity: Activities.InventoryEntity
+  }
+
   export interface Response extends BaseResponse<Entity[]> {
   }
 

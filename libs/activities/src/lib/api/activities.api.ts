@@ -8,7 +8,7 @@ import {activitiesApiMock} from "./activities.api.mock";
   providedIn: 'root'
 })
 export class ActivitiesApi {
-  static url = 'activities';
+  static url = 'inventory/activities';
 
   constructor(private http: HttpClient) {
   }
@@ -22,4 +22,6 @@ export class ActivitiesApi {
       }, 2000)
     })
   }
+
+
 }

@@ -29,7 +29,7 @@ mat-label {
   //margin: 0 !important;
 }
 
-mat-drawer {
+.nav-mat-drawer {
   width: 250px !important;
 }
 
@@ -79,4 +79,16 @@ mat-drawer {
 
 mat-select-trigger {
   max-width: calc(100% - 50px) !important;
+}
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent !important;
+}
+
+.mat-drawer-inner-container {
+  overflow: hidden !important;
 }
