@@ -22,6 +22,7 @@ import {AddTemplateDialogComponent, AddTemplateDialogData} from "../add-template
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {MatDrawer} from "@angular/material/sidenav";
 import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
+import {BehaviorSubject} from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -39,6 +40,8 @@ export class TemplatesPageComponent implements OnInit {
   dataSource = new MatTableDataSource<Templates.Entity>();
   search = new FormControl('');
   displayedColumns: string[] = ['name', 'actions'];
+
+  sidenavClose = new BehaviorSubject(true);
 
   constructor(
     private templatesService: TemplatesService,
@@ -87,7 +90,7 @@ export class TemplatesPageComponent implements OnInit {
       if (confirm) {
         this.templatesService.deleteTemplate(template.id).pipe(untilDestroyed(this)).subscribe({
           next: () => {
-            this.toast.success('Employee deleted successfully');
+            this.toast.success('Template deleted successfully');
             this.cdr.detectChanges();
           },
           error: () => {
@@ -104,6 +107,7 @@ export class TemplatesPageComponent implements OnInit {
   }
 
   openAddTemplateDialog() {
+    this.sidenavClose.next(false);
     this.dialog.open<AddTemplateDialogComponent, AddTemplateDialogData>(AddTemplateDialogComponent, {data: {action: 'add'}}).afterClosed()
       .pipe(untilDestroyed(this)).subscribe((res) => {
       if (res) {
@@ -137,6 +141,10 @@ export class TemplatesPageComponent implements OnInit {
       this.fetchTemplates();
     }
     drawer.close();
+  }
+
+  onClose() {
+    this.sidenavClose.next(true);
   }
 }
 

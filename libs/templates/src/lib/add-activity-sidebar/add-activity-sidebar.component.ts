@@ -1,14 +1,24 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ErrorTailorModule} from "@ngneat/error-tailor";
+import {FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ControlErrorsDirective, ErrorTailorModule} from "@ngneat/error-tailor";
 import {TemplatesService} from "../state/templates.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {Templates} from "../templates.types";
 import {HotToastService} from "@ngneat/hot-toast";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
+import {BehaviorSubject} from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -18,9 +28,12 @@ import {ActivitiesService} from "@hiboard/activities/state/activities.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddActivitySidebarComponent implements OnInit {
+  @ViewChild('gdprErrorTailor', {static: true}) gdprErrorTailor: ControlErrorsDirective;
+  @ViewChild('formDirective') formDirective: FormGroupDirective;
   @Output() closeSideBar = new EventEmitter();
 
   @Input() isTemplates: boolean;
+  @Input() sidenavClose: BehaviorSubject<boolean>;
 
   templates: Templates.Entity[] = [];
 
@@ -49,6 +62,23 @@ export class AddActivitySidebarComponent implements OnInit {
     if (this.isTemplates) {
       this.form.get('templates')!.setValidators(Validators.required);
     }
+
+    // this.sidenavClose.pipe(untilDestroyed(this)).subscribe(isClosed => {
+    //   if (isClosed) {
+    //     this.form.reset();
+    //     this.gdprErrorTailor.hideError();
+    //   }
+    // })
+  }
+
+  ngAfterViewInit() {
+    this.sidenavClose.pipe(untilDestroyed(this)).subscribe(isClosed => {
+      if (isClosed) {
+        this.form.reset();
+        this.formDirective.resetForm();
+        this.gdprErrorTailor.hideError();
+      }
+    })
   }
 
   initTemplates() {

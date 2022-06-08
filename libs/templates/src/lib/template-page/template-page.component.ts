@@ -90,6 +90,15 @@ export class TemplatePageComponent implements OnInit {
     }
     drawer.close();
   }
+
+  onDelete(activity: Activities.InventoryEntity) {
+    this.templatesService.updateTemplate({
+      ...this.activeTemplate$.getValue()!,
+      activities: this.activeTemplate$.getValue()!.activities.filter(({id}) => id !== activity.id)
+    }).pipe(untilDestroyed(this)).subscribe(res => {
+      this.activeTemplate$.next(res.data);
+    })
+  }
 }
 
 @NgModule({

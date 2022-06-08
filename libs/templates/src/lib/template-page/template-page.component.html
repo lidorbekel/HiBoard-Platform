@@ -36,6 +36,8 @@
           </button>
         </div>
 
+        <h2 class="font-bold primary mb-2"> Activities({{dataSource.data.length}}): </h2>
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource" matSort class="w-full">
             <ng-container matColumnDef="name">
@@ -63,7 +65,7 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <button mat-icon-button color="warn">
+                <button mat-icon-button color="warn" (click)="onDelete(element)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </mat-cell>
