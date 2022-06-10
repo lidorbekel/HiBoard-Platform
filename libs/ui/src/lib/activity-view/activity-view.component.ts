@@ -19,7 +19,6 @@ import {
 export class ActivityViewComponent {
   @Input() activity: Activities.Entity;
   @Input() loading = false;
-  @Input() loading2 = true;
 
   constructor(
     private dialog: MatDialog,

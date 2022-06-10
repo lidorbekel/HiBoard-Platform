@@ -1,6 +1,7 @@
 :host {
   display: block;
   overflow-y: hidden;
+  box-shadow: 0 2px 3px 0 #b2bec4;
 }
 
 .activity-view-card {
@@ -33,3 +34,6 @@
   white-space: nowrap;
 }
 
+.tag {
+  background-color: whitesmoke;
+}

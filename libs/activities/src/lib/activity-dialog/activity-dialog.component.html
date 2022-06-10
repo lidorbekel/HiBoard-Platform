@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ activity.title }}</h2>
+<h2 mat-dialog-title>{{ activity.activity.title }}</h2>
 
 <hr class="my-2">
 
@@ -12,7 +12,7 @@
         formControlName="description"
         placeholder="Description..."
         rows="5"
-        readonly
+        [readonly]="isEmployee()"
       ></textarea>
     </section>
 
@@ -28,7 +28,7 @@
       </mat-form-field>
     </section>
 
-    <section class="mb-3">
+    <section *ngIf="!data.isInventory" class="mb-3">
       <p class="text14 font-bold">Status</p>
       <mat-radio-group formControlName="status">
         <mat-radio-button

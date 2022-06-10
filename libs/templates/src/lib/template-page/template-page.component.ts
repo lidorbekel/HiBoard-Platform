@@ -18,9 +18,11 @@ import {FormControl} from "@angular/forms";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {MatDialog} from "@angular/material/dialog";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
-import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
 import {MatDrawer} from "@angular/material/sidenav";
 import {BehaviorSubject} from "rxjs";
+import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
+
+import {ActivityDialogComponent} from "@hiboard/activities/activity-dialog/activity-dialog.component";
 
 @UntilDestroy()
 @Component({
@@ -104,6 +106,15 @@ export class TemplatePageComponent implements OnInit {
 
   onClose() {
     this.sidenavClose.next(true);
+  }
+
+  onEditActivity(activity: Activities.InventoryEntity) {
+    this.dialog.open(ActivityDialogComponent, {
+      data: {
+        activity,
+        isInventory: true
+      }
+    })
   }
 }
 

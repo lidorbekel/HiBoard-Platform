@@ -14,11 +14,6 @@ const {state, config} = createState(
 );
 const store = new Store({state, name: 'activities', config});
 
-// export const activitiesStatus = {
-//   loading$: store.pipe(select(({ loading }) => loading)),
-//   error$: store.pipe(select(({ error }) => error)),
-// }
-
 @Injectable({
   providedIn: 'root'
 })

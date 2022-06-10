@@ -5,10 +5,11 @@ import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
-import {ActivitiesService} from "@hiboard/activities/state/activities.service";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 
 export interface ActivityDialogData {
   activity: Activities.Entity;
+  isInventory?: boolean;
 }
 
 @Component({
@@ -33,7 +34,7 @@ export class ActivityDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ActivityDialogData,
-    activitiesService: ActivitiesService
+    private userRepo: UserRepository
   ) {
     this.activity = data.activity;
   }
@@ -43,12 +44,15 @@ export class ActivityDialogComponent implements OnInit {
   }
 
   initFormValues() {
-    this.form.get('tag')!.setValue(this.activity.tag);
-    this.form.get('status')!.setValue(this.activity.status);
-    this.form.get('description')!.setValue(this.activity.description);
-    this.form.get('weeks')!.setValue(this.activity?.estimation?.weeks || 0);
-    this.form.get('days')!.setValue(this.activity?.estimation?.days || 0);
-    this.form.get('hours')!.setValue(this.activity?.estimation?.hours || 0);
+    if (!this.data.isInventory) {
+      this.form.get('status')!.setValue(this.activity.status);
+    }
+
+    this.form.get('tag')!.setValue(this.activity.activity.tag);
+    this.form.get('description')!.setValue(this.activity.activity.description);
+    this.form.get('weeks')!.setValue(this.activity?.activity.estimation?.weeks || 0);
+    this.form.get('days')!.setValue(this.activity?.activity.estimation?.days || 0);
+    this.form.get('hours')!.setValue(this.activity?.activity.estimation?.hours || 0);
   }
 
   save() {
@@ -56,7 +60,10 @@ export class ActivityDialogComponent implements OnInit {
       return;
     }
 
+  }
 
+  isEmployee() {
+    return this.userRepo.isEmployee();
   }
 }
 

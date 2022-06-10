@@ -9,7 +9,7 @@
       <mat-select-trigger class="flex items-center h-full">
         <mat-chip-list class="chip-list">
           <mat-chip
-            *ngFor="let name of nameControl.value?.slice(0, 2)"
+            *ngFor="let name of nameControl.value?.slice(0, 3)"
             [removable]="true"
             (removed)="remove(nameControl, name)"
             color="primary"
@@ -22,7 +22,7 @@
         </mat-chip-list>
 
         <span *ngIf="nameControl.value?.length > 2" class="primary ml-1">
-                +{{nameControl.value.length - 2}} more
+                +{{nameControl.value.length - 2}}
               </span>
       </mat-select-trigger>
 
@@ -41,16 +41,16 @@
     >
       <mat-select-trigger class="flex-align-center">
         <mat-chip-list>
-          <mat-chip *ngFor="let tag of tagControl.value?.slice(0, 2)"
+          <mat-chip *ngFor="let tag of tagControl.value?.slice(0,3)"
                     [removable]="true" (removed)="remove(tagControl, tag)" color="primary" selected>
             {{ tag }}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
 
-        <span *ngIf="tagControl.value?.length > 2" class="primary ml-2">
-                +{{tagControl.value.length - 2}} more
-              </span>
+        <span *ngIf="tagControl.value?.length > 3" class="primary ml-1">
+                  +{{tagControl.value.length - 3}}
+                </span>
       </mat-select-trigger>
 
       <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
@@ -68,15 +68,15 @@
     >
       <mat-select-trigger class="flex-align-center">
         <mat-chip-list>
-          <mat-chip *ngFor="let status of statusControl.value?.slice(0, 2)"
+          <mat-chip *ngFor="let status of statusControl.value"
                     [removable]="true" (removed)="remove(statusControl, status)" color="primary" selected>
             {{ status }}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
 
-        <span *ngIf="statusControl.value?.length > 2" class="primary ml-2">
-                +{{statusControl.value.length - 2}} more
+        <span *ngIf="statusControl.value?.length > 3" class="primary ml-1">
+                +{{statusControl.value.length - 3}}
               </span>
       </mat-select-trigger>
 
