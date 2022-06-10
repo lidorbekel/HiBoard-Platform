@@ -1,8 +1,10 @@
 <ng-container *subscribe="user$; let user">
   <mat-nav-list>
-    <div class="profile-card" *ngIf="user">
-      Hi {{ user.firstName }} {{ user.lastName }} !
+    <div class="p-2">
+      <p class="text-center primary font-bold text-xl mb-1">{{ companyName }}</p>
+      <p class="text-center light-grey text-14">{{ user!.firstName + ' ' + user!.lastName }}</p>
     </div>
+
 
     <mat-divider></mat-divider>
 

@@ -4,7 +4,8 @@
       <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end" (closedStart)="onClose()">
         <hbd-add-activity-sidebar [isTemplates]="false"
                                   (closeSideBar)="onTemplateChange($event, drawer)"
-                                  [sidenavClose]="sidenavClose"></hbd-add-activity-sidebar>
+                                  [sidenavClose]="sidenavClose"
+        ></hbd-add-activity-sidebar>
       </mat-drawer>
 
       <div class="flex-col w-2/3">
@@ -66,6 +67,10 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="onEditActivity(element)">
+                  <mat-icon class="edit-icon">edit</mat-icon>
+                </button>
+
                 <button mat-icon-button color="warn" (click)="onDelete(element)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>

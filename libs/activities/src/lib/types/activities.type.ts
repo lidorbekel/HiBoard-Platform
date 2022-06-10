@@ -14,14 +14,16 @@ export namespace Activities {
     },
   }
 
-  export interface Entity extends InventoryEntity {
+  export interface Entity {
+    activity: InventoryEntity;
+    id: string;
     status: ActivityStatus;
   }
 
   export interface InventoryResponse extends BaseResponse<InventoryEntity> {
   }
 
-  export interface Response extends BaseResponse<{ activities: Entity[] }> {
+  export interface Response extends BaseResponse<Entity[]> {
   }
 
   export interface PageQueryParams {

@@ -57,6 +57,19 @@
       ></ng-template>
     </div>
 
+    <div class="mb-2" *ngIf="data.templates">
+      <p class="text14 font-bold">Select Template</p>
+      <mat-form-field appearance="outline" class=" w-3/4">
+        <mat-select
+          formControlName="template"
+          placeholder="Choose Template"
+          disableOptionCentering
+        >
+          <mat-option *ngFor="let template of data.templates" [value]="template.id">{{template.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <div class="mb-2">
       <div class="flex-align-center">
         <p class="text14 font-bold mr-1">Initial Password</p>

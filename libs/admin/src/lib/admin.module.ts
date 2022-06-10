@@ -16,7 +16,7 @@ const routes: Routes = [
     component: CompanyDetailsPageComponent
   },
   {
-    path: 'company-users',
+    path: 'managers',
     component: CompanyUsersPageComponent
   }
 ];

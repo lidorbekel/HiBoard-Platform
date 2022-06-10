@@ -33,6 +33,8 @@ export class CompanyUsersPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filter') filter: ElementRef;
 
+  loading = true;
+
   search = new FormControl('');
   displayedColumns: string[] = [
     'fullName',
@@ -55,6 +57,7 @@ export class CompanyUsersPageComponent implements OnInit {
   ngOnInit(): void {
     this.companyUsersService.managers$.subscribe((managersGridData) => {
       if (managersGridData) {
+        this.loading = false;
         this.dataSource.data = managersGridData;
         this.cdr.detectChanges();
       }

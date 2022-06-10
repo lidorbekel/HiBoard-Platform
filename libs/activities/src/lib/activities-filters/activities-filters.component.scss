@@ -21,13 +21,13 @@ mat-form-field {
 }
 
 .mat-standard-chip {
-  width: fit-content;
+  overflow: hidden;
   max-width: 100%;
   border-radius: 4px;
   min-height: 22px;
 
   .chip-text {
-    width: calc(100%); // calc is important here, do not use "100%" alone
+    width: calc(100%);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -39,12 +39,6 @@ mat-form-field {
 }
 
 .trigger-select {
-  display: flex;
-  align-items: center;
-}
-
-.chip-list {
-  max-width: calc(100% - 50px);
   display: flex;
   align-items: center;
 }

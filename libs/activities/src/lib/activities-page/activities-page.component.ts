@@ -87,7 +87,6 @@ export class ActivitiesPageComponent implements OnInit {
         this.cdr.markForCheck();
       })
   }
-
 }
 
 @NgModule({

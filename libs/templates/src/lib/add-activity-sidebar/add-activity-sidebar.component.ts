@@ -36,6 +36,7 @@ export class AddActivitySidebarComponent implements OnInit {
   @Output() closeSideBar = new EventEmitter();
 
   @Input() isTemplates: boolean;
+
   @Input() sidenavClose: BehaviorSubject<boolean>;
 
   templates: Templates.Entity[] = [];
@@ -71,7 +72,6 @@ export class AddActivitySidebarComponent implements OnInit {
         this.formDirective.resetForm();
         this.nameErrorTailor.hideError();
         this.selectErrorTailor?.hideError();
-        console.log(this.form)
       }
     })
   }

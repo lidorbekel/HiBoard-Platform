@@ -11,9 +11,11 @@ import {User} from "../../users.types";
 import {UserService} from "../state/user.service";
 import {CompanyRepository} from "@hiboard/company/state/company.repository";
 import {UserRepository} from "../state/user.repository";
+import {Templates} from "../../../../templates/src/lib/templates.types";
 
 export interface CreateUserDialogData {
-  role: User.Role
+  role: User.Role,
+  templates?: Templates.Entity[]
 }
 
 @Component({
@@ -29,6 +31,7 @@ export class CreateUserDialogComponent {
     email: new FormControl('', Validators.email),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     department: new FormControl(''),
+    template: new FormControl('')
   })
 
   departments = this.companyRepo.currentCompany!.departments
@@ -45,7 +48,7 @@ export class CreateUserDialogComponent {
               public dialogRef: MatDialogRef<CreateUserDialogComponent>,
               private toast: HotToastService,
               private cdr: ChangeDetectorRef,
-              private companyRepo: CompanyRepository
+              private companyRepo: CompanyRepository,
   ) {
   }
 
@@ -66,7 +69,10 @@ export class CreateUserDialogComponent {
 
     this.userService.createUser(newUser, {managerId: this.userRepo.userId}).subscribe({
       next: (res) => {
-        this.dialogRef.close(res.data)
+        this.dialogRef.close({
+          data: res.data,
+          templateId: this.createUserForm.get('template')!.value
+        })
       },
       error: () => {
         this.loading = false;

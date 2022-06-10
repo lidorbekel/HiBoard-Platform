@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, NgModule, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnInit} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
@@ -6,6 +6,8 @@ import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {SubscribeModule} from "@ngneat/subscribe";
 import {map} from "rxjs";
 import {User} from "../../../../user/src/users.types";
+import {CompanyRepository} from "@hiboard/company/state/company.repository";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
 interface NavItem {
   title: string,
@@ -14,6 +16,7 @@ interface NavItem {
   role?: User.Role
 }
 
+@UntilDestroy()
 @Component({
   selector: 'hbd-navigation',
   templateUrl: './navigation.component.html',
@@ -22,6 +25,7 @@ interface NavItem {
 })
 export class NavigationComponent implements OnInit {
   user$ = this.userRepo.user$;
+
   navItems: NavItem[] = [
     {
       title: 'Activities',
@@ -42,9 +46,9 @@ export class NavigationComponent implements OnInit {
       role: 'Admin'
     },
     {
-      title: 'Company Users',
+      title: 'Managers',
       icon: 'supervised_user_circle',
-      link: 'admin/company-users',
+      link: 'admin/managers',
       role: 'Admin'
     },
     {
@@ -55,19 +59,29 @@ export class NavigationComponent implements OnInit {
     }
   ];
 
+  companyName: string;
+
   topNavItems: NavItem[] = [];
 
-  constructor(private userRepo: UserRepository) {
+  constructor(private userRepo: UserRepository, private companyRepo: CompanyRepository, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.userRepo.user$.pipe(
+      untilDestroyed(this),
       map((user) => {
         if (user) {
           this.topNavItems = this.navItems.filter((item) => item.role === user.role);
         }
       })
     ).subscribe();
+
+    this.companyRepo.company$.pipe(untilDestroyed(this)).subscribe(company => {
+      if (company) {
+        this.companyName = company.name;
+        this.cdr.detectChanges();
+      }
+    })
   }
 }
 
