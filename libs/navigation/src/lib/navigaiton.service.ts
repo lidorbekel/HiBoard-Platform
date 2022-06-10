@@ -1,4 +1,4 @@
-import {Router} from "@angular/router";
+import {NavigationBehaviorOptions, Router} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {UserRepository} from "../../../user/src/lib/state/user.repository";
 
@@ -7,15 +7,15 @@ export class NavigationService {
   constructor(private router: Router, private userRepo: UserRepository) {
   }
 
-  navigate(url: string) {
-    return this.router.navigateByUrl(url);
+  navigate(url: string, options?: NavigationBehaviorOptions) {
+    return this.router.navigateByUrl(url, options);
   }
 
   forgotPassword() {
     return this.router.navigateByUrl('auth/reset-password/change-password')
   }
 
-  toactivities() {
+  toActivities() {
     return this.navigate('activities');
   }
 
@@ -31,8 +31,8 @@ export class NavigationService {
     return this.navigate('join')
   }
 
-  toAdmin() {
-    return this.navigate('admin');
+  toAdmin(joinCompleted?: boolean) {
+    return this.navigate('admin', joinCompleted ? {state: {joinCompleted}} : {});
   }
 
   toProfile() {
@@ -45,7 +45,7 @@ export class NavigationService {
       return this.toAdmin();
     }
     if (role === 'Employee') {
-      return this.toactivities();
+      return this.toActivities();
     }
 
     return this.toEmployees();

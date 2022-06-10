@@ -28,6 +28,7 @@
     "@ngneat/elf": "1.2.0",
     "@ngneat/elf-devtools": "^1.2.1",
     "@ngneat/elf-entities": "4.1.1",
+    "@ngneat/elf-ng-router-store": "^1.0.5",
     "@ngneat/elf-persist-state": "^1.1.1",
     "@ngneat/error-tailor": "^2.1.0",
     "@ngneat/helipopper": "^5.1.4",
