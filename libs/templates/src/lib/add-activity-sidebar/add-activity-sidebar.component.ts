@@ -28,7 +28,10 @@ import {BehaviorSubject} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddActivitySidebarComponent implements OnInit {
-  @ViewChild('gdprErrorTailor', {static: true}) gdprErrorTailor: ControlErrorsDirective;
+  @ViewChild('nameErrorTailor', {static: true}) nameErrorTailor: ControlErrorsDirective;
+
+  @ViewChild('selectErrorTailor', {static: true}) selectErrorTailor: ControlErrorsDirective;
+
   @ViewChild('formDirective') formDirective: FormGroupDirective;
   @Output() closeSideBar = new EventEmitter();
 
@@ -53,22 +56,12 @@ export class AddActivitySidebarComponent implements OnInit {
   constructor(
     private templatesService: TemplatesService,
     private activitiesService: ActivitiesService,
-    private toast: HotToastService
+    private toast: HotToastService,
   ) {
   }
 
   ngOnInit(): void {
     this.initTemplates();
-    if (this.isTemplates) {
-      this.form.get('templates')!.setValidators(Validators.required);
-    }
-
-    // this.sidenavClose.pipe(untilDestroyed(this)).subscribe(isClosed => {
-    //   if (isClosed) {
-    //     this.form.reset();
-    //     this.gdprErrorTailor.hideError();
-    //   }
-    // })
   }
 
   ngAfterViewInit() {
@@ -76,13 +69,16 @@ export class AddActivitySidebarComponent implements OnInit {
       if (isClosed) {
         this.form.reset();
         this.formDirective.resetForm();
-        this.gdprErrorTailor.hideError();
+        this.nameErrorTailor.hideError();
+        this.selectErrorTailor?.hideError();
+        console.log(this.form)
       }
     })
   }
 
   initTemplates() {
     if (this.isTemplates) {
+      this.form.get('templates')!.setValidators(Validators.required);
       this.templatesService.templates$.pipe(
         untilDestroyed(this)
       ).subscribe((templates) => {
