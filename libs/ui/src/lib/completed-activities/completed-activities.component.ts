@@ -8,7 +8,9 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompletedactivitiesComponent implements OnInit {
-  @Input() value = 50;
+  @Input() total: number;
+  @Input() completed: number;
+  @Input() percentage: number;
 
   constructor() {
   }

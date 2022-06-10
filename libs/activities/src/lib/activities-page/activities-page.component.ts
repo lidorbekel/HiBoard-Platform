@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {ActivitiesRepository} from "@hiboard/activities/state/activities.repository";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
@@ -22,14 +23,17 @@ import {activitiesFilters} from "@hiboard/activities/activities-page/activities-
   styleUrls: ['./activities-page.component.scss'],
   providers: [
     ActivitiesRepository,
-    ActivitiesService
+    ActivitiesService,
+    UserRepository
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivitiesPageComponent implements OnInit {
   activities: AsyncState<Activities.Response>;
   filteredActivities: Activities.Entity[];
-  completedActivitiesPercent = 70; //TODO remove
+  totalActivities: number;
+  completedActivities: number;
+  activitiesPercentage: number;
   loadingArray = Array(9);
 
   filters = new FormGroup({
@@ -58,6 +62,7 @@ export class ActivitiesPageComponent implements OnInit {
   constructor(
     private service: ActivitiesService,
     private activitiesRepo: ActivitiesRepository,
+    private userRepo: UserRepository,
     private cdr: ChangeDetectorRef,
     private factory: BindQueryParamsFactory,
   ) {
@@ -76,6 +81,9 @@ export class ActivitiesPageComponent implements OnInit {
     })
 
     this.fetchActivities();
+    this.totalActivities = this.userRepo.totalActivities;
+    this.completedActivities = this.userRepo.completedActivities;
+    this.activitiesPercentage = this.completedActivities / this.totalActivities * 100;
   }
 
   private fetchActivities() {

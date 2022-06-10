@@ -2,7 +2,9 @@
   <hbd-activities-filters
     [formGroup]="filters" [activities]="activities"></hbd-activities-filters>
   <hbd-completed-activities
-    [value]="completedActivitiesPercent"></hbd-completed-activities>
+    [total]="totalActivities"
+    [completed]="completedActivities"
+    [percentage]="activitiesPercentage"></hbd-completed-activities>
 </div>
 
 <div *ngIf="!activities.loading">
