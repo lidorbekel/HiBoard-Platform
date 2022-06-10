@@ -1,9 +1,10 @@
 <ng-container *subscribe="activeTemplate$; let template">
   <ng-container *ngIf="template">
     <mat-drawer-container class="h-full">
-      <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end">
+      <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end" (closedStart)="onClose()">
         <hbd-add-activity-sidebar [isTemplates]="false"
-                                  (closeSideBar)="onTemplateChange($event, drawer)"></hbd-add-activity-sidebar>
+                                  (closeSideBar)="onTemplateChange($event, drawer)"
+                                  [sidenavClose]="sidenavClose"></hbd-add-activity-sidebar>
       </mat-drawer>
 
       <div class="flex-col w-2/3">
@@ -91,6 +92,7 @@
       </div>
 
       <button mat-raised-button color="primary" class="flex-align-center pl-0 see-all-btn" (click)="goBack()">
+        <mat-icon class="mr-1">arrow_back</mat-icon>
         <span>All templates</span>
       </button>
     </mat-drawer-container>

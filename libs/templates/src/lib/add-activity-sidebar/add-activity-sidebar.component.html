@@ -9,7 +9,8 @@
         formControlName="name"
         placeholder="Name"
         [controlErrorAnchor]="nameAnchor"
-        #gdprErrorTailor="errorTailor"
+        [controlErrorsOnBlur]="false"
+        #nameErrorTailor="errorTailor"
       >
     </mat-form-field>
 
@@ -100,6 +101,7 @@
                   disableOptionCentering
                   panelClass="myPanelClass"
                   [controlErrorAnchor]="selectAnchor"
+                  #selectErrorTailor="errorTailor"
       >
         <mat-select-trigger class="flex items-center h-full">
           <mat-chip-list class="chip-list">
@@ -130,6 +132,7 @@
       controlErrorAnchor
       #selectAnchor="controlErrorAnchor"
     ></ng-template>
+
   </section>
 
 

@@ -20,6 +20,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
 import {MatDrawer} from "@angular/material/sidenav";
+import {BehaviorSubject} from "rxjs";
 
 @UntilDestroy()
 @Component({
@@ -36,6 +37,7 @@ export class TemplatePageComponent implements OnInit {
   dataSource = new MatTableDataSource<Activities.Entity>();
   search = new FormControl('');
   displayedColumns: string[] = ['name', 'tag', 'actions'];
+  sidenavClose = new BehaviorSubject(true);
 
   constructor(
     private templatesService: TemplatesService,
@@ -98,6 +100,10 @@ export class TemplatePageComponent implements OnInit {
     }).pipe(untilDestroyed(this)).subscribe(res => {
       this.activeTemplate$.next(res.data);
     })
+  }
+
+  onClose() {
+    this.sidenavClose.next(true);
   }
 }
 
