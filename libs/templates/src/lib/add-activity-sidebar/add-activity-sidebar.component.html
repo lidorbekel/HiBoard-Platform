@@ -28,7 +28,14 @@
       formControlName="description"
       placeholder="Description..."
       rows="3"
+      [controlErrorsOnBlur]="false"
+      #descErrorTailor="errorTailor"
     ></textarea>
+
+    <ng-template
+      controlErrorAnchor
+      #descErrorTailor="controlErrorAnchor"
+    ></ng-template>
   </section>
 
   <section class="my-3">

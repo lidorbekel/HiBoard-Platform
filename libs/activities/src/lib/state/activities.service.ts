@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ActivitiesRepository} from "./activities.repository";
 import {toAsyncState} from "@ngneat/loadoff";
-import {Activities} from "@hiboard/activities/types/activities.type";
+import {Activities, ActivityStatus} from "@hiboard/activities/types/activities.type";
 import {HttpClient} from "@angular/common/http";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {tap} from "rxjs";
@@ -16,7 +16,11 @@ export class ActivitiesService {
     return `${userId}/activities`
   }
 
-  constructor(private activitiesRepo: ActivitiesRepository, private http: HttpClient, private userRepo: UserRepository) {
+  constructor(
+    private activitiesRepo: ActivitiesRepository,
+    private http: HttpClient,
+    private userRepo: UserRepository,
+  ) {
   }
 
   getActivities() {
@@ -34,5 +38,25 @@ export class ActivitiesService {
 
   createInventoryActivity(activity: Omit<Activities.InventoryEntity, 'id'>) {
     return this.http.post<Activities.InventoryResponse>(ActivitiesService.inventoryUrl, activity);
+  }
+
+  updateUserActivity(activity: Activities.Entity) {
+    return this.http.patch(`${ActivitiesService.url(this.userRepo.userId.toString())}/${activity.id}`, {
+      ...activity,
+      status: this.convertStatusToEnum(activity.status)
+    })
+      .pipe(
+        tap(() => this.activitiesRepo.updateUserActivity(activity.id, activity))
+      )
+  }
+
+  convertStatusToEnum(status: ActivityStatus) {
+    if (status === 'Backlog') {
+      return 1;
+    }
+    if (status === 'InProgress') {
+      return 2;
+    }
+    return 3;
   }
 }

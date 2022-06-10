@@ -33,7 +33,7 @@ export namespace Activities {
   }
 }
 
-export type ActivityStatus = "backlog" | "in-progress" | "done";
+export type ActivityStatus = "Backlog" | "InProgress" | "Done";
 
 
 

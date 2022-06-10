@@ -31,6 +31,7 @@ export class AddActivitySidebarComponent implements OnInit {
   @ViewChild('nameErrorTailor', {static: true}) nameErrorTailor: ControlErrorsDirective;
 
   @ViewChild('selectErrorTailor', {static: true}) selectErrorTailor: ControlErrorsDirective;
+  @ViewChild('descErrorTailor', {static: true}) descErrorTailor: ControlErrorsDirective;
 
   @ViewChild('formDirective') formDirective: FormGroupDirective;
   @Output() closeSideBar = new EventEmitter();
@@ -44,7 +45,7 @@ export class AddActivitySidebarComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     tag: new FormControl('', [Validators.maxLength(10)]),
-    description: new FormControl(''),
+    description: new FormControl('', [Validators.required]),
     templates: new FormControl(''),
     weeks: new FormControl(0, [Validators.max(4)]),
     days: new FormControl(0, [Validators.max(6)]),
@@ -71,6 +72,7 @@ export class AddActivitySidebarComponent implements OnInit {
         this.form.reset();
         this.formDirective.resetForm();
         this.nameErrorTailor.hideError();
+        this.descErrorTailor.hideError();
         this.selectErrorTailor?.hideError();
       }
     })

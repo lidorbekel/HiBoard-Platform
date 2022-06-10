@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgModule} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {Activities} from "@hiboard/activities/types/activities.type";
 import {CommonModule} from "@angular/common";
@@ -9,6 +9,7 @@ import {
   ActivityDialogComponent,
   ActivityDialogData
 } from "@hiboard/activities/activity-dialog/activity-dialog.component";
+import {untilDestroyed} from "@ngneat/until-destroy";
 
 @Component({
   selector: 'hbd-activity-view',
@@ -22,12 +23,19 @@ export class ActivityViewComponent {
 
   constructor(
     private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
   openActivityDialog(activity: Activities.Entity) {
     this.dialog.open<ActivityDialogComponent, ActivityDialogData>(ActivityDialogComponent, {
       data: {activity}
+    }).afterClosed().pipe(untilDestroyed(this)).subscribe(res => {
+      this.cdr.detectChanges();
+      if (res) {
+        //TODO
+      }
+
     })
   }
 }

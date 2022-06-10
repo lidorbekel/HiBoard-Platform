@@ -16,7 +16,7 @@
       selected
       [ngClass]="activity.status.toString()"
     >
-      {{ activity.status }}
+      {{ activity.status === 'InProgress' ? 'In Progress' : activity.status }}
     </mat-chip>
 
     <button
