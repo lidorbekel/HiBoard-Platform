@@ -9,8 +9,9 @@ import {
   ActivityDialogComponent,
   ActivityDialogData
 } from "@hiboard/activities/activity-dialog/activity-dialog.component";
-import {untilDestroyed} from "@ngneat/until-destroy";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'hbd-activity-view',
   templateUrl: './activity-view.component.html',
@@ -31,10 +32,7 @@ export class ActivityViewComponent {
     this.dialog.open<ActivityDialogComponent, ActivityDialogData>(ActivityDialogComponent, {
       data: {activity}
     }).afterClosed().pipe(untilDestroyed(this)).subscribe(res => {
-      this.cdr.detectChanges();
-      if (res) {
-        //TODO
-      }
+      console.log('res', res);
 
     })
   }

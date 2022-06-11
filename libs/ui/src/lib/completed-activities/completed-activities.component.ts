@@ -1,6 +1,9 @@
-import {Component, OnInit, ChangeDetectionStrategy, NgModule, Input} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnInit} from '@angular/core';
 import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {ActivitiesRepository} from "@hiboard/activities/state/activities.repository";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'hbd-completed-activities',
   templateUrl: './completed-activities.component.html',
@@ -8,14 +11,25 @@ import {MaterialModule} from "@hiboard/ui/material/material.module";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompletedactivitiesComponent implements OnInit {
-  @Input() total: number;
-  @Input() completed: number;
-  @Input() percentage: number;
+  total = 0;
+  completed = 0;
+  percentage = 0;
 
-  constructor() {
+  constructor(
+    private activitiesRepo: ActivitiesRepository,
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit(): void {
+    this.activitiesRepo.activities$.pipe(untilDestroyed(this)).subscribe(activities => {
+      if (activities) {
+        this.total = activities.length;
+        this.completed = activities.filter(({status}) => status === 'Done').length;
+        this.percentage = (100 * this.completed) / this.total;
+        this.cdr.detectChanges();
+      }
+    })
   }
 
 }

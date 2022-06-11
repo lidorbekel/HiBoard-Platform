@@ -78,6 +78,7 @@ export class ActivitiesPageComponent implements OnInit {
       })
     ).subscribe((filteredActivities) => {
       this.filteredActivities = filteredActivities;
+      this.cdr.detectChanges();
     })
 
     this.fetchActivities();

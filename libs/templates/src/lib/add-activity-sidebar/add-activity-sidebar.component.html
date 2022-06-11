@@ -125,8 +125,8 @@
             </mat-chip>
           </mat-chip-list>
 
-          <span *ngIf="templatesControl.value?.length > 2" class="primary ml-1">
-                +{{templatesControl.value.length - 2}} more
+          <span *ngIf="templatesControl.value?.length > 3" class="primary ml-1">
+                +{{templatesControl.value.length - 3}} more
               </span>
         </mat-select-trigger>
         <mat-option (click)="selectAll()" value="Select All">Select All</mat-option>

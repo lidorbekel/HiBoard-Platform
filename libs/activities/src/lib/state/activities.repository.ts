@@ -31,8 +31,8 @@ export class ActivitiesRepository implements OnDestroy {
     }))
   }
 
-  updateUserActivity(id: string, userActivity: Activities.Entity) {
-    store.update(updateEntities(id, userActivity));
+  updateUserActivity(userActivity: Activities.Entity) {
+    store.update(updateEntities(userActivity.id, userActivity));
   }
 
   ngOnDestroy(): void {

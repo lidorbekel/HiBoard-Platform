@@ -46,7 +46,7 @@ export class ActivitiesService {
       status: this.convertStatusToEnum(activity.status)
     })
       .pipe(
-        tap(() => this.activitiesRepo.updateUserActivity(activity.id, activity))
+        tap(() => this.activitiesRepo.updateUserActivity(activity))
       )
   }
 

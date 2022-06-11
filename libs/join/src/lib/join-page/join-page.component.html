@@ -1,126 +1,130 @@
 <div class="container">
-  <h1 class="mb-10">Join <span class="font-bold">HiBoard</span> !</h1>
 
-  <form [formGroup]="form" errorTailor class="form">
-    <div class="details">
-      <section class="w-[450px]">
-        <h2 class="text20 mb-6">Admin Information</h2>
-        <div class="flex mb-2 justify-between">
-          <div>
-            <p class="text14 font-bold">First Name</p>
-            <mat-form-field appearance="outline">
+  <h1 class="mb-10">Join <span class="font-bold primary">HiBoard</span> !</h1>
+  <mat-card>
+    <form [formGroup]="form" errorTailor class="form">
+      <div class="details">
+        <section class="w-[450px]">
+          <h2 class="text20 mb-6">Admin Information</h2>
+          <div class="flex mb-2 justify-between">
+            <div>
+              <p class="text14 font-bold">First Name</p>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="firstName"
+                  placeholder="First Name"
+                  [controlErrorAnchor]="nameAnchor"
+                >
+              </mat-form-field>
+
+              <ng-template
+                controlErrorAnchor
+                #nameAnchor="controlErrorAnchor"
+              ></ng-template>
+            </div>
+
+            <div>
+              <p class="text14 font-bold">Last Name</p>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="lastName"
+                  placeholder="Last Name"
+                  [controlErrorAnchor]="lastNameAnchor"
+                >
+              </mat-form-field>
+
+              <ng-template
+                controlErrorAnchor
+                #lastNameAnchor="controlErrorAnchor"
+              ></ng-template>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <p class="text14 font-bold">Email Address</p>
+            <mat-form-field appearance="outline" class="w-full">
               <input
                 matInput
-                formControlName="firstName"
-                placeholder="First Name"
-                [controlErrorAnchor]="nameAnchor"
+                formControlName="email"
+                placeholder="Email Address"
+                [controlErrorAnchor]="emailAnchor"
               >
             </mat-form-field>
 
             <ng-template
               controlErrorAnchor
-              #nameAnchor="controlErrorAnchor"
+              #emailAnchor="controlErrorAnchor"
             ></ng-template>
           </div>
 
-          <div>
-            <p class="text14 font-bold">Last Name</p>
-            <mat-form-field appearance="outline">
+          <div class="mb-2">
+            <p class="text14 font-bold mr-1">Password</p>
+            <mat-form-field appearance="outline" class="w-1/2">
+              <input
+                [type]="hidePassword ? 'password' : 'text'"
+                matInput
+                formControlName="password"
+                placeholder="Password"
+                [controlErrorAnchor]="passwordAnchor"
+              >
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
+                      [lazy]="true"
+                      [tippy]="hidePassword ? 'Show Password' : 'Hide Password'"
+              >
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <ng-template
+              controlErrorAnchor
+              #passwordAnchor="controlErrorAnchor"
+            ></ng-template>
+          </div>
+        </section>
+
+        <div class="vl mx-8"></div>
+
+        <section class="w-[450px]">
+          <h2 class="text20 mb-6">Company Information</h2>
+
+          <div class="w-full mb-2">
+            <p class="text14 font-bold">Company Name</p>
+            <mat-form-field appearance="outline" class="w-full">
               <input
                 matInput
-                formControlName="lastName"
-                placeholder="Last Name"
-                [controlErrorAnchor]="lastNameAnchor"
+                formControlName="company"
+                placeholder="Company Name"
+                [controlErrorAnchor]="companyNameAnchor"
               >
             </mat-form-field>
 
             <ng-template
               controlErrorAnchor
-              #lastNameAnchor="controlErrorAnchor"
+              #companyNameAnchor="controlErrorAnchor"
             ></ng-template>
           </div>
-        </div>
 
-        <div class="mb-2">
-          <p class="text14 font-bold">Email Address</p>
-          <mat-form-field appearance="outline" class="w-full">
-            <input
-              matInput
-              formControlName="email"
-              placeholder="Email Address"
-              [controlErrorAnchor]="emailAnchor"
-            >
-          </mat-form-field>
+        </section>
+      </div>
 
-          <ng-template
-            controlErrorAnchor
-            #emailAnchor="controlErrorAnchor"
-          ></ng-template>
-        </div>
 
-        <div class="mb-2">
-          <p class="text14 font-bold mr-1">Password</p>
-          <mat-form-field appearance="outline" class="w-1/2">
-            <input
-              [type]="hidePassword ? 'password' : 'text'"
-              matInput
-              formControlName="password"
-              placeholder="Password"
-              [controlErrorAnchor]="passwordAnchor"
-            >
-            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
-                    [lazy]="true"
-                    [tippy]="hidePassword ? 'Show Password' : 'Hide Password'"
-            >
-              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
+    </form>
+  </mat-card>
 
-          <ng-template
-            controlErrorAnchor
-            #passwordAnchor="controlErrorAnchor"
-          ></ng-template>
-        </div>
-      </section>
-
-      <div class="vl mx-8"></div>
-
-      <section class="w-[450px]">
-        <h2 class="text20 mb-6">Company Information</h2>
-
-        <div class="w-full mb-2">
-          <p class="text14 font-bold">Company Name</p>
-          <mat-form-field appearance="outline" class="w-full">
-            <input
-              matInput
-              formControlName="company"
-              placeholder="Company Name"
-              [controlErrorAnchor]="companyNameAnchor"
-            >
-          </mat-form-field>
-
-          <ng-template
-            controlErrorAnchor
-            #companyNameAnchor="controlErrorAnchor"
-          ></ng-template>
-        </div>
-
-      </section>
-    </div>
-
-    <div class="w-full flex justify-end mt-8">
-      <button mat-stroked-button color="primary" style="margin-right: 8px" (click)="toLogin()">
-        Back to login
-      </button>
-      <button mat-raised-button color="primary" type="submit"
-              (click)="register()"
-              [class.hbd-spinner]="loading"
-              [disabled]="loading || form.invalid"
-      >
-        Take me to HiBoard
-      </button>
-    </div>
-  </form>
+  <div class="w-full flex justify-center mt-8">
+    <button mat-stroked-button color="primary" style="margin-right: 8px" (click)="toLogin()">
+      Back to login
+    </button>
+    <button mat-raised-button color="primary" type="submit"
+            (click)="register()"
+            [class.hbd-spinner]="loading"
+            [disabled]="loading || form.invalid"
+    >
+      Take me to HiBoard
+    </button>
+  </div>
 </div>
 
 

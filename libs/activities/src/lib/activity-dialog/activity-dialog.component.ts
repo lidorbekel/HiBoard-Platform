@@ -68,8 +68,6 @@ export class ActivityDialogComponent implements OnInit {
       status: this.form.get('status')!.value
     }
 
-    console.log(updatedActivity)
-
     this.activitiesService.updateUserActivity(updatedActivity).subscribe(({
       next: () => this.dialogRef.close()
     }));
