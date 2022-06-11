@@ -53,9 +53,6 @@ export class ActivityDialogComponent implements OnInit {
 
     this.form.get('tag')!.setValue(this.activity.activity.tag);
     this.form.get('description')!.setValue(this.activity.activity.description);
-    this.form.get('weeks')!.setValue(this.activity?.activity.estimation?.weeks || 0);
-    this.form.get('days')!.setValue(this.activity?.activity.estimation?.days || 0);
-    this.form.get('hours')!.setValue(this.activity?.activity.estimation?.hours || 0);
   }
 
   save() {

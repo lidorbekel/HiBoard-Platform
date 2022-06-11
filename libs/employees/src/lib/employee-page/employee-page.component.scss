@@ -3,7 +3,7 @@
 }
 
 .table-container {
-  max-height: 350px !important;
+  max-height: 500px !important;
   overflow: auto;
 }
 
@@ -24,3 +24,24 @@
   background-color: lightskyblue !important;
 }
 
+.on-time {
+  color: green;
+}
+
+
+.not-on-time {
+  color: red;
+}
+
+.mat-column-tag {
+  flex: 0 0 20% !important;
+}
+
+.mat-column-status {
+  flex: 0 0 20% !important;
+}
+
+
+.mat-column-onTime {
+  flex: 0 0 15% !important;
+}

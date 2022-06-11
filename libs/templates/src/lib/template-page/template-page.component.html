@@ -64,6 +64,17 @@
                 }}</mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="estimation">
+              <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Time Estimation
+              </mat-header-cell
+              >
+              <mat-cell *matCellDef="let element"
+              >{{
+                parseTimeEstimation(element.timeEstimation)
+                }}</mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let element">

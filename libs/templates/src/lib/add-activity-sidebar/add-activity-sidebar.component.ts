@@ -44,11 +44,11 @@ export class AddActivitySidebarComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
+    week: new FormControl('', [Validators.required]),
     tag: new FormControl('', [Validators.maxLength(10)]),
     description: new FormControl('', [Validators.required]),
     templates: new FormControl(''),
-    weeks: new FormControl(0, [Validators.max(4)]),
-    days: new FormControl(0, [Validators.max(6)]),
+    days: new FormControl(0, [Validators.required]),
     hours: new FormControl(0, [Validators.max(23)]),
   })
 
@@ -119,14 +119,13 @@ export class AddActivitySidebarComponent implements OnInit {
       return;
     }
 
+    const timeEstimation = `${this.form.get('days')!.value}.${this.form.get('hours')!.value}:00:00`;
+
     const newActivity: Omit<Activities.InventoryEntity, 'id'> = {
       title: this.form.get('name')!.value,
       description: this.form.get('description')!.value,
-      estimation: {
-        weeks: this.form.get('weeks')!.value,
-        days: this.form.get('days')!.value,
-        hours: this.form.get('hours')!.value,
-      },
+      week: this.form.get('week')!.value,
+      timeEstimation,
       tag: this.form.get('tag')!.value,
     };
 

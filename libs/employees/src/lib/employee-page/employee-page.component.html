@@ -21,12 +21,10 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-
-    <hbd-completed-activities></hbd-completed-activities>
   </div>
 
   <div class="table-container">
-    <table mat-table [dataSource]="dataSource" class="w-[50%]" matSort>
+    <table mat-table [dataSource]="dataSource" class="w-[60%]" matSort>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header
         >Name
@@ -59,6 +57,19 @@
           >
             {{ element.status === 'InProgress' ? 'In Progress' : element.status }}
           </mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="onTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Is On Time
+        </mat-header-cell
+        >
+        <mat-cell *matCellDef="let element" [class.on-time]="element.isOnTime" [class.not-on-time]="!element.isOnTime">
+          <mat-icon
+            *ngIf="element.status !== 'Backlog'">
+            {{ element.isOnTime ? 'check_circle_outline' : 'highlight_remove' }}
+          </mat-icon>
         </mat-cell>
       </ng-container>
 

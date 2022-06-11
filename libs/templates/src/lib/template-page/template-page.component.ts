@@ -38,7 +38,7 @@ export class TemplatePageComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   dataSource = new MatTableDataSource<Activities.Entity>();
   search = new FormControl('');
-  displayedColumns: string[] = ['name', 'tag', 'actions'];
+  displayedColumns: string[] = ['name', 'tag', 'estimation', 'actions'];
   sidenavClose = new BehaviorSubject(true);
 
   constructor(
@@ -106,6 +106,16 @@ export class TemplatePageComponent implements OnInit {
 
   onClose() {
     this.sidenavClose.next(true);
+  }
+
+  parseTimeEstimation(estimation: string) {
+    const converted = estimation.split('.');
+    if (converted.length === 1) {
+      return '--';
+    }
+    const days = converted[0];
+    const hours = converted[1]?.slice(0, 2);
+    return `${days} ${days === '1' ? 'Day' : 'Days'}, ${hours} Hours`;
   }
 
   onEditActivity(activity: Activities.InventoryEntity) {
