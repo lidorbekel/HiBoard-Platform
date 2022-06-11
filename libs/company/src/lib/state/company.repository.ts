@@ -1,19 +1,20 @@
-import {createState, select, Store, withProps} from '@ngneat/elf';
-import {Injectable} from "@angular/core";
-import {defaultStoreStatus, StoreStatus} from "@hiboard/core/store";
-import {Company} from "@hiboard/company/company.types";
+import { createState, select, Store, withProps } from '@ngneat/elf';
+import { Injectable } from '@angular/core';
+import { defaultStoreStatus, StoreStatus } from '@hiboard/core/store';
+import { Company } from '@hiboard/company/company.types';
 
 export interface CompanyState extends StoreStatus {
-  company: Company.Entity | null
+  company: Company.Entity | null;
 }
 
-const {state, config} = createState(
+const { state, config } = createState(
   withProps<CompanyState>({
     company: null,
-    ...defaultStoreStatus
-  }));
+    ...defaultStoreStatus,
+  })
+);
 
-const store = new Store({state, name: 'company', config});
+const store = new Store({ state, name: 'company', config });
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class CompanyRepository {
   update(company: CompanyState['company']) {
     store.update((state) => ({
       ...state,
-      company
+      company,
     }));
   }
 
@@ -40,7 +41,7 @@ export class CompanyRepository {
   setLoading(isLoading: boolean) {
     store.update((state) => ({
       ...state,
-      loading: isLoading
+      loading: isLoading,
     }));
   }
 }

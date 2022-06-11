@@ -1,29 +1,37 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {RoleGuard} from "@hiboard/auth/guards/role.guard";
-import {UserProfilePageComponent} from "@hiboard/user-profile/user-profile-page/user-profile-page.component";
+import { CompanyEmployeesPageComponent } from './../../../company-employees/src/lib/company-employees-page/company-employees-page.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RoleGuard } from '@hiboard/auth/guards/role.guard';
+import { UserProfilePageComponent } from '@hiboard/user-profile/user-profile-page/user-profile-page.component';
 
 const children: Routes = [
   {
     path: 'activities',
     loadChildren: () =>
       import('@hiboard/activities/activities.module').then(
-        ({ActivitiesModule}) => ActivitiesModule
+        ({ ActivitiesModule }) => ActivitiesModule
       ),
     data: {
-      roles: ['Employee']
-    }
+      roles: ['Employee'],
+    },
+  },
+  {
+    path: 'company-employees',
+    component: CompanyEmployeesPageComponent,
+    data: {
+      roles: ['Employee', 'Manager'],
+    },
   },
   {
     path: 'employees',
     loadChildren: () =>
       import('@hiboard/employees/employees.module').then(
-        ({EmployeesModule}) => EmployeesModule
+        ({ EmployeesModule }) => EmployeesModule
       ),
     data: {
-      roles: ['Manager']
-    }
+      roles: ['Manager'],
+    },
   },
   {
     path: 'templates',
@@ -39,16 +47,16 @@ const children: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('@hiboard/admin/admin.module').then(
-        ({AdminModule}) => AdminModule
+        ({ AdminModule }) => AdminModule
       ),
     data: {
-      roles: ['Admin']
-    }
+      roles: ['Admin'],
+    },
   },
   {
     path: 'profile',
-    component: UserProfilePageComponent
-  }
+    component: UserProfilePageComponent,
+  },
 ];
 
 const dashboardRoutes: Routes = [
@@ -59,16 +67,15 @@ const dashboardRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'activities'
+        redirectTo: 'activities',
       },
-      ...children.map((child) => ({...child, canActivate: [RoleGuard]}))
-    ]
-  }
-]
+      ...children.map((child) => ({ ...child, canActivate: [RoleGuard] })),
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(dashboardRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule {
-}
+export class DashboardRoutingModule {}

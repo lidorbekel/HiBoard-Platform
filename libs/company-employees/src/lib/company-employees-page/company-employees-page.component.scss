@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.mat-card {
+  padding: 10px;
+}
+
+img {
+  display: block;
+  margin: auto;
+  min-height: 30px;
+  padding: 15px 15px 10px 15px;
+}
+
+.title_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mat-card-title {
+  margin: 0 0px;
+}
+
+.mat-card-header .mat-card-title {
+  margin-bottom: 0px;
+}
+
+.mat-card-content {
+  font-size: 11px;
+}
+
+.text-email {
+  text-decoration: underline;
+}
+
+.contact :hover {
+  transform: scale(1.06);
+  transition: all 0.2s ease-in-out;
+}

@@ -1,0 +1,51 @@
+<h1 class="font-bold">Company Employees</h1>
+<h2>
+  Here is a list that includes all the company employees, so you can contact
+  each employee by using his email address.
+</h2>
+
+<div class="flex items-center my-4">
+  <mat-form-field appearance="outline" class="w-[400px]">
+    <input
+      matInput
+      placeholder="Search"
+      #filter
+      autocomplete="off"
+      (keyup)="applyFilter()"
+    />
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      *ngIf="filter.value"
+      (click)="onSearchClear()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<ng-container *ngIf="$data | async as employees">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="15%" *ngFor="let employee of dataSource.filteredData">
+      <div class="contact">
+        <mat-card class="mat-elevation-z2">
+          <img mat-card-image src="assets/employees/user.png" />
+          <!-- <mat-card-header class="title_center"> -->
+          <mat-card-title class="title_center">
+            {{ employee.firstName + ' ' + employee.lastName }}</mat-card-title
+          >
+          <!-- </mat-card-header> -->
+          <mat-card-content>
+            <a class="text-email" href="mailto:{{ employee.email }}">{{
+              employee.email
+            }}</a>
+            <br />
+            dept. {{ employee.department }}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</ng-container>
