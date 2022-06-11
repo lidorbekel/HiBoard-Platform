@@ -27,6 +27,7 @@ import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.
 import {Templates} from "../../../../templates/src/lib/templates.types";
 import {TemplatesService} from "../../../../templates/src/lib/state/templates.service";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
+import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 
 @UntilDestroy()
 @Component({
@@ -55,7 +56,8 @@ export class EmployeesPageComponent implements OnInit {
               private userRepo: UserRepository,
               private cdr: ChangeDetectorRef,
               private templatesService: TemplatesService,
-              private activitiesService: ActivitiesService
+              private activitiesService: ActivitiesService,
+              private navigationService: NavigationService
   ) {
   }
 
@@ -73,7 +75,7 @@ export class EmployeesPageComponent implements OnInit {
       }
     })
 
-    this.employeesService.fetchEmployeesByManagerId(this.userRepo.userId);
+    this.employeesService.fetchEmployeesByManagerId(this.userRepo.userId).pipe(untilDestroyed(this)).subscribe();
 
     this.templatesService.getTemplates().pipe(untilDestroyed(this)).subscribe(res => {
       if (res.data) {
@@ -82,8 +84,15 @@ export class EmployeesPageComponent implements OnInit {
     })
   }
 
+  getActivitiesDone(total: string, completed: string) {
+    if (+total === 0) {
+      return 0;
+    }
+    return (100 * +completed) / +total;
+  }
+
   navigateToEmployee(employee: User.Entity) {
-    console.log(employee)
+    this.navigationService.toEmployee(employee.id.toString());
   }
 
   openCreateEmployeeDialog() {

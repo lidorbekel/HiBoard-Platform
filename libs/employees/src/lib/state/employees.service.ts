@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../../user/src/users.types";
-import {BehaviorSubject, map} from "rxjs";
+import {BehaviorSubject, map, tap} from "rxjs";
 import {Injectable} from "@angular/core";
 import {UserService} from "../../../../user/src/lib/state/user.service";
 
@@ -22,9 +22,11 @@ export class EmployeesService {
   }
 
   fetchEmployeesByManagerId(managerId: number) {
-    return this.http.get<User.UsersResponse>(EmployeesService.employeesUrl(managerId)).subscribe(res => {
-      this.employees.next(res.data)
-    })
+    return this.http.get<User.UsersResponse>(EmployeesService.employeesUrl(managerId)).pipe(
+      tap((res) => {
+        this.employees.next(res.data)
+      })
+    )
   }
 
   addEmployee(user: User.Entity) {
@@ -32,6 +34,10 @@ export class EmployeesService {
       ...this.employees.getValue(),
       user
     ])
+  }
+
+  getEmployeeById(id: number) {
+    return this.employees.getValue().filter((employee) => +employee.id === +id)[0];
   }
 
   deleteEmployee(id: number) {
