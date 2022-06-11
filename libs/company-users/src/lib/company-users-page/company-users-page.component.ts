@@ -2,26 +2,25 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   NgModule,
   OnInit,
-  ElementRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@hiboard/ui/material/material.module';
-import { MatDialog } from '@angular/material/dialog';
-import { HotToastService } from '@ngneat/hot-toast';
-import { CreateUserDialogComponent } from '../../../../user/src/lib/create-user-dialog/create-user-dialog.component';
-import { UserService } from '../../../../user/src/lib/state/user.service';
-import { UserRepository } from '../../../../user/src/lib/state/user.repository';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { CompanyUsersService } from '@hiboard/company-users/state/company-users.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../../user/src/users.types';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { FormControl, FormsModule } from '@angular/forms';
-import { ConfirmDialogComponent } from '@hiboard/ui/confirm-dialog/confirm-dialog.component';
+import {CommonModule} from '@angular/common';
+import {MaterialModule} from '@hiboard/ui/material/material.module';
+import {MatDialog} from '@angular/material/dialog';
+import {HotToastService} from '@ngneat/hot-toast';
+import {CreateUserDialogComponent} from '../../../../user/src/lib/create-user-dialog/create-user-dialog.component';
+import {UserService} from '../../../../user/src/lib/state/user.service';
+import {UserRepository} from '../../../../user/src/lib/state/user.repository';
+import {CompanyUsersService} from '@hiboard/company-users/state/company-users.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {User} from '../../../../user/src/users.types';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {FormControl} from '@angular/forms';
+import {ConfirmDialogComponent} from '@hiboard/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'hbd-company-users-page',
@@ -34,12 +33,13 @@ export class CompanyUsersPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filter') filter: ElementRef;
 
+  loading = true;
+
   search = new FormControl('');
   displayedColumns: string[] = [
     'fullName',
     'email',
     'departmentName',
-    'done',
     'actions',
   ];
   dataSource = new MatTableDataSource<User.Entity>();
@@ -51,11 +51,13 @@ export class CompanyUsersPageComponent implements OnInit {
     private userService: UserService,
     private userRepo: UserRepository,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.companyUsersService.managers$.subscribe((managersGridData) => {
       if (managersGridData) {
+        this.loading = false;
         this.dataSource.data = managersGridData;
         this.cdr.detectChanges();
       }
@@ -65,17 +67,18 @@ export class CompanyUsersPageComponent implements OnInit {
 
   openCreateEmployeeDialog() {
     const dialogRef = this.dialog.open(CreateUserDialogComponent, {
-      data: { role: 'Manager' },
+      data: {role: 'Manager'},
     });
 
     dialogRef.afterClosed().subscribe((res) => {
-      if (res !== '') {
-        this.companyUsersService.addManager(res);
+      if (res) {
+        this.companyUsersService.addManager(res.data);
         this.cdr.detectChanges();
         this.toast.success('Manager created successfully');
       }
     });
   }
+
   //
   onSearchClear() {
     this.filter.nativeElement.value = '';
@@ -112,4 +115,5 @@ export class CompanyUsersPageComponent implements OnInit {
   imports: [CommonModule, MaterialModule],
   exports: [CompanyUsersPageComponent],
 })
-export class CompanyUsersPageComponentModule {}
+export class CompanyUsersPageComponentModule {
+}

@@ -40,27 +40,29 @@
     ></ng-template>
   </div>
 
-  <button class="login-form-forgot mb-4" (click)="toForgotPassword()">Forgot password</button>
+  <div class="flex-col">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      class="w-full loginBtn"
+      (click)="login()"
+      [class.hbd-spinner]="loading"
+      [disabled]="loading"
+    >
+      Login
+    </button>
 
-  <button
-    mat-raised-button
-    type="submit"
-    color="primary"
-    class="w-full"
-    (click)="login()"
-    [class.hbd-spinner]="loading"
-    [disabled]="loading"
-  >
-    Login
-  </button>
 
-
-  <button
-    class="flex mt-6 text14 mx-auto"
-    (click)="onJoin()"
-  >
-    Join to HiBoard !
-  </button>
+    <button
+      class="w-full mt-6 text14 primary"
+      (click)="onJoin()"
+      mat-button
+      mat-stroked-button
+    >
+      Join to HiBoard !
+    </button>
+  </div>
 
   <p
     class="auth-form-error"

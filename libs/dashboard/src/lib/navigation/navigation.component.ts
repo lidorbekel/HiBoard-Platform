@@ -1,16 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  OnInit,
-} from '@angular/core';
-import { MaterialModule } from '@hiboard/ui/material/material.module';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { UserRepository } from '../../../../user/src/lib/state/user.repository';
-import { SubscribeModule } from '@ngneat/subscribe';
-import { map } from 'rxjs';
-import { User } from '../../../../user/src/users.types';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnInit} from '@angular/core';
+import {MaterialModule} from "@hiboard/ui/material/material.module";
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
+import {SubscribeModule} from "@ngneat/subscribe";
+import {map} from "rxjs";
+import {User} from "../../../../user/src/users.types";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {CompanyRepository} from "@hiboard/company/state/company.repository";
 
 interface NavItem {
   title: string;
@@ -19,6 +16,7 @@ interface NavItem {
   role?: User.Role;
 }
 
+@UntilDestroy()
 @Component({
   selector: 'hbd-navigation',
   templateUrl: './navigation.component.html',
@@ -27,6 +25,7 @@ interface NavItem {
 })
 export class NavigationComponent implements OnInit {
   user$ = this.userRepo.user$;
+
   navItems: NavItem[] = [
     {
       title: 'Activities',
@@ -60,29 +59,42 @@ export class NavigationComponent implements OnInit {
       role: 'Admin',
     },
     {
-      title: 'Company Users',
+      title: 'Managers',
       icon: 'supervised_user_circle',
-      link: 'admin/company-users',
-      role: 'Admin',
+      link: 'admin/managers',
+      role: 'Admin'
     },
+    {
+      title: 'Templates',
+      icon: 'view_quilt',
+      link: 'templates',
+      role: 'Manager'
+    }
   ];
+
+  companyName: string;
 
   topNavItems: NavItem[] = [];
 
-  constructor(private userRepo: UserRepository) {}
+  constructor(private userRepo: UserRepository, private companyRepo: CompanyRepository, private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
-    this.userRepo.user$
-      .pipe(
-        map((user) => {
-          if (user) {
-            this.topNavItems = this.navItems.filter(
-              (item) => item.role === user.role
-            );
-          }
-        })
-      )
-      .subscribe();
+    this.userRepo.user$.pipe(
+      untilDestroyed(this),
+      map((user) => {
+        if (user) {
+          this.topNavItems = this.navItems.filter((item) => item.role === user.role);
+        }
+      })
+    ).subscribe();
+
+    this.companyRepo.company$.pipe(untilDestroyed(this)).subscribe(company => {
+      if (company) {
+        this.companyName = company.name;
+        this.cdr.detectChanges();
+      }
+    })
   }
 }
 
@@ -91,4 +103,5 @@ export class NavigationComponent implements OnInit {
   imports: [MaterialModule, RouterModule, CommonModule, SubscribeModule],
   exports: [NavigationComponent],
 })
-export class NavigationComponentModule {}
+export class NavigationComponentModule {
+}

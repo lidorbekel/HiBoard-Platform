@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.mat-column-actions {
+  flex: 0 0 10% !important;
+}
+
+.table-container {
+  max-height: 350px !important;
+  overflow: auto;
+}
+
+.see-all-btn {
+  margin-top: 16px;
+}
+
+.edit-icon {
+  color: lightgray;
+
+  &:hover {
+    color: grey
+  }
+}

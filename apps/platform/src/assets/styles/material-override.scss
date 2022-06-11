@@ -29,7 +29,7 @@ mat-label {
   //margin: 0 !important;
 }
 
-mat-drawer {
+.nav-mat-drawer {
   width: 250px !important;
 }
 
@@ -73,10 +73,26 @@ mat-drawer {
   background-color: white;
 }
 
-.mat-chip-list-wrapper {
-  flex-wrap: nowrap !important;
+.mat-drawer-content {
+  overflow: hidden !important;
 }
 
-mat-select-trigger {
-  max-width: calc(100% - 50px) !important;
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent !important;
+}
+
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+.mat-chip-list {
+  width: 100% !important;
+  max-width: calc(100% - 35px);
+  display: flex;
+  align-items: center;
+}
+
+.mat-chip-list-wrapper {
+  flex-wrap: nowrap !important;
+  max-width: 100% !important;
 }

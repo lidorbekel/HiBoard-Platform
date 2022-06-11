@@ -27,10 +27,12 @@ export class ActivitiesFiltersComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
   @Input() set activities(activities: AsyncState<Activities.Response>) {
-    const data = activities.res?.data.activities;
-    this.loading = isLoading(activities);
-    if (data) {
-      this.initFilterValues(data);
+    if (activities) {
+      const data = activities.res?.data;
+      this.loading = isLoading(activities);
+      if (data) {
+        this.initFilterValues(data);
+      }
     }
   }
 
@@ -54,9 +56,9 @@ export class ActivitiesFiltersComponent implements OnInit {
   }
 
   private initFilterValues(activities: Activities.Entity[]) {
-    this.names = Array.from(new Set(activities.map((activity) => activity.title)));
+    this.names = Array.from(new Set(activities.map(({activity}) => activity.title)));
 
-    this.tags = Array.from(new Set(activities.map((activity) => activity.tag)));
+    this.tags = Array.from(new Set(activities.map(({activity}) => activity.tag)));
 
     this.statuses = Array.from(new Set(activities.map((activity) => activity.status)));
   }

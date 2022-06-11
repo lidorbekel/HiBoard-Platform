@@ -13,13 +13,20 @@ export class ErrorsInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
-        const msg = errorResponse.error?.Message;
-
-        console.log(msg);
-
+        let msg = errorResponse.error?.Message || errorResponse.error?.message;
         if (msg) {
+          if (msg === 'INVALID_PASSWORD') {
+            msg = 'Invalid Password';
+          }
+
+          if (msg && msg.includes('EMAIL_EXISTS')) {
+            msg = 'Email exists'
+          } else if (msg && msg.includes('instance')) {
+            msg = 'There was a problem, please try later...'
+          }
+
           this.toast.error(msg, {
-            duration: 20_000
+            duration: 10_000
           });
         }
 

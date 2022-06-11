@@ -7,14 +7,12 @@ export interface ActivitiesFilters {
 }
 
 export const activitiesFilters = (activities: Activities.Entity[], filters: ActivitiesFilters) => {
-  console.log(filters)
   if (filters.name?.length) {
-    console.log('im in')
-    activities = activities.filter(({title}) => filters.name.includes(title));
+    activities = activities.filter(({activity}) => filters.name.includes(activity.title));
   }
 
   if (filters.tag?.length) {
-    activities = activities.filter(({tag}) => filters.tag.includes(tag));
+    activities = activities.filter(({activity}) => filters.tag.includes(activity.tag));
   }
 
   if (filters.status?.length) {

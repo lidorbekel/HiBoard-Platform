@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgModule} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
@@ -19,7 +19,7 @@ import {AuthService} from "@hiboard/auth/state/auth.service";
   styleUrls: ['./join-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class JoinPageComponent implements OnInit {
+export class JoinPageComponent {
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -71,7 +71,7 @@ export class JoinPageComponent implements OnInit {
             this.authService.login(email, password)
               .pipe(
                 switchMap(() => {
-                    return this.navigationService.toDefaultByRole();
+                    return this.navigationService.toAdmin(true);
                   }
                 )
               ).subscribe(({
@@ -81,7 +81,6 @@ export class JoinPageComponent implements OnInit {
             }))
           },
           error: () => {
-            this.toast.error('Unable to create user, please try again later');
             this.loading = false;
             this.cdr.detectChanges();
           }
@@ -98,10 +97,6 @@ export class JoinPageComponent implements OnInit {
   toLogin() {
     this.navigationService.toLogin();
   }
-
-  ngOnInit(): void {
-  }
-
 }
 
 @NgModule({

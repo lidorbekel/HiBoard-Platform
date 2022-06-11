@@ -1,5 +1,7 @@
+<h1 class="font-bold">Managers</h1>
+
 <div class="flex items-center my-4">
-  <button mat-stroked-button (click)="openCreateEmployeeDialog()" class="flex-align-center pl-0">
+  <button mat-raised-button (click)="openCreateEmployeeDialog()" color="primary" class="flex-align-center pl-0">
     <mat-icon>add</mat-icon>
     <span>Add Manager</span>
   </button>
@@ -49,17 +51,6 @@
     <mat-cell *matCellDef="let element">{{ element.department }}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="done">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
-    >Activities Done
-    </mat-header-cell
-    >
-    <mat-cell *matCellDef="let element"
-    >{{ element.done ? element.done : 0 }} %
-    </mat-cell
-    >
-  </ng-container>
-
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
@@ -82,6 +73,6 @@
 
   <mat-footer-row
     *matFooterRowDef="['loading']"
-    [ngClass]="{ hide: dataSource.data.length }"
+    [ngClass]="{ hide: !loading || dataSource.data.length }"
   ></mat-footer-row>
 </table>

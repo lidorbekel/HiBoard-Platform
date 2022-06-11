@@ -11,6 +11,8 @@ export namespace User {
     role: Role;
     companyId: string;
     department: string;
+    totalActivities: number;
+    completedActivities: number;
     done: number
   }
 

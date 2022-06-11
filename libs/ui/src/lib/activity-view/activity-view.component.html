@@ -1,22 +1,22 @@
 <mat-card class="activity-view-card" *ngIf="!loading">
   <div class="flex justify-between">
-    <p class="font-bold text20 mb-4">{{ activity.title }}</p>
+    <p class="font-bold text20 mb-4">{{ activity.activity.title }}</p>
 
-    <mat-chip color="accent" selected>{{ activity.tag }}</mat-chip>
+    <mat-chip class="tag">{{ activity.activity.tag }}</mat-chip>
   </div>
 
   <p
     class="text14 light-grey mb-4 description"
-    [tippy]="activity.description"
+    [tippy]="activity.activity.description"
     placement="top-start"
-  >{{ activity.description }}</p>
+  >{{ activity.activity.description }}</p>
 
   <div class="flex justify-between">
     <mat-chip
       selected
-      [ngClass]="activity.status"
+      [ngClass]="activity.status.toString()"
     >
-      {{ activity.status }}
+      {{ activity.status === 'InProgress' ? 'In Progress' : activity.status }}
     </mat-chip>
 
     <button

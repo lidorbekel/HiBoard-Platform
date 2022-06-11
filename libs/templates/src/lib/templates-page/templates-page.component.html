@@ -1,0 +1,93 @@
+<mat-drawer-container class="h-full">
+  <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end" (closedStart)="onClose()">
+    <hbd-add-activity-sidebar (closeSideBar)="onTemplatesChange($event, drawer)"
+                              [isTemplates]="true"
+                              [sidenavClose]="sidenavClose"
+    ></hbd-add-activity-sidebar>
+  </mat-drawer>
+
+  <div class="flex-col w-2/3">
+    <h1 class="font-bold"> {{ activeUserDepartment }} Templates</h1>
+
+    <div class="flex items-center my-4">
+      <mat-form-field appearance="outline" class="flex-1">
+        <input
+          matInput
+          placeholder="Search"
+          #filter
+          autocomplete="off"
+          (keyup)="applyFilter()"
+        />
+        <button
+          mat-button
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          *ngIf="filter.value"
+          (click)="onSearchClear()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <section>
+        <button mat-raised-button color="primary" class="flex-align-center pl-0 add-template-button"
+                (click)="openAddTemplateDialog()">
+          <mat-icon>add</mat-icon>
+          <span>Add Template</span>
+        </button>
+
+        <button mat-stroked-button color="primary" class="flex-align-center pl-0"
+                (click)="drawer.open()"
+
+        >
+          <mat-icon>add</mat-icon>
+          <span>Add Activity</span>
+        </button>
+      </section>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="w-full" matSort>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Name
+        </mat-header-cell
+        >
+        <mat-cell *matCellDef="let element" (click)="navigateToTemplate(element)"
+        >{{
+          element.name
+          }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="openEditTemplateDialog(element)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="onDeleteTemplate(element)">
+            <mat-icon class="delete-icon">delete_outline</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef> Loading data...</mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+      <mat-row
+        *matRowDef="let element; columns: displayedColumns"
+      ></mat-row>
+
+      <mat-footer-row
+        *matFooterRowDef="['loading']"
+        [ngClass]="{ hide: !loading || dataSource.data.length }"
+      ></mat-footer-row>
+    </table>
+  </div>
+</mat-drawer-container>
+
+

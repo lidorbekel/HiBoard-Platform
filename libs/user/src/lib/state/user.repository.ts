@@ -37,6 +37,18 @@ export class UserRepository {
     return this.getCurrentUser()!.id;
   }
 
+  get totalActivities() {
+    return this.getCurrentUser()!.totalActivities;
+  }
+
+  get completedActivities() {
+    return this.getCurrentUser()!.completedActivities;
+  }
+
+  isEmployee(): boolean {
+    return this.getCurrentUser()!.role === 'Employee';
+  }
+
   setLoading(isLoading: boolean) {
     store.update((state) => ({
       ...state,

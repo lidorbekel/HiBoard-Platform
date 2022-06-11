@@ -2,21 +2,28 @@ import {BaseResponse} from "@hiboard/api/api.types";
 
 export namespace Activities {
 
-  export interface Entity {
+  export interface InventoryEntity {
     id: string;
     title: string;
     description: string;
     tag: string;
-    status: ActivityStatus;
     estimation?: {
       weeks: number,
       days: number,
       hours: number
     },
-    // department: string;
   }
 
-  export interface Response extends BaseResponse<{ activities: Entity[] }> {
+  export interface Entity {
+    activity: InventoryEntity;
+    id: string;
+    status: ActivityStatus;
+  }
+
+  export interface InventoryResponse extends BaseResponse<InventoryEntity> {
+  }
+
+  export interface Response extends BaseResponse<Entity[]> {
   }
 
   export interface PageQueryParams {
@@ -26,7 +33,7 @@ export namespace Activities {
   }
 }
 
-export type ActivityStatus = "backlog" | "in-progress" | "done";
+export type ActivityStatus = "Backlog" | "InProgress" | "Done";
 
 
 

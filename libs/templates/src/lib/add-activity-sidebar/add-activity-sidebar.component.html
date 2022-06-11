@@ -1,0 +1,147 @@
+<h1 class="font-bold mb-2">Add New Activity</h1>
+
+<form [formGroup]="form" errorTailor #formDirective="ngForm">
+  <section class="my-3">
+    <p class="text14 font-bold">Name</p>
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Name"
+        [controlErrorAnchor]="nameAnchor"
+        [controlErrorsOnBlur]="false"
+        #nameErrorTailor="errorTailor"
+      >
+    </mat-form-field>
+
+    <ng-template
+      controlErrorAnchor
+      #nameAnchor="controlErrorAnchor"
+    ></ng-template>
+  </section>
+
+  <section class="mb-4">
+    <p class="text14 font-bold">Description</p>
+    <textarea
+      class="description"
+      matInput
+      formControlName="description"
+      placeholder="Description..."
+      rows="3"
+      [controlErrorsOnBlur]="false"
+      #descErrorTailor="errorTailor"
+    ></textarea>
+
+    <ng-template
+      controlErrorAnchor
+      #descErrorTailor="controlErrorAnchor"
+    ></ng-template>
+  </section>
+
+  <section class="my-3">
+    <p class="text14 font-bold">Tag</p>
+    <mat-form-field appearance="outline" class="w-[100px]">
+      <input
+        matInput
+        formControlName="tag"
+        placeholder="Tag"
+        maxlength="10"
+      >
+    </mat-form-field>
+  </section>
+
+  <section class="mb-3">
+    <p class="text14 font-bold">Estimation</p>
+
+    <div class="flex-align-center">
+      <section class="mr-2">
+        <p class="text12 font-light">Weeks</p>
+        <mat-form-field appearance="outline" class="w-[50px]">
+          <input
+            matInput
+            type="number"
+            formControlName="weeks"
+            min="0"
+            max="4"
+            maxlength="1"
+          >
+        </mat-form-field>
+      </section>
+
+      <section class="mr-2">
+        <p class="text12 font-light">Days</p>
+        <mat-form-field appearance="outline" class="w-[50px]">
+          <input
+            matInput
+            type="number"
+            formControlName="days"
+            min="0"
+            max="6"
+            maxlength="1"
+          >
+        </mat-form-field>
+      </section>
+
+      <section class="mr-2">
+        <p class="text12 font-light">Hours</p>
+        <mat-form-field appearance="outline" class="w-[70px]">
+          <input
+            matInput
+            type="number"
+            formControlName="hours"
+            min="0"
+            step="0.5"
+            max="23"
+            maxlength="2"
+          >
+        </mat-form-field>
+      </section>
+    </div>
+  </section>
+
+  <section class="mb-6" *ngIf="isTemplates">
+    <p class="text14 font-bold">Select Templates</p>
+
+    <mat-form-field appearance="outline" class=" w-3/4">
+      <mat-select formControlName="templates"
+                  multiple placeholder="Choose Template.s"
+                  disableOptionCentering
+                  panelClass="myPanelClass"
+                  [controlErrorAnchor]="selectAnchor"
+                  #selectErrorTailor="errorTailor"
+      >
+        <mat-select-trigger class="flex items-center h-full">
+          <mat-chip-list class="chip-list">
+            <mat-chip
+              *ngFor="let template of templatesControl.value?.slice(0, 2)"
+              [removable]="true"
+              (removed)="remove(templatesControl, template)"
+              color="primary"
+              selected
+            >
+              <span class="chip-text"> {{ template }}</span>
+
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+
+          <span *ngIf="templatesControl.value?.length > 3" class="primary ml-1">
+                +{{templatesControl.value.length - 3}} more
+              </span>
+        </mat-select-trigger>
+        <mat-option (click)="selectAll()" value="Select All">Select All</mat-option>
+
+        <mat-option *ngFor="let template of templatesNames" [value]="template">{{template}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <ng-template
+      controlErrorAnchor
+      #selectAnchor="controlErrorAnchor"
+    ></ng-template>
+
+  </section>
+
+
+  <button mat-raised-button color="primary" class="w-full" (click)="onSave()">Save</button>
+</form>

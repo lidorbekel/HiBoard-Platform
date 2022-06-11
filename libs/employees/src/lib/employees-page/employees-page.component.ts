@@ -11,17 +11,22 @@ import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {MatDialog} from "@angular/material/dialog";
 import {HotToastService} from "@ngneat/hot-toast";
-import {CreateUserDialogComponent,} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
+import {
+  CreateUserDialogComponent,
+  CreateUserDialogData,
+} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
 import {UserService} from "../../../../user/src/lib/state/user.service";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
-import {UntilDestroy} from "@ngneat/until-destroy";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {EmployeesService} from "@hiboard/employees/state/employees.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {User} from "../../../../user/src/users.types";
 import {MatSort} from "@angular/material/sort";
-import {MatPaginator} from "@angular/material/paginator";
 import {FormControl, FormsModule} from "@angular/forms";
 import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.component";
+import {Templates} from "../../../../templates/src/lib/templates.types";
+import {TemplatesService} from "../../../../templates/src/lib/state/templates.service";
+import {ActivitiesService} from "@hiboard/activities/state/activities.service";
 
 @UntilDestroy()
 @Component({
@@ -32,9 +37,10 @@ import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.
 })
 export class EmployeesPageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filter') filter: ElementRef;
   loading = false;
+
+  templates: Templates.Entity[] = [];
 
   search = new FormControl('');
 
@@ -47,14 +53,19 @@ export class EmployeesPageComponent implements OnInit {
               private employeesService: EmployeesService,
               private userService: UserService,
               private userRepo: UserRepository,
-              private cdr: ChangeDetectorRef
+              private cdr: ChangeDetectorRef,
+              private templatesService: TemplatesService,
+              private activitiesService: ActivitiesService
   ) {
   }
 
   ngOnInit(): void {
     this.loading = true;
 
-    this.employeesService.employees$.subscribe(employeesGridData => {
+    this.employeesService.employees$
+      .pipe(
+        untilDestroyed(this)
+      ).subscribe(employeesGridData => {
       if (employeesGridData) {
         this.loading = false;
         this.dataSource.data = employeesGridData;
@@ -63,6 +74,12 @@ export class EmployeesPageComponent implements OnInit {
     })
 
     this.employeesService.fetchEmployeesByManagerId(this.userRepo.userId);
+
+    this.templatesService.getTemplates().pipe(untilDestroyed(this)).subscribe(res => {
+      if (res.data) {
+        this.templates = res.data;
+      }
+    })
   }
 
   navigateToEmployee(employee: User.Entity) {
@@ -70,13 +87,20 @@ export class EmployeesPageComponent implements OnInit {
   }
 
   openCreateEmployeeDialog() {
-    const dialogRef = this.dialog.open(CreateUserDialogComponent, {
-      data: {role: 'Employee'}
+    const dialogRef = this.dialog.open<CreateUserDialogComponent, CreateUserDialogData>(CreateUserDialogComponent, {
+      data: {
+        role: 'Employee',
+        templates: this.templates
+      }
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.employeesService.addEmployee(res);
+        this.employeesService.addEmployee(res.data);
+        if (res.templateId) {
+          this.activitiesService.assignTemplateToEmployee(res.data.id, res.templateId).subscribe();
+        }
+
         this.cdr.detectChanges();
         this.toast.success('Employee added successfully')
       }
@@ -95,9 +119,8 @@ export class EmployeesPageComponent implements OnInit {
   onDelete(user: User.Entity) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
-    dialogRef.afterClosed().subscribe(confirm => {
+    dialogRef.afterClosed().pipe(untilDestroyed(this)).subscribe(confirm => {
       if (confirm) {
-        console.log('Im in')
         this.employeesService.deleteEmployee(user.id)
           .subscribe({
             next: () => {

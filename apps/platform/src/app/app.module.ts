@@ -16,6 +16,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {popperVariation, TippyModule, tooltipVariation} from '@ngneat/helipopper';
 import {CoreModule} from "@hiboard/core/core.module";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {ElfNgRouterStoreModule} from "@ngneat/elf-ng-router-store";
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
     MaterialModule,
     HttpClientModule,
     ApiModule,
+    ElfNgRouterStoreModule,
     NgxSkeletonLoaderModule.forRoot({
       animation: 'pulse',
       theme: {
