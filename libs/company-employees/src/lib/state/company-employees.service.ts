@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../../../user/src/users.types';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, first, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UserService } from '../../../../user/src/lib/state/user.service';
 
@@ -22,9 +22,10 @@ export class CompanyEmployeesService {
 
   fetchEmployeesByCompanyId(companyId: string) {
     return this.http
-      .get<User.UsersResponse>(CompanyEmployeesService.employeesUrl(companyId))
+      .get<any>(CompanyEmployeesService.employeesUrl(companyId))
+      .pipe(first())
       .subscribe((res) => {
-        this.employees.next(res.data);
+        this.employees.next(res.data.users);
       });
   }
 }

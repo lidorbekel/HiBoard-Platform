@@ -69,11 +69,18 @@ export class CompanyEmployeesPageComponent implements OnInit {
       ),
       switchMap(() => this.companyEmployeesService.employees$),
       filter((employeesData) => !!employeesData),
-      pluck('users'),
-      tap((users) => console.log(users)),
+      tap((users: User.Entity[]) => (this.dataSource.data = users)),
       tap(() => (this.loading = false)),
       tap(() => this.cdr.detectChanges())
     );
+
+    this.dataSource.filterPredicate = (data: User.Entity, filter: string) => {
+      return (
+        data.email?.trim().toLowerCase().includes(filter) ||
+        data.firstName?.trim().toLowerCase().includes(filter) ||
+        data.lastName?.trim().toLowerCase().includes(filter)
+      );
+    };
   }
 
   onSearchClear() {
