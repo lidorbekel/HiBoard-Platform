@@ -5,12 +5,20 @@
 </div>
 
 <div *ngIf="!activities?.loading">
-  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <hbd-activity-view
-      *ngFor="let activity of filteredActivities"
-      [activity]="activity"
-      class="transition-transform transform hover:scale-105 duration-300 ease-in-out"
-    ></hbd-activity-view>
+
+  <div *ngFor="let week of weeks" class="mb-4">
+    <div class="flex items-center mb-4">
+      <p class="text14 font-bold flex mr-4 light-grey">{{'Week ' + (week + 1)  }}</p>
+      <hr class="w-[95%]">
+    </div>
+
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <hbd-activity-view
+        *ngFor="let activity of getFilteredActivitiesByWeek(week)"
+        [activity]="activity"
+        class="transition-transform transform hover:scale-105 duration-300 ease-in-out"
+      ></hbd-activity-view>
+    </div>
   </div>
 </div>
 

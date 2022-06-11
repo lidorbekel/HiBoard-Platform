@@ -36,6 +36,8 @@ export class ActivitiesPageComponent implements OnInit {
   activitiesPercentage: number;
   loadingArray = Array(9);
 
+  weeks: number[];
+
   filters = new FormGroup({
     name: new FormControl(),
     tag: new FormControl(),
@@ -78,6 +80,7 @@ export class ActivitiesPageComponent implements OnInit {
       })
     ).subscribe((filteredActivities) => {
       this.filteredActivities = filteredActivities;
+      this.weeks = [...new Set(filteredActivities.map((userActivity) => userActivity.activity.week))];
       this.cdr.detectChanges();
     })
 
@@ -95,6 +98,10 @@ export class ActivitiesPageComponent implements OnInit {
         this.activities = activities;
         this.cdr.markForCheck();
       })
+  }
+
+  getFilteredActivitiesByWeek(week: number) {
+    return this.filteredActivities.filter(({activity}) => activity.week == week)
   }
 }
 
