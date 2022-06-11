@@ -1,8 +1,8 @@
 <mat-card class="completed-activities-card">
   <div class="completed-activities-details mb-2">
-    <p class="font-bold">Completed activities</p>
+    <p class="font-bold">Completed Activities</p>
 
-    <p>{{ value }}%</p>
+    <p>{{ completed }} / {{total}}</p>
   </div>
-  <mat-progress-bar mode="determinate" [value]="value"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" [value]="percentage"></mat-progress-bar>
 </mat-card>

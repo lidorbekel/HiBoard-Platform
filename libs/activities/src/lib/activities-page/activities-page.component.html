@@ -1,11 +1,10 @@
 <div class="flex-align-center justify-between mb-8 w-full">
   <hbd-activities-filters
     [formGroup]="filters" [activities]="activities"></hbd-activities-filters>
-  <hbd-completed-activities
-    [value]="completedActivitiesPercent"></hbd-completed-activities>
+  <hbd-completed-activities></hbd-completed-activities>
 </div>
 
-<div *ngIf="!activities.loading">
+<div *ngIf="!activities?.loading">
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <hbd-activity-view
       *ngFor="let activity of filteredActivities"
@@ -15,7 +14,7 @@
   </div>
 </div>
 
-<div *ngIf="activities.loading">
+<div *ngIf="activities?.loading">
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <hbd-activity-view
       *ngFor="let activity of loadingArray"

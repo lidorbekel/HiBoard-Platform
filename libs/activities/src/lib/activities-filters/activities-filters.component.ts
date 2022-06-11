@@ -27,10 +27,12 @@ export class ActivitiesFiltersComponent implements OnInit {
   @Input() formGroup: FormGroup;
 
   @Input() set activities(activities: AsyncState<Activities.Response>) {
-    const data = activities.res?.data;
-    this.loading = isLoading(activities);
-    if (data) {
-      this.initFilterValues(data);
+    if (activities) {
+      const data = activities.res?.data;
+      this.loading = isLoading(activities);
+      if (data) {
+        this.initFilterValues(data);
+      }
     }
   }
 

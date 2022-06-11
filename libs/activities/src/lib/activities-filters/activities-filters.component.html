@@ -15,14 +15,14 @@
             color="primary"
             selected
           >
-            <span class="chip-text">        {{ name }}</span>
+            <span class="chip-text">{{ name }}</span>
 
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
 
-        <span *ngIf="nameControl.value?.length > 2" class="primary ml-1">
-                +{{nameControl.value.length - 2}}
+        <span *ngIf="nameControl.value?.length > 3" class="primary ml-1">
+                +{{nameControl.value.length - 3}}
               </span>
       </mat-select-trigger>
 

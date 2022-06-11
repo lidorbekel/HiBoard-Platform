@@ -72,7 +72,7 @@ export class CompanyUsersPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.companyUsersService.addManager(res);
+        this.companyUsersService.addManager(res.data);
         this.cdr.detectChanges();
         this.toast.success('Manager created successfully');
       }
