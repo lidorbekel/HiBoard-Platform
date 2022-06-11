@@ -23,8 +23,8 @@ export class ActivitiesService {
   ) {
   }
 
-  getActivities() {
-    return this.http.get<Activities.Response>(ActivitiesService.url(this.userRepo.getCurrentUser()!.id.toString())).pipe(
+  getActivities(id?: string) {
+    return this.http.get<Activities.Response>(ActivitiesService.url(id ?? this.userRepo.getCurrentUser()!.id.toString())).pipe(
       tap((res) => {
         this.activitiesRepo.setActivities(res.data);
       }),

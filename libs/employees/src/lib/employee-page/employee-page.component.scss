@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+.table-container {
+  max-height: 350px !important;
+  overflow: auto;
+}
+
+.mat-standard-chip {
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.Done {
+  background-color: forestgreen !important;
+}
+
+.InProgress {
+  background-color: darkorange !important;
+}
+
+.Backlog {
+  background-color: lightskyblue !important;
+}
+

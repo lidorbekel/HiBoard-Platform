@@ -47,6 +47,12 @@ export class NavigationComponent implements OnInit {
       role: 'Manager',
     },
     {
+      title: 'Templates',
+      icon: 'view_quilt',
+      link: 'templates',
+      role: 'Manager'
+    },
+    {
       title: 'Company Employees',
       icon: 'people_alt',
       link: 'company-employees',
@@ -64,12 +70,6 @@ export class NavigationComponent implements OnInit {
       link: 'admin/managers',
       role: 'Admin'
     },
-    {
-      title: 'Templates',
-      icon: 'view_quilt',
-      link: 'templates',
-      role: 'Manager'
-    }
   ];
 
   companyName: string;
