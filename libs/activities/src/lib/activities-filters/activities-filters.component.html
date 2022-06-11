@@ -30,6 +30,37 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field appearance="outline" [class.loading]="loading">
+    <mat-select formControlName="week"
+                multiple placeholder="All weeks"
+                [disabled]="loading"
+                disableOptionCentering
+                panelClass="myPanelClass"
+    >
+      <mat-select-trigger class="flex items-center h-full">
+        <mat-chip-list class="chip-list">
+          <mat-chip
+            *ngFor="let week of weekControl.value?.slice(0, 3)"
+            [removable]="true"
+            (removed)="remove(weekControl, week)"
+            color="primary"
+            selected
+          >
+            <span class="chip-text">{{ week }}</span>
+
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+
+        <span *ngIf="weekControl.value?.length > 3" class="primary ml-1">
+                +{{weekControl.value.length - 3}}
+              </span>
+      </mat-select-trigger>
+
+      <mat-option *ngFor="let week of weeks" [value]="week">{{week}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <mat-form-field appearance="outline">
     <mat-select
       formControlName="tag"

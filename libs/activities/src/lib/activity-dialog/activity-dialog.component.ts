@@ -51,9 +51,47 @@ export class ActivityDialogComponent implements OnInit {
       this.form.get('status')!.setValue(this.activity.status);
     }
 
+    const {days, hours} = this.decodeTimeEstimation(this.activity.activity.timeEstimation);
+
+    this.form.get('days')!.setValue(days);
+    this.form.get('hours')!.setValue(hours);
+
     this.form.get('tag')!.setValue(this.activity.activity.tag);
     this.form.get('description')!.setValue(this.activity.activity.description);
   }
+
+  decodeTimeEstimation(timeEstimation: string) {
+    const converted = timeEstimation.split('.');
+    let days;
+    let hours;
+    if (converted.length === 1) {
+      days = 0;
+      hours = converted[0].split(':')[0];
+    } else {
+      days = converted[0];
+      hours = converted[1]?.slice(0, 2);
+    }
+
+    return {
+      days,
+      hours
+    }
+  }
+
+  // parseTimeEstimation(estimation: string) {
+  //   const converted = estimation.split('.');
+  //   let days;
+  //   let hours;
+  //   if (converted.length === 1) {
+  //     days = 0;
+  //     hours = converted[0].split(':')[0];
+  //   } else {
+  //     days = converted[0];
+  //     hours = converted[1]?.slice(0, 2);
+  //   }
+  //   return `${days} ${days === '1' ? 'Day' : 'Days'},  ${hours} Hours`;
+  // }
+
 
   save() {
     if (this.form.invalid) {

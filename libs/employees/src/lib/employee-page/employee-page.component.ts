@@ -23,7 +23,7 @@ import {User} from "../../../../user/src/users.types";
 import {SubscribeModule} from "@ngneat/subscribe";
 import {MatSort} from "@angular/material/sort";
 import {CompletedactivitiesComponentModule} from "@hiboard/ui/completed-activities/completed-activities.component";
-import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 
 @UntilDestroy()
 @Component({
@@ -51,6 +51,7 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     private activitiesService: ActivitiesService,
     private employeesService: EmployeesService,
     private userRepo: UserRepository,
+    private navigationService: NavigationService
   ) {
   }
 
@@ -97,13 +98,15 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = this.filter.nativeElement.value.trim().toLowerCase();
   }
 
+  goBack() {
+    this.navigationService.toEmployees();
+  }
+
 }
 
 @NgModule({
   declarations: [EmployeePageComponent],
-  imports: [MaterialModule, CommonModule, SubscribeModule, CompletedactivitiesComponentModule,
-    NgxChartsModule
-  ],
+  imports: [MaterialModule, CommonModule, SubscribeModule, CompletedactivitiesComponentModule],
   exports: [EmployeePageComponent]
 })
 export class EmployeePageComponentModule {

@@ -110,12 +110,16 @@ export class TemplatePageComponent implements OnInit {
 
   parseTimeEstimation(estimation: string) {
     const converted = estimation.split('.');
+    let days;
+    let hours;
     if (converted.length === 1) {
-      return '--';
+      days = 0;
+      hours = converted[0].split(':')[0];
+    } else {
+      days = converted[0];
+      hours = converted[1]?.slice(0, 2);
     }
-    const days = converted[0];
-    const hours = converted[1]?.slice(0, 2);
-    return `${days} ${days === '1' ? 'Day' : 'Days'}, ${hours} Hours`;
+    return `${days} ${days === '1' ? 'Day' : 'Days'},  ${hours} Hours`;
   }
 
   onEditActivity(activity: Activities.InventoryEntity) {

@@ -33,15 +33,15 @@
   color: red;
 }
 
-.mat-column-tag {
-  flex: 0 0 20% !important;
-}
-
+.mat-column-tag,
 .mat-column-status {
   flex: 0 0 20% !important;
 }
 
-
 .mat-column-onTime {
   flex: 0 0 15% !important;
+}
+
+.see-all-btn {
+  margin-top: 16px;
 }
