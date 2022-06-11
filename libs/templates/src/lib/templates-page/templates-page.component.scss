@@ -33,3 +33,8 @@
 .mat-drawer-content {
   margin: 0 !important;
 }
+
+.table-container {
+  max-height: 450px !important;
+  overflow: auto;
+}

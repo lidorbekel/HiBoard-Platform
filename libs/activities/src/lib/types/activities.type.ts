@@ -7,17 +7,15 @@ export namespace Activities {
     title: string;
     description: string;
     tag: string;
-    estimation?: {
-      weeks: number,
-      days: number,
-      hours: number
-    },
+    week: number;
+    timeEstimation: string;
   }
 
   export interface Entity {
     activity: InventoryEntity;
     id: string;
     status: ActivityStatus;
+    isOnTime: boolean;
   }
 
   export interface InventoryResponse extends BaseResponse<InventoryEntity> {

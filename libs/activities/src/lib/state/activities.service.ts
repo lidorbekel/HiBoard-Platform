@@ -13,7 +13,7 @@ export class ActivitiesService {
   static inventoryUrl = 'inventory/activities';
 
   static url = (userId: string) => {
-    return `${userId}/activities`
+    return `user/${userId}/activities`
   }
 
   constructor(

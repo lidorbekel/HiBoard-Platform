@@ -41,10 +41,10 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
   search = new FormControl('');
 
-  displayedColumns: string[] = ['name', 'tag', 'status'];
+  displayedColumns: string[] = ['name', 'tag', 'status', 'onTime'];
 
   dataSource = new MatTableDataSource<Activities.Entity>();
-  
+
   constructor(
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
