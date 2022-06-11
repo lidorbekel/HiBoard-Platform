@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, NgModule, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, NgModule} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
@@ -6,7 +6,6 @@ import {CommonModule} from "@angular/common";
 import {AsyncState, isLoading} from "@ngneat/loadoff";
 import {Activities, ActivityStatus} from "@hiboard/activities/types/activities.type";
 import {Observable} from "rxjs";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'hbd-activities-filters',
@@ -14,15 +13,13 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
   styleUrls: ['./activities-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActivitiesFiltersComponent implements OnInit {
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+export class ActivitiesFiltersComponent {
   loading: boolean;
   names: string[];
+  weeks: string[];
   statuses: ActivityStatus[];
   tags: string[];
   filteredOptions: Observable<string[]>;
-
-  tagsControl = new FormControl();
 
   @Input() formGroup: FormGroup;
 
@@ -36,15 +33,12 @@ export class ActivitiesFiltersComponent implements OnInit {
     }
   }
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-
-  }
-
   get nameControl() {
     return this.formGroup.get('name') as FormControl;
+  }
+
+  get weekControl() {
+    return this.formGroup.get('week') as FormControl;
   }
 
   get tagControl() {
@@ -58,22 +52,11 @@ export class ActivitiesFiltersComponent implements OnInit {
   private initFilterValues(activities: Activities.Entity[]) {
     this.names = Array.from(new Set(activities.map(({activity}) => activity.title)));
 
+    this.weeks = [...new Set(activities.map((userActivity) => userActivity.activity.week.toString()))];
+
     this.tags = Array.from(new Set(activities.map(({activity}) => activity.tag)));
 
     this.statuses = Array.from(new Set(activities.map((activity) => activity.status)));
-  }
-
-  getSelectTriggerTitle(selectTrigger: keyof Activities.PageQueryParams) {
-    if (selectTrigger === 'name') {
-
-      return this.nameControl.value ? this.nameControl.value[0] : '';
-    }
-
-    if (selectTrigger === 'tag') {
-      return this.tagControl.value ? this.tagControl.value[0] : '';
-    }
-
-    return this.statusControl.value ? this.statusControl.value[0] : '';
   }
 
   remove(control: FormControl, value: string): void {
@@ -87,6 +70,7 @@ export class ActivitiesFiltersComponent implements OnInit {
 
   clearAll() {
     this.nameControl.reset();
+    this.weekControl.reset();
     this.tagControl.reset();
     this.statusControl.reset();
   }

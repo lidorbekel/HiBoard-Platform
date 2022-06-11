@@ -40,6 +40,7 @@ export class ActivitiesPageComponent implements OnInit {
 
   filters = new FormGroup({
     name: new FormControl(),
+    week: new FormControl(),
     tag: new FormControl(),
     status: new FormControl()
   });
@@ -48,6 +49,10 @@ export class ActivitiesPageComponent implements OnInit {
     .create<Activities.PageQueryParams>([
       {
         queryKey: 'name',
+        type: 'array'
+      },
+      {
+        queryKey: 'week',
         type: 'array'
       },
       {
