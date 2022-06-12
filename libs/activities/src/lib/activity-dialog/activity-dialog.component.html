@@ -16,31 +16,17 @@
       ></textarea>
     </section>
 
-    <section class="my-3">
-      <p class="text14 font-bold">Tag</p>
-      <mat-form-field appearance="outline" class="w-[100px]">
-        <input
-          matInput
-          formControlName="tag"
-          placeholder="Tag"
-          maxlength="10"
-        >
-      </mat-form-field>
-    </section>
+    <section class="mb-4">
+      <div class="flex items-center">
+        <p class="text14 font-bold">Estimation</p>
 
-    <section *ngIf="!data.isInventory" class="mb-3">
-      <p class="text14 font-bold">Status</p>
-      <mat-radio-group formControlName="status">
-        <mat-radio-button
-          *ngFor="let status of validStatuses"
-          [value]="status"
-          class="mr-3"
-        >{{ status === 'InProgress' ? 'In Progress' : status }}</mat-radio-button>
-      </mat-radio-group>
-    </section>
+        <div class="flex items-center ml-2">
+          💡
+          <p class="text12 ml-1 light-blue">The average time to complete this activity
+            is {{ userAverageTime }}</p>
 
-    <section class="mb-3">
-      <p class="text14 font-bold">Estimation</p>
+        </div>
+      </div>
 
       <div class="flex-align-center">
         <section class="mr-2">
@@ -53,6 +39,7 @@
               min="0"
               max="6"
               maxlength="1"
+              readonly
             >
           </mat-form-field>
         </section>
@@ -68,10 +55,35 @@
               step="0.5"
               max="23"
               maxlength="2"
+              readonly
             >
           </mat-form-field>
         </section>
       </div>
+    </section>
+
+    <section class="my-3">
+      <p class="text14 font-bold">Tag</p>
+      <mat-form-field appearance="outline" class="w-[100px]">
+        <input
+          matInput
+          formControlName="tag"
+          placeholder="Tag"
+          maxlength="10"
+          readonly
+        >
+      </mat-form-field>
+    </section>
+
+    <section *ngIf="!data.isInventory" class="mb-3">
+      <p class="text14 font-bold">Status</p>
+      <mat-radio-group formControlName="status">
+        <mat-radio-button
+          *ngFor="let status of validStatuses"
+          [value]="status"
+          class="mr-3"
+        >{{ status === 'InProgress' ? 'In Progress' : status }}</mat-radio-button>
+      </mat-radio-group>
     </section>
   </form>
 </mat-dialog-content>

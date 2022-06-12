@@ -7,6 +7,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
+import {decodeTimeEstimation} from '../activities-utils';
 
 export interface ActivityDialogData {
   activity: Activities.Entity;
@@ -22,8 +23,10 @@ export interface ActivityDialogData {
 export class ActivityDialogComponent implements OnInit {
   activity: Activities.Entity;
 
+  userAverageTime = '';
+
   form = new FormGroup({
-    tag: new FormControl('', [Validators.maxLength(10)]),
+    tag: new FormControl({disabled: true}),
     status: new FormControl(''),
     description: new FormControl(''),
     weeks: new FormControl('', [Validators.max(4)]),
@@ -44,6 +47,13 @@ export class ActivityDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormValues();
+    const {hours, days, minutes} = this.decodeTimeEstimation(this.activity.activity.userAverageTime);
+
+    this.userAverageTime = this.userAverageTime + `${days + ' ' + (days === '1' || days === '01' ? 'Day ' : 'Days ')}`;
+
+    this.userAverageTime = this.userAverageTime + `${hours + ' ' + (hours === '1' || hours === '01' ? 'Hour ' : 'Hours ')}`;
+
+    this.userAverageTime = this.userAverageTime + `${minutes + ' ' + (minutes === '1' || minutes === '01' ? 'Minute ' : 'Minutes ')}`;
   }
 
   initFormValues() {
@@ -61,37 +71,8 @@ export class ActivityDialogComponent implements OnInit {
   }
 
   decodeTimeEstimation(timeEstimation: string) {
-    const converted = timeEstimation.split('.');
-    let days;
-    let hours;
-    if (converted.length === 1) {
-      days = 0;
-      hours = converted[0].split(':')[0];
-    } else {
-      days = converted[0];
-      hours = converted[1]?.slice(0, 2);
-    }
-
-    return {
-      days,
-      hours
-    }
+    return decodeTimeEstimation(timeEstimation);
   }
-
-  // parseTimeEstimation(estimation: string) {
-  //   const converted = estimation.split('.');
-  //   let days;
-  //   let hours;
-  //   if (converted.length === 1) {
-  //     days = 0;
-  //     hours = converted[0].split(':')[0];
-  //   } else {
-  //     days = converted[0];
-  //     hours = converted[1]?.slice(0, 2);
-  //   }
-  //   return `${days} ${days === '1' ? 'Day' : 'Days'},  ${hours} Hours`;
-  // }
-
 
   save() {
     if (this.form.invalid) {

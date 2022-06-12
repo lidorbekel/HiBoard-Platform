@@ -36,7 +36,7 @@ export class ActivitiesService {
     return this.http.post(`${ActivitiesService.url(employeeId)}/assign/${templateId}`, {})
   }
 
-  createInventoryActivity(activity: Omit<Activities.InventoryEntity, 'id'>) {
+  createInventoryActivity(activity: Omit<Activities.InventoryEntity, 'id' | 'userAverageTime'>) {
     return this.http.post<Activities.InventoryResponse>(ActivitiesService.inventoryUrl, activity);
   }
 

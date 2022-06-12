@@ -8,32 +8,24 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { MaterialModule } from '@hiboard/ui/material/material.module';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ActivitiesService } from '@hiboard/activities/state/activities.service';
-import { AsyncState } from '@ngneat/loadoff';
-import { Activities } from '@hiboard/activities/types/activities.type';
-import { EmployeesService } from '@hiboard/employees/state/employees.service';
-import { UserRepository } from '../../../../user/src/lib/state/user.repository';
-import { FormControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../../user/src/users.types';
-import { SubscribeModule } from '@ngneat/subscribe';
-import { MatSort } from '@angular/material/sort';
-import { CompletedactivitiesComponentModule } from '@hiboard/ui/completed-activities/completed-activities.component';
-import { NavigationService } from '@hiboard/navigation/navigaiton.service';
-import { ChartType, ChartOptions } from 'chart.js';
-import {
-  SingleDataSet,
-  Label,
-  monkeyPatchChartJsLegend,
-  monkeyPatchChartJsTooltip,
-  BaseChartDirective,
-  ChartsModule,
-  Color,
-} from 'ng2-charts';
+import {MaterialModule} from '@hiboard/ui/material/material.module';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {ActivitiesService} from '@hiboard/activities/state/activities.service';
+import {AsyncState} from '@ngneat/loadoff';
+import {Activities} from '@hiboard/activities/types/activities.type';
+import {EmployeesService} from '@hiboard/employees/state/employees.service';
+import {UserRepository} from '../../../../user/src/lib/state/user.repository';
+import {FormControl} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material/table';
+import {User} from '../../../../user/src/users.types';
+import {SubscribeModule} from '@ngneat/subscribe';
+import {MatSort} from '@angular/material/sort';
+import {CompletedactivitiesComponentModule} from '@hiboard/ui/completed-activities/completed-activities.component';
+import {NavigationService} from '@hiboard/navigation/navigaiton.service';
+import {ChartOptions, ChartType} from 'chart.js';
+import {ChartsModule, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet,} from 'ng2-charts';
 
 @UntilDestroy()
 @Component({
@@ -55,7 +47,6 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<Activities.Entity>();
 
-  // chart
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -65,9 +56,9 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
   // public barChartColors: Color[] = [
-  //   { backgroundColor: 'green' },
-  //   { backgroundColor: 'red' },
-  //   { backgroundColor: 'yellow' },
+  //   {backgroundColor: 'green'},
+  //   {backgroundColor: 'red'},
+  //   {backgroundColor: 'yellow'},
   // ];
 
   constructor(
@@ -77,7 +68,8 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     private employeesService: EmployeesService,
     private userRepo: UserRepository,
     private navigationService: NavigationService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     monkeyPatchChartJsTooltip();
@@ -162,4 +154,5 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
   ],
   exports: [EmployeePageComponent],
 })
-export class EmployeePageComponentModule {}
+export class EmployeePageComponentModule {
+}
