@@ -88,7 +88,7 @@ export class EmployeesPageComponent implements OnInit {
     if (+total === 0) {
       return 0;
     }
-    return (100 * +completed) / +total;
+    return ((100 * +completed) / +total).toString().slice(0, 3);
   }
 
   navigateToEmployee(employee: User.Entity) {

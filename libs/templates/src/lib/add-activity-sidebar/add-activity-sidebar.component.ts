@@ -11,7 +11,6 @@ import {
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@hiboard/ui/material/material.module";
 import {FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ControlErrorsDirective, ErrorTailorModule} from "@ngneat/error-tailor";
 import {TemplatesService} from "../state/templates.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {Activities} from "@hiboard/activities/types/activities.type";
@@ -28,11 +27,6 @@ import {BehaviorSubject} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddActivitySidebarComponent implements OnInit {
-  @ViewChild('nameErrorTailor', {static: true}) nameErrorTailor: ControlErrorsDirective;
-
-  @ViewChild('selectErrorTailor', {static: true}) selectErrorTailor: ControlErrorsDirective;
-  @ViewChild('descErrorTailor', {static: true}) descErrorTailor: ControlErrorsDirective;
-
   @ViewChild('formDirective') formDirective: FormGroupDirective;
   @Output() closeSideBar = new EventEmitter();
 
@@ -45,11 +39,11 @@ export class AddActivitySidebarComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     week: new FormControl('', [Validators.required]),
-    tag: new FormControl('', [Validators.maxLength(10)]),
+    tag: new FormControl('', [Validators.maxLength(10), Validators.required]),
     description: new FormControl('', [Validators.required]),
     templates: new FormControl(''),
     days: new FormControl(0, [Validators.required]),
-    hours: new FormControl(0, [Validators.max(23)]),
+    hours: new FormControl(0, [Validators.required]),
   })
 
   templatesNames: string[] = [];
@@ -71,9 +65,6 @@ export class AddActivitySidebarComponent implements OnInit {
       if (isClosed) {
         this.form.reset();
         this.formDirective.resetForm();
-        this.nameErrorTailor.hideError();
-        this.descErrorTailor.hideError();
-        this.selectErrorTailor?.hideError();
       }
     })
   }
@@ -121,7 +112,7 @@ export class AddActivitySidebarComponent implements OnInit {
 
     const timeEstimation = `${this.form.get('days')!.value}.${this.form.get('hours')!.value}:00:00`;
 
-    const newActivity: Omit<Activities.InventoryEntity, 'id'> = {
+    const newActivity: Omit<Activities.InventoryEntity, 'id' | 'userAverageTime'> = {
       title: this.form.get('name')!.value,
       description: this.form.get('description')!.value,
       week: this.form.get('week')!.value,
@@ -155,7 +146,7 @@ export class AddActivitySidebarComponent implements OnInit {
 
 @NgModule({
   declarations: [AddActivitySidebarComponent],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, ErrorTailorModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
   exports: [AddActivitySidebarComponent]
 })
 export class AddActivitySidebarComponentModule {

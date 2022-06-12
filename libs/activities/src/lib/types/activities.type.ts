@@ -9,6 +9,7 @@ export namespace Activities {
     tag: string;
     week: number;
     timeEstimation: string;
+    userAverageTime: string;
   }
 
   export interface Entity {
