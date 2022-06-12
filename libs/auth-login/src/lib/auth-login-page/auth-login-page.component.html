@@ -8,6 +8,7 @@
         matInput
         formControlName="username"
         [controlErrorAnchor]="emailAnchor"
+        [controlErrorsOnBlur]="false"
       >
     </mat-form-field>
 
@@ -25,6 +26,7 @@
         matInput
         formControlName="password"
         [controlErrorAnchor]="passwordAnchor"
+        [controlErrorsOnBlur]="false"
       >
       <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
               [lazy]="true"
