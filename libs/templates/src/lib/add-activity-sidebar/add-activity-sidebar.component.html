@@ -1,6 +1,6 @@
 <h1 class="font-bold mb-2">Add New Activity</h1>
 
-<form [formGroup]="form" errorTailor #formDirective="ngForm">
+<form [formGroup]="form" #formDirective="ngForm">
   <section class="my-3">
     <p class="text14 font-bold">Name</p>
     <mat-form-field appearance="outline" class="w-full">
@@ -8,16 +8,8 @@
         matInput
         formControlName="name"
         placeholder="Name"
-        [controlErrorAnchor]="nameAnchor"
-        [controlErrorsOnBlur]="false"
-        #nameErrorTailor="errorTailor"
       >
     </mat-form-field>
-
-    <ng-template
-      controlErrorAnchor
-      #nameAnchor="controlErrorAnchor"
-    ></ng-template>
   </section>
 
   <section class="mb-4">
@@ -28,15 +20,7 @@
       formControlName="description"
       placeholder="Description..."
       rows="3"
-      [controlErrorAnchor]="descAnchor"
-      [controlErrorsOnBlur]="false"
-      #descErrorTailor="errorTailor"
     ></textarea>
-
-    <ng-template
-      controlErrorAnchor
-      #descAnchor="controlErrorAnchor"
-    ></ng-template>
   </section>
 
   <div class="flex my-3">
@@ -61,14 +45,8 @@
           formControlName="week"
           placeholder="Week"
           maxlength="2"
-          [controlErrorAnchor]="weekErrorTailor"
         >
       </mat-form-field>
-
-      <ng-template
-        controlErrorAnchor
-        #weekErrorTailor="controlErrorAnchor"
-      ></ng-template>
     </section>
   </div>
 
@@ -87,7 +65,6 @@
             min="0"
             max="6"
             maxlength="1"
-            [controlErrorAnchor]="daysErrorTailor"
           >
         </mat-form-field>
       </section>
@@ -107,11 +84,6 @@
         </mat-form-field>
       </section>
     </div>
-
-    <ng-template
-      controlErrorAnchor
-      #daysErrorTailor="controlErrorAnchor"
-    ></ng-template>
   </section>
 
   <section class="mb-6" *ngIf="isTemplates">
@@ -122,8 +94,6 @@
                   multiple placeholder="Choose Templates"
                   disableOptionCentering
                   panelClass="myPanelClass"
-                  [controlErrorAnchor]="selectAnchor"
-                  #selectErrorTailor="errorTailor"
       >
         <mat-select-trigger class="flex items-center h-full">
           <mat-chip-list class="chip-list">
@@ -149,14 +119,9 @@
         <mat-option *ngFor="let template of templatesNames" [value]="template">{{template}}</mat-option>
       </mat-select>
     </mat-form-field>
-
-    <ng-template
-      controlErrorAnchor
-      #selectAnchor="controlErrorAnchor"
-    ></ng-template>
-
   </section>
 
 
-  <button mat-raised-button color="primary" class="w-full" (click)="onSave()">Save</button>
+  <button mat-raised-button color="primary" class="w-full" (click)="onSave()" [disabled]="this.form.invalid">Save
+  </button>
 </form>
