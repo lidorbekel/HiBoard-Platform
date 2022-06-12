@@ -90,18 +90,7 @@
       ></mat-footer-row>
     </table>
   </div>
-
-  <button
-    mat-raised-button
-    color="primary"
-    class="flex-align-center pl-0 see-all-btn"
-    (click)="goBack()"
-  >
-    <mat-icon class="mr-1">arrow_back</mat-icon>
-    <span>All employees</span>
-  </button>
-
-  <div>
+  <div class="pie-chart">
     <canvas
       baseChart
       [data]="pieChartData"
@@ -112,4 +101,13 @@
     >
     </canvas>
   </div>
+  <button
+    mat-raised-button
+    color="primary"
+    class="flex-align-center pl-0 see-all-btn"
+    (click)="goBack()"
+  >
+    <mat-icon class="mr-1">arrow_back</mat-icon>
+    <span>All employees</span>
+  </button>
 </ng-container>

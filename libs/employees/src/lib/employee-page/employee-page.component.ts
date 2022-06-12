@@ -32,6 +32,7 @@ import {
   monkeyPatchChartJsTooltip,
   BaseChartDirective,
   ChartsModule,
+  Color,
 } from 'ng2-charts';
 
 @UntilDestroy()
@@ -63,6 +64,11 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
+  // public barChartColors: Color[] = [
+  //   { backgroundColor: 'green' },
+  //   { backgroundColor: 'red' },
+  //   { backgroundColor: 'yellow' },
+  // ];
 
   constructor(
     private route: ActivatedRoute,
