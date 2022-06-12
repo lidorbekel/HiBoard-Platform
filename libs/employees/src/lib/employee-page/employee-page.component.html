@@ -1,5 +1,7 @@
 <ng-container *ngIf="employee">
-  <h1 class="font-bold">{{ employee.firstName + ' ' + employee.lastName }} Activities</h1>
+  <h1 class="font-bold">
+    {{ employee.firstName + ' ' + employee.lastName }} Activities
+  </h1>
 
   <div class="flex w-[50%] items-center my-4 justify-between">
     <mat-form-field appearance="outline" class="w-[400px]">
@@ -27,47 +29,45 @@
     <table mat-table [dataSource]="dataSource" class="w-[60%]" matSort>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Name
-        </mat-header-cell
-        >
+          >Name
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">{{
           element.activity.title
-          }}</mat-cell>
+        }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="tag">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Tag
-        </mat-header-cell
-        >
+          >Tag
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">{{
           element.activity.tag
-          }}</mat-cell>
+        }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Status
-        </mat-header-cell
-        >
+          >Status
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-chip
-            selected
-            [ngClass]="element.status.toString()"
-          >
-            {{ element.status === 'InProgress' ? 'In Progress' : element.status }}
+          <mat-chip selected [ngClass]="element.status.toString()">
+            {{
+              element.status === 'InProgress' ? 'In Progress' : element.status
+            }}
           </mat-chip>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="onTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Is On Time
-        </mat-header-cell
+          >Is On Time
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let element"
+          [class.on-time]="element.isOnTime"
+          [class.not-on-time]="!element.isOnTime"
         >
-        <mat-cell *matCellDef="let element" [class.on-time]="element.isOnTime" [class.not-on-time]="!element.isOnTime">
-          <mat-icon
-            *ngIf="element.status !== 'Backlog'">
+          <mat-icon *ngIf="element.status !== 'Backlog'">
             {{ element.isOnTime ? 'check_circle_outline' : 'highlight_remove' }}
           </mat-icon>
         </mat-cell>
@@ -91,4 +91,15 @@
     </table>
   </div>
 
+  <div>
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+    >
+    </canvas>
+  </div>
 </ng-container>
