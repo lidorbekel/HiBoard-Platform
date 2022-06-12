@@ -26,6 +26,7 @@ export namespace Activities {
 
   export interface PageQueryParams {
     name?: string;
+    week?: string;
     tag?: string;
     status?: string;
   }

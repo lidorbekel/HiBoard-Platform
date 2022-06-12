@@ -23,6 +23,7 @@ import { User } from '../../../../user/src/users.types';
 import { SubscribeModule } from '@ngneat/subscribe';
 import { MatSort } from '@angular/material/sort';
 import { CompletedactivitiesComponentModule } from '@hiboard/ui/completed-activities/completed-activities.component';
+import { NavigationService } from '@hiboard/navigation/navigaiton.service';
 import { ChartType, ChartOptions } from 'chart.js';
 import {
   SingleDataSet,
@@ -68,7 +69,8 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
     private activitiesService: ActivitiesService,
     private employeesService: EmployeesService,
-    private userRepo: UserRepository
+    private userRepo: UserRepository,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -137,16 +139,20 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
       .trim()
       .toLowerCase();
   }
+
+  goBack() {
+    this.navigationService.toEmployees();
+  }
 }
 
 @NgModule({
   declarations: [EmployeePageComponent],
   imports: [
-    ChartsModule,
     MaterialModule,
     CommonModule,
     SubscribeModule,
     CompletedactivitiesComponentModule,
+    ChartsModule,
   ],
   exports: [EmployeePageComponent],
 })
