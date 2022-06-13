@@ -30,30 +30,30 @@
       <table mat-table [dataSource]="dataSource" matSort class="w-full">
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Name
+            >Name
           </mat-header-cell>
           <mat-cell *matCellDef="let element">{{
             element.activity.title
-            }}</mat-cell>
+          }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="tag">
           <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Tag
+            >Tag
           </mat-header-cell>
           <mat-cell *matCellDef="let element">{{
             element.activity.tag
-            }}</mat-cell>
+          }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Status
+            >Status
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <mat-chip selected [ngClass]="element.status.toString()">
               {{
-              element.status === 'InProgress' ? 'In Progress' : element.status
+                element.status === 'InProgress' ? 'In Progress' : element.status
               }}
             </mat-chip>
           </mat-cell>
@@ -61,7 +61,7 @@
 
         <ng-container matColumnDef="onTime">
           <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Is On Time
+            >Is On Time
           </mat-header-cell>
           <mat-cell
             *matCellDef="let element"
@@ -69,7 +69,9 @@
             [class.not-on-time]="!element.isOnTime"
           >
             <mat-icon *ngIf="element.status !== 'Backlog'">
-              {{ element.isOnTime ? 'check_circle_outline' : 'highlight_remove' }}
+              {{
+                element.isOnTime ? 'check_circle_outline' : 'highlight_remove'
+              }}
             </mat-icon>
           </mat-cell>
         </ng-container>
@@ -97,6 +99,7 @@
         baseChart
         [data]="pieChartData"
         [labels]="pieChartLabels"
+        [colors]="pieChartColors"
         [chartType]="pieChartType"
         [options]="pieChartOptions"
         [plugins]="pieChartPlugins"
@@ -104,7 +107,6 @@
       </canvas>
     </div>
   </div>
-
 
   <button
     mat-raised-button
