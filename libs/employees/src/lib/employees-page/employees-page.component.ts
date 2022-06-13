@@ -5,36 +5,37 @@ import {
   ElementRef,
   NgModule,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {MaterialModule} from "@hiboard/ui/material/material.module";
-import {MatDialog} from "@angular/material/dialog";
-import {HotToastService} from "@ngneat/hot-toast";
+import { ChartsModule } from 'ng2-charts';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@hiboard/ui/material/material.module';
+import { MatDialog } from '@angular/material/dialog';
+import { HotToastService } from '@ngneat/hot-toast';
 import {
   CreateUserDialogComponent,
   CreateUserDialogData,
-} from "../../../../user/src/lib/create-user-dialog/create-user-dialog.component";
-import {UserService} from "../../../../user/src/lib/state/user.service";
-import {UserRepository} from "../../../../user/src/lib/state/user.repository";
-import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {EmployeesService} from "@hiboard/employees/state/employees.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {User} from "../../../../user/src/users.types";
-import {MatSort} from "@angular/material/sort";
-import {FormControl, FormsModule} from "@angular/forms";
-import {ConfirmDialogComponent} from "@hiboard/ui/confirm-dialog/confirm-dialog.component";
-import {Templates} from "../../../../templates/src/lib/templates.types";
-import {TemplatesService} from "../../../../templates/src/lib/state/templates.service";
-import {ActivitiesService} from "@hiboard/activities/state/activities.service";
-import {NavigationService} from "@hiboard/navigation/navigaiton.service";
+} from '../../../../user/src/lib/create-user-dialog/create-user-dialog.component';
+import { UserService } from '../../../../user/src/lib/state/user.service';
+import { UserRepository } from '../../../../user/src/lib/state/user.repository';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { EmployeesService } from '@hiboard/employees/state/employees.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { User } from '../../../../user/src/users.types';
+import { MatSort } from '@angular/material/sort';
+import { FormControl, FormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from '@hiboard/ui/confirm-dialog/confirm-dialog.component';
+import { Templates } from '../../../../templates/src/lib/templates.types';
+import { TemplatesService } from '../../../../templates/src/lib/state/templates.service';
+import { ActivitiesService } from '@hiboard/activities/state/activities.service';
+import { NavigationService } from '@hiboard/navigation/navigaiton.service';
 
 @UntilDestroy()
 @Component({
   selector: 'hbd-employees-page',
   templateUrl: './employees-page.component.html',
   styleUrls: ['./employees-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesPageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
@@ -45,43 +46,54 @@ export class EmployeesPageComponent implements OnInit {
 
   search = new FormControl('');
 
-  displayedColumns: string[] = ['fullName', 'email', 'departmentName', 'done', 'actions'];
+  displayedColumns: string[] = [
+    'fullName',
+    'email',
+    'departmentName',
+    'done',
+    'actions',
+  ];
 
   dataSource = new MatTableDataSource<User.Entity>();
 
-  constructor(private dialog: MatDialog,
-              private toast: HotToastService,
-              private employeesService: EmployeesService,
-              private userService: UserService,
-              private userRepo: UserRepository,
-              private cdr: ChangeDetectorRef,
-              private templatesService: TemplatesService,
-              private activitiesService: ActivitiesService,
-              private navigationService: NavigationService
-  ) {
-  }
+  constructor(
+    private dialog: MatDialog,
+    private toast: HotToastService,
+    private employeesService: EmployeesService,
+    private userService: UserService,
+    private userRepo: UserRepository,
+    private cdr: ChangeDetectorRef,
+    private templatesService: TemplatesService,
+    private activitiesService: ActivitiesService,
+    private navigationService: NavigationService
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
 
     this.employeesService.employees$
-      .pipe(
-        untilDestroyed(this)
-      ).subscribe(employeesGridData => {
-      if (employeesGridData) {
-        this.loading = false;
-        this.dataSource.data = employeesGridData;
-        this.cdr.detectChanges();
-      }
-    })
+      .pipe(untilDestroyed(this))
+      .subscribe((employeesGridData) => {
+        if (employeesGridData) {
+          this.loading = false;
+          this.dataSource.data = employeesGridData;
+          this.cdr.detectChanges();
+        }
+      });
 
-    this.employeesService.fetchEmployeesByManagerId(this.userRepo.userId).pipe(untilDestroyed(this)).subscribe();
+    this.employeesService
+      .fetchEmployeesByManagerId(this.userRepo.userId)
+      .pipe(untilDestroyed(this))
+      .subscribe();
 
-    this.templatesService.getTemplates().pipe(untilDestroyed(this)).subscribe(res => {
-      if (res.data) {
-        this.templates = res.data;
-      }
-    })
+    this.templatesService
+      .getTemplates()
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res.data) {
+          this.templates = res.data;
+        }
+      });
   }
 
   getActivitiesDone(total: string, completed: string) {
@@ -96,56 +108,64 @@ export class EmployeesPageComponent implements OnInit {
   }
 
   openCreateEmployeeDialog() {
-    const dialogRef = this.dialog.open<CreateUserDialogComponent, CreateUserDialogData>(CreateUserDialogComponent, {
+    const dialogRef = this.dialog.open<
+      CreateUserDialogComponent,
+      CreateUserDialogData
+    >(CreateUserDialogComponent, {
       data: {
         role: 'Employee',
-        templates: this.templates
-      }
+        templates: this.templates,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.employeesService.addEmployee(res.data);
         if (res.templateId) {
-          this.activitiesService.assignTemplateToEmployee(res.data.id, res.templateId).subscribe();
+          this.activitiesService
+            .assignTemplateToEmployee(res.data.id, res.templateId)
+            .subscribe();
         }
 
         this.cdr.detectChanges();
-        this.toast.success('Employee added successfully')
+        this.toast.success('Employee added successfully');
       }
-    })
+    });
   }
 
   onSearchClear() {
-    this.filter.nativeElement.value = "";
+    this.filter.nativeElement.value = '';
     this.applyFilter();
   }
 
   applyFilter() {
-    this.dataSource.filter = this.filter.nativeElement.value.trim().toLowerCase();
+    this.dataSource.filter = this.filter.nativeElement.value
+      .trim()
+      .toLowerCase();
   }
 
   onDelete(user: User.Entity) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
-    dialogRef.afterClosed().pipe(untilDestroyed(this)).subscribe(confirm => {
-      if (confirm) {
-        this.employeesService.deleteEmployee(user.id)
-          .subscribe({
+    dialogRef
+      .afterClosed()
+      .pipe(untilDestroyed(this))
+      .subscribe((confirm) => {
+        if (confirm) {
+          this.employeesService.deleteEmployee(user.id).subscribe({
             next: () => {
               this.toast.success('Employee deleted successfully');
               this.cdr.detectChanges();
             },
-          })
-      }
-    })
+          });
+        }
+      });
   }
 }
 
 @NgModule({
   declarations: [EmployeesPageComponent],
-  imports: [CommonModule, MaterialModule, FormsModule],
-  exports: [EmployeesPageComponent]
+  imports: [CommonModule, MaterialModule, FormsModule, ChartsModule],
+  exports: [EmployeesPageComponent],
 })
-export class EmployeesPageComponentModule {
-}
+export class EmployeesPageComponentModule {}
