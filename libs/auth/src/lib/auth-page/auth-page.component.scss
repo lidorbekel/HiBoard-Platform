@@ -8,12 +8,6 @@
   background-color: white;
 }
 
-.auth-container {
-  flex-basis: 450px;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.16), 0 3px 6px -1px rgba(0, 0, 0, 0.23);
-}
-
 ::ng-deep {
   .auth-form-container {
     width: min(100%, 330px);
@@ -35,12 +29,12 @@
 .auth-container {
   border-radius: 10px;
   box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.16), 0 3px 6px -1px rgba(0, 0, 0, 0.23);
-  min-width: 400px;
+  width: 45%;
+  max-width: 450px;
+
 }
 
 img {
   height: 100Vh;
-  //width: 100vw;
-  //padding-left: 500px;
   flex-grow: 1;
 }

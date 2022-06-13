@@ -74,11 +74,7 @@ export class JoinPageComponent {
                     return this.navigationService.toAdmin(true);
                   }
                 )
-              ).subscribe(({
-              next: () => {
-                this.toast.success(`Welcome to HiBoard, ${company} !`)
-              }
-            }))
+              ).subscribe()
           },
           error: () => {
             this.loading = false;

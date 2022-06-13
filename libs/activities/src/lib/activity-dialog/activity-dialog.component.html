@@ -101,6 +101,7 @@
     mat-raised-button
     color="primary"
     type="submit"
+    [class.hbd-spinner]="loading"
     (click)="save()"
   >
     Save

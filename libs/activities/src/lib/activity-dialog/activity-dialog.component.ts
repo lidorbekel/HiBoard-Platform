@@ -22,7 +22,7 @@ export interface ActivityDialogData {
 })
 export class ActivityDialogComponent implements OnInit {
   activity: Activities.Entity;
-
+  loading = false;
   userAverageTime = '';
 
   form = new FormGroup({
@@ -78,6 +78,7 @@ export class ActivityDialogComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.loading = true;
 
     const updatedActivity: Activities.Entity = {
       ...this.activity,

@@ -4,6 +4,7 @@ import {AuthService} from "@hiboard/auth/state/auth.service";
 import {TippyModule} from "@ngneat/helipopper";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {SubscribeModule} from "@ngneat/subscribe";
+import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 
 @Component({
   selector: 'hbd-header',
@@ -12,7 +13,10 @@ import {SubscribeModule} from "@ngneat/subscribe";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  constructor(private auth: AuthService, private navigationService: NavigationService) {
+  user$ = this.userRepo.user$;
+
+  constructor(private auth: AuthService, private navigationService: NavigationService,
+              private userRepo: UserRepository) {
   }
 
   logout() {

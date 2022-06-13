@@ -1,30 +1,34 @@
-<mat-toolbar color="primary">
-  <img class="w-[200px] ml-3" src="assets/images/logo-white.svg" alt="HiBoard"/>
+<ng-container *subscribe="user$; let user">
+  <mat-toolbar color="primary">
+    <img class="w-[200px] ml-3" src="assets/images/logo-white.svg" alt="HiBoard"/>
 
-  <ul>
-    <li class="flex items-center">
-      <button
-        mat-button
-        [tippy]="menu"
-        variation="popper"
-        placement="bottom-end"
-        class="flex items-center"
-      >
-        <mat-icon>person_outline</mat-icon>
+    <ul>
+      <li class="flex">
+        <p class="text16 font-normal self-end">Hi, {{ user!.firstName + ' ' + user!.lastName }}</p>
+        <button
+          mat-button
+          [tippy]="menu"
+          variation="popper"
+          placement="bottom-end"
+          class="flex items-center"
+        >
+          <mat-icon>person_outline</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </mat-toolbar>
+
+  <ng-template #menu let-hide>
+    <mat-nav-list>
+      <button mat-list-item (click)="toProfile()">
+        <mat-icon class="mr-4">account_box</mat-icon>
+        Profile
       </button>
-    </li>
-  </ul>
-</mat-toolbar>
+      <button mat-list-item (click)="logout()">
+        <mat-icon class="mr-4">logout</mat-icon>
+        logout
+      </button>
+    </mat-nav-list>
+  </ng-template>
 
-<ng-template #menu let-hide>
-  <mat-nav-list>
-    <button mat-list-item (click)="toProfile()">
-      <mat-icon class="mr-4">account_box</mat-icon>
-      Profile
-    </button>
-    <button mat-list-item (click)="logout()">
-      <mat-icon class="mr-4">logout</mat-icon>
-      logout
-    </button>
-  </mat-nav-list>
-</ng-template>
+</ng-container>
