@@ -1,33 +1,35 @@
-<div class="flex-align-center justify-between mb-8 w-full">
+<div class="flex-align-center justify-between w-full sticky p-4" hbdStickyActive>
   <hbd-activities-filters
     [formGroup]="filters" [activities]="activities"></hbd-activities-filters>
   <hbd-completed-activities></hbd-completed-activities>
 </div>
 
 <div *ngIf="!activities?.loading">
+  <div class="p-4">
+    <div *ngFor="let week of weeks" class="mb-8">
+      <div class="flex items-center mb-4">
+        <p class="text14 font-bold flex mr-4 light-grey">{{'Week ' + week }}</p>
+        <hr class="flex-grow">
+      </div>
 
-  <div *ngFor="let week of weeks" class="mb-2">
-    <div class="flex items-center mb-4">
-      <p class="text14 font-bold flex mr-4 light-grey">{{'Week ' + week }}</p>
-      <hr class="flex-grow">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <hbd-activity-view
+          *ngFor="let activity of getFilteredActivitiesByWeek(week)"
+          [activity]="activity"
+          class="transition-transform transform hover:scale-105 duration-300 ease-in-out"
+        ></hbd-activity-view>
+      </div>
     </div>
+  </div>
 
+  <div *ngIf="activities?.loading">
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <hbd-activity-view
-        *ngFor="let activity of getFilteredActivitiesByWeek(week)"
+        *ngFor="let activity of loadingArray"
         [activity]="activity"
-        class="transition-transform transform hover:scale-105 duration-300 ease-in-out"
+        [loading]="true"
       ></hbd-activity-view>
     </div>
   </div>
 </div>
 
-<div *ngIf="activities?.loading">
-  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <hbd-activity-view
-      *ngFor="let activity of loadingArray"
-      [activity]="activity"
-      [loading]="true"
-    ></hbd-activity-view>
-  </div>
-</div>

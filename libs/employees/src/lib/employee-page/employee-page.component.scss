@@ -1,9 +1,10 @@
 :host {
   display: block;
+  padding: 16px;
 }
 
 .table-container {
-  max-height: 500px !important;
+  max-height: 400px !important;
   overflow: auto;
 }
 

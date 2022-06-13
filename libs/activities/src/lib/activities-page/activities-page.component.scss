@@ -1,3 +1,14 @@
 :host {
   display: block;
 }
+
+.sticky {
+  top: -0.1px;
+  transition: box-shadow .2s;
+  background-color: #fafafa;
+}
+
+.sticky-active {
+  box-shadow: 0 0px 4px 0 #b2bec4;
+  z-index: 1;
+}

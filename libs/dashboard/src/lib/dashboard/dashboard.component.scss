@@ -4,8 +4,11 @@
 }
 
 mat-drawer-container {
-  height: 100%;
+  height: calc(100vh - 64px);
+  flex: 1;
+  overflow-y: auto;
 }
+
 
 mat-drawer {
   position: fixed !important;
@@ -13,6 +16,6 @@ mat-drawer {
 }
 
 mat-drawer-content {
-  padding: 20px;
+  overflow: auto;
+  flex: 1 1 0%;
 }
-

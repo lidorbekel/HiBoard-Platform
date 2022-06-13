@@ -17,6 +17,7 @@ import {AsyncState} from '@ngneat/loadoff';
 import {Activities} from '@hiboard/activities/types/activities.type';
 import {EmployeesService} from '@hiboard/employees/state/employees.service';
 import {UserRepository} from '../../../../user/src/lib/state/user.repository';
+import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import {FormControl} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {User} from '../../../../user/src/users.types';
@@ -49,17 +50,44 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      datalabels: {
+        formatter: (value: any, ctx: any) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          let totalCount = 0;
+          if (data?.datasets) {
+            data.datasets[0]['data']?.forEach((data) => {
+              totalCount += data ? +data : 0;
+            });
+
+            const index: any = '' + tooltipItem.index;
+            const count: any = data.datasets ? data.datasets[0]['data'] : [];
+            return `${(count[index] * 100) / totalCount}% (${count[index]})`;
+          }
+
+          return '';
+        },
+      },
+    },
   };
   public pieChartLabels: Label[] = [];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
-  public pieChartPlugins = [];
-  // public barChartColors: Color[] = [
-  //   {backgroundColor: 'green'},
-  //   {backgroundColor: 'red'},
-  //   {backgroundColor: 'yellow'},
-  // ];
+  public pieChartPlugins = [DatalabelsPlugin];
+  public pieChartColors: any = [{backgroundColor: []}];
 
   constructor(
     private route: ActivatedRoute,
@@ -118,8 +146,17 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
           }
 
           this.pieChartLabels = Array.from(dataMap.keys());
+          const labelMap = new Map<string, string>();
+          labelMap.set('Done', 'rgba(38, 166, 91, 1)');
+          labelMap.set('InProgress', 'rgba(230, 126, 34, 1)');
+          labelMap.set('Backlog', 'rgba(137, 196, 244, 1)');
+
           this.pieChartData = this.pieChartLabels.map((key) =>
             dataMap.get('' + key)
+          );
+
+          this.pieChartColors[0]['backgroundColor'] = this.pieChartLabels.map(
+            (key) => labelMap.get('' + key)
           );
 
           this.cdr.markForCheck();

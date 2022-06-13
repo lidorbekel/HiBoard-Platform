@@ -15,6 +15,7 @@ import {CompletedactivitiesComponentModule} from "@hiboard/ui/completed-activiti
 import {BindQueryParamsFactory} from "@ngneat/bind-query-params";
 import {map, startWith, switchMap} from "rxjs";
 import {activitiesFilters} from "@hiboard/activities/activities-page/activities-page-filters";
+import {StickyActiveDirectiveModule} from "@hiboard/ui/sticky-active.directive";
 
 @UntilDestroy()
 @Component({
@@ -119,6 +120,7 @@ export class ActivitiesPageComponent implements OnInit {
     ActivitiesFiltersComponentModule,
     SubscribeModule,
     CompletedactivitiesComponentModule,
+    StickyActiveDirectiveModule
   ],
   exports: [ActivitiesPageComponent]
 })
