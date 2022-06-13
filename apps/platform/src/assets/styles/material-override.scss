@@ -26,11 +26,13 @@ mat-label {
 
 .mat-form-field-wrapper {
   padding-bottom: 0 !important;
-  //margin: 0 !important;
 }
 
 .nav-mat-drawer {
   width: 250px !important;
+  z-index: 2;
+  box-shadow: 0 0 4px #b2bec4;
+  overflow-y: auto;
 }
 
 .mat-list-base {
@@ -73,10 +75,6 @@ mat-label {
   background-color: white;
 }
 
-.mat-drawer-content {
-  overflow: hidden !important;
-}
-
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: transparent !important;
 }
@@ -95,4 +93,8 @@ mat-label {
 .mat-chip-list-wrapper {
   flex-wrap: nowrap !important;
   max-width: 100% !important;
+}
+
+mat-drawer-container {
+  //background-color: whitesmoke !important;
 }

@@ -1,5 +1,10 @@
 :host {
   display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: #b2bec4 0 0 4px 0 !important;
 }
 
 ul li {

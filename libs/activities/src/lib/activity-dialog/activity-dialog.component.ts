@@ -8,6 +8,7 @@ import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 import {ActivitiesService} from "@hiboard/activities/state/activities.service";
 import {decodeTimeEstimation} from '../activities-utils';
+import {HotToastService} from "@ngneat/hot-toast";
 
 export interface ActivityDialogData {
   activity: Activities.Entity;
@@ -22,7 +23,7 @@ export interface ActivityDialogData {
 })
 export class ActivityDialogComponent implements OnInit {
   activity: Activities.Entity;
-
+  loading = false;
   userAverageTime = '';
 
   form = new FormGroup({
@@ -41,6 +42,7 @@ export class ActivityDialogComponent implements OnInit {
     private userRepo: UserRepository,
     private activitiesService: ActivitiesService,
     public dialogRef: MatDialogRef<ActivityDialogComponent>,
+    private toast: HotToastService
   ) {
     this.activity = data.activity;
   }
@@ -78,6 +80,7 @@ export class ActivityDialogComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.loading = true;
 
     const updatedActivity: Activities.Entity = {
       ...this.activity,
@@ -85,7 +88,12 @@ export class ActivityDialogComponent implements OnInit {
     }
 
     this.activitiesService.updateUserActivity(updatedActivity).subscribe(({
-      next: () => this.dialogRef.close()
+      next: () => {
+        if (updatedActivity.status === 'Done') {
+          this.toast.success('Well Done !')
+        }
+        this.dialogRef.close()
+      }
     }));
   }
 

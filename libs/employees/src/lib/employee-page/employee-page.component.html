@@ -1,5 +1,7 @@
 <ng-container *ngIf="employee">
-  <h1 class="font-bold">{{ employee.firstName + ' ' + employee.lastName }} Activities</h1>
+  <h1 class="font-bold">
+    {{ employee.firstName + ' ' + employee.lastName }} Activities
+  </h1>
 
   <div class="flex w-[50%] items-center my-4 justify-between">
     <mat-form-field appearance="outline" class="w-[400px]">
@@ -23,77 +25,96 @@
     </mat-form-field>
   </div>
 
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" class="w-[60%]" matSort>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Name
-        </mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">{{
-          element.activity.title
+  <div class="flex w-full">
+    <div class="table-container w-[60%]">
+      <table mat-table [dataSource]="dataSource" matSort class="w-full">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{
+            element.activity.title
           }}</mat-cell>
-      </ng-container>
+        </ng-container>
 
-      <ng-container matColumnDef="tag">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Tag
-        </mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">{{
-          element.activity.tag
+        <ng-container matColumnDef="tag">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Tag
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{
+            element.activity.tag
           }}</mat-cell>
-      </ng-container>
+        </ng-container>
 
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Status
-        </mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">
-          <mat-chip
-            selected
-            [ngClass]="element.status.toString()"
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Status
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-chip selected [ngClass]="element.status.toString()">
+              {{
+                element.status === 'InProgress' ? 'In Progress' : element.status
+              }}
+            </mat-chip>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="onTime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Is On Time
+          </mat-header-cell>
+          <mat-cell
+            *matCellDef="let element"
+            [class.on-time]="element.isOnTime"
+            [class.not-on-time]="!element.isOnTime"
           >
-            {{ element.status === 'InProgress' ? 'In Progress' : element.status }}
-          </mat-chip>
-        </mat-cell>
-      </ng-container>
+            <mat-icon *ngIf="element.status !== 'Backlog'">
+              {{
+                element.isOnTime ? 'check_circle_outline' : 'highlight_remove'
+              }}
+            </mat-icon>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="onTime">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Is On Time
-        </mat-header-cell
-        >
-        <mat-cell *matCellDef="let element" [class.on-time]="element.isOnTime" [class.not-on-time]="!element.isOnTime">
-          <mat-icon
-            *ngIf="element.status !== 'Backlog'">
-            {{ element.isOnTime ? 'check_circle_outline' : 'highlight_remove' }}
-          </mat-icon>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef> Loading data...</mat-footer-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="loading">
-        <mat-footer-cell *matFooterCellDef> Loading data...</mat-footer-cell>
-      </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row
+          *matRowDef="let element; columns: displayedColumns"
+          class="employee-row"
+        ></mat-row>
 
-      <mat-row
-        *matRowDef="let element; columns: displayedColumns"
-        class="employee-row"
-      ></mat-row>
+        <mat-footer-row
+          *matFooterRowDef="['loading']"
+          [ngClass]="{ hide: !loading }"
+        ></mat-footer-row>
+      </table>
+    </div>
 
-      <mat-footer-row
-        *matFooterRowDef="['loading']"
-        [ngClass]="{ hide: !loading }"
-      ></mat-footer-row>
-    </table>
+    <div class="w-[30%]">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [colors]="pieChartColors"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+      >
+      </canvas>
+    </div>
   </div>
 
-  <button mat-raised-button color="primary" class="flex-align-center pl-0 see-all-btn" (click)="goBack()">
+  <button
+    mat-raised-button
+    color="primary"
+    class="flex-align-center pl-0 see-all-btn"
+    (click)="goBack()"
+  >
     <mat-icon class="mr-1">arrow_back</mat-icon>
     <span>All employees</span>
   </button>
-
 </ng-container>

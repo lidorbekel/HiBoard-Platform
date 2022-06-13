@@ -1,11 +1,11 @@
 <div class="container">
+  <img src="assets/svg/logo-purple.svg" alt="" class="w-[250px] mb-8">
 
-  <h1 class="mb-10">Join <span class="font-bold primary">HiBoard</span> !</h1>
   <mat-card>
     <form [formGroup]="form" errorTailor class="form">
       <div class="details">
         <section class="w-[450px]">
-          <h2 class="text20 mb-6">Admin Information</h2>
+          <h2 class="text20 mb-6 font-bold">Admin Information</h2>
           <div class="flex mb-2 justify-between">
             <div>
               <p class="text14 font-bold">First Name</p>
@@ -15,6 +15,7 @@
                   formControlName="firstName"
                   placeholder="First Name"
                   [controlErrorAnchor]="nameAnchor"
+                  [controlErrorsOnBlur]="false"
                 >
               </mat-form-field>
 
@@ -32,6 +33,7 @@
                   formControlName="lastName"
                   placeholder="Last Name"
                   [controlErrorAnchor]="lastNameAnchor"
+                  [controlErrorsOnBlur]="false"
                 >
               </mat-form-field>
 
@@ -50,6 +52,7 @@
                 formControlName="email"
                 placeholder="Email Address"
                 [controlErrorAnchor]="emailAnchor"
+                [controlErrorsOnBlur]="false"
               >
             </mat-form-field>
 
@@ -68,6 +71,7 @@
                 formControlName="password"
                 placeholder="Password"
                 [controlErrorAnchor]="passwordAnchor"
+                [controlErrorsOnBlur]="false"
               >
               <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
                       [lazy]="true"
@@ -87,7 +91,7 @@
         <div class="vl mx-8"></div>
 
         <section class="w-[450px]">
-          <h2 class="text20 mb-6">Company Information</h2>
+          <h2 class="text20 mb-6 font-bold">Company Information</h2>
 
           <div class="w-full mb-2">
             <p class="text14 font-bold">Company Name</p>
@@ -97,6 +101,7 @@
                 formControlName="company"
                 placeholder="Company Name"
                 [controlErrorAnchor]="companyNameAnchor"
+                [controlErrorsOnBlur]="false"
               >
             </mat-form-field>
 
@@ -113,7 +118,7 @@
     </form>
   </mat-card>
 
-  <div class="w-full flex justify-center mt-8">
+  <div class="w-[450px] flex justify-center mt-8">
     <button mat-stroked-button color="primary" style="margin-right: 8px" (click)="toLogin()">
       Back to login
     </button>

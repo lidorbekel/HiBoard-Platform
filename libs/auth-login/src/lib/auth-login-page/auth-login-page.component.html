@@ -1,13 +1,16 @@
+<img src="assets/svg/logo-purple.svg" alt="" class="w-[150px] mb-4">
+
 <h1 class="auth-title mb-5">Log In to your Account</h1>
 
-<form [formGroup]="loginForm" errorTailor>
+<form [formGroup]="loginForm" errorTailor class="w-full">
   <div class="form-control">
-    <p class="text14 font-bold">Email</p>
+    <p class="text14 font-medium light-grey">Email</p>
     <mat-form-field appearance="outline" class="w-full">
       <input
         matInput
         formControlName="username"
         [controlErrorAnchor]="emailAnchor"
+        [controlErrorsOnBlur]="false"
       >
     </mat-form-field>
 
@@ -18,13 +21,14 @@
   </div>
 
   <div class="form-control">
-    <p class="text14 font-bold mr-1">Password</p>
+    <p class="text14 font-medium light-grey mt-1">Password</p>
     <mat-form-field appearance="outline" class="w-full">
       <input
         [type]="hidePassword ? 'password' : 'text'"
         matInput
         formControlName="password"
         [controlErrorAnchor]="passwordAnchor"
+        [controlErrorsOnBlur]="false"
       >
       <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
               [lazy]="true"
