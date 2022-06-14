@@ -23,6 +23,7 @@ import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {MatDrawer} from "@angular/material/sidenav";
 import {AddActivitySidebarComponentModule} from "../add-activity-sidebar/add-activity-sidebar.component";
 import {BehaviorSubject} from "rxjs";
+import {MatSort} from "@angular/material/sort";
 
 @UntilDestroy()
 @Component({
@@ -32,6 +33,8 @@ import {BehaviorSubject} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TemplatesPageComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+
   activeUserDepartment: string;
   loading = false;
   templates: Templates.Entity[] = []
@@ -39,7 +42,7 @@ export class TemplatesPageComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   dataSource = new MatTableDataSource<Templates.Entity>();
   search = new FormControl('');
-  displayedColumns: string[] = ['name', 'actions'];
+  displayedColumns: string[] = ['name', 'total', 'actions'];
 
   sidenavClose = new BehaviorSubject(true);
 
@@ -51,6 +54,10 @@ export class TemplatesPageComponent implements OnInit {
     private toast: HotToastService,
     private navigationService: NavigationService
   ) {
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {

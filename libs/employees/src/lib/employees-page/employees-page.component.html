@@ -28,7 +28,7 @@
 </div>
 
 <table mat-table [dataSource]="dataSource" class="w-full" matSort>
-  <ng-container matColumnDef="fullName">
+  <ng-container matColumnDef="firstName">
     <mat-header-cell *matHeaderCellDef mat-sort-header
     >Full Name
     </mat-header-cell
@@ -44,7 +44,7 @@
   </ng-container>
 
   <ng-container matColumnDef="departmentName">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
+    <mat-header-cell *matHeaderCellDef
     >Department
     </mat-header-cell
     >
@@ -52,10 +52,7 @@
   </ng-container>
 
   <ng-container matColumnDef="done">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
-    >Activities Done
-    </mat-header-cell
-    >
+    <mat-header-cell *matHeaderCellDef>Activities Done</mat-header-cell>
     <mat-cell *matCellDef="let element"
     >{{ getActivitiesDone(element.totalActivities, element.completedActivities) }} %
     </mat-cell

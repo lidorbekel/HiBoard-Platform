@@ -3,8 +3,11 @@
     <img class="w-[200px] ml-3" src="assets/images/logo-white.svg" alt="HiBoard"/>
 
     <ul>
-      <li class="flex">
-        <p class="text16 font-normal self-end">Hi, {{ user!.firstName + ' ' + user!.lastName }}</p>
+      <li class="flex items-center">
+        <span class="mr-2">🌞</span>
+        <mat-slide-toggle class="self-center" (click)="toggleTheme()"></mat-slide-toggle>
+        <span class="ml-1">🌛</span>
+        <p class="text16 font-normal self-end ml-4">Hi, {{ user!.firstName + ' ' + user!.lastName }}</p>
         <button
           mat-button
           [tippy]="menu"

@@ -1,7 +1,7 @@
 <ng-container *subscribe="activeTemplate$; let template">
   <ng-container *ngIf="template">
     <mat-drawer-container class="h-full">
-      <mat-drawer #drawer class="p-6 w-[450px]" mode="over" position="end" (closedStart)="onClose()">
+      <mat-drawer #drawer class="p-6 w-[450px] h-screen" mode="over" position="end" (closedStart)="onClose()">
         <hbd-add-activity-sidebar [isTemplates]="false"
                                   (closeSideBar)="onTemplateChange($event, drawer)"
                                   [sidenavClose]="sidenavClose"
