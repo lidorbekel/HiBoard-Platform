@@ -60,7 +60,7 @@ body {
 html[theme="dark-mode"] {
   hbd-dashboard {
     mat-drawer-container {
-      filter: invert(0.9) hue-rotate(180deg) !important;
+      filter: invert(0.9) hue-rotate(180deg);
 
       .nav-mat-drawer {
         top: 0;
