@@ -1,6 +1,8 @@
 <mat-card class="activity-view-card" *ngIf="!loading">
   <div class="flex justify-between">
-    <p class="font-bold text20 mb-4">{{ activity.activity.title }}</p>
+    <p class="font-bold text20 mb-4 description"
+       [tippy]="activity.activity.title"
+    >{{ activity.activity.title }}</p>
 
     <mat-chip class="tag">{{ activity.activity.tag }}</mat-chip>
   </div>

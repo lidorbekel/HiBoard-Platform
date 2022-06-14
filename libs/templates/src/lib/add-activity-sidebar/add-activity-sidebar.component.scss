@@ -1,17 +1,19 @@
 :host {
   display: block;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .description {
   margin-top: 2px;
-  width: 584px;
+  width: 80%;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #e5e7eb;
 }
 
 textarea {
-  resize: none;
+  resize: none !important;
 }
 
 .mat-standard-chip {

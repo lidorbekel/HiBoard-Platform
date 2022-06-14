@@ -25,6 +25,7 @@ export class ActivityDialogComponent implements OnInit {
   activity: Activities.Entity;
   loading = false;
   userAverageTime = '';
+  isAverage = false;
 
   form = new FormGroup({
     tag: new FormControl({disabled: true}),
@@ -50,12 +51,18 @@ export class ActivityDialogComponent implements OnInit {
   ngOnInit(): void {
     this.initFormValues();
     const {hours, days, minutes} = this.decodeTimeEstimation(this.activity.activity.userAverageTime);
+    
+    if (!(days === '0' && hours === '00' && minutes === '00')) {
+      this.isAverage = true;
 
-    this.userAverageTime = this.userAverageTime + `${days + ' ' + (days === '1' || days === '01' ? 'Day ' : 'Days ')}`;
+      this.userAverageTime = this.userAverageTime + `${days + ' ' + (days === '1' || days === '01' ? 'Day ' : 'Days ')}`;
 
-    this.userAverageTime = this.userAverageTime + `${hours + ' ' + (hours === '1' || hours === '01' ? 'Hour ' : 'Hours ')}`;
+      this.userAverageTime = this.userAverageTime + `${hours + ' ' + (hours === '1' || hours === '01' ? 'Hour ' : 'Hours ')}`;
 
-    this.userAverageTime = this.userAverageTime + `${minutes + ' ' + (minutes === '1' || minutes === '01' ? 'Minute ' : 'Minutes ')}`;
+      this.userAverageTime = this.userAverageTime + `${minutes + ' ' + (minutes === '1' || minutes === '01' ? 'Minute ' : 'Minutes ')}`;
+    }
+
+
   }
 
   initFormValues() {

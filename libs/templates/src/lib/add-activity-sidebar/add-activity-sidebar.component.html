@@ -3,7 +3,7 @@
 <form [formGroup]="form" #formDirective="ngForm">
   <section class="my-3">
     <p class="text14 font-bold">Name</p>
-    <mat-form-field appearance="outline" class="w-full">
+    <mat-form-field appearance="outline" class="w-[70%]">
       <input
         matInput
         formControlName="name"
@@ -15,7 +15,7 @@
   <section class="mb-4">
     <p class="text14 font-bold">Description</p>
     <textarea
-      class="description"
+      class="description resize-none"
       matInput
       formControlName="description"
       placeholder="Description..."

@@ -3,6 +3,7 @@ import {RouterRepository} from "@ngneat/elf-ng-router-store";
 import {MatDialog} from "@angular/material/dialog";
 import {WelcomeDialogComponent} from "@hiboard/dashboard/welcome-dialog/welcome-dialog.component";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {ThemeService} from "@hiboard/core/theme.service";
 
 @UntilDestroy()
 @Component({
@@ -15,8 +16,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private routerRepository: RouterRepository,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private themeService: ThemeService
   ) {
+    this.themeService.init();
   }
 
   ngOnInit(): void {

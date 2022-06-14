@@ -20,7 +20,7 @@
       <div class="flex items-center">
         <p class="text14 font-bold">Estimation</p>
 
-        <div class="flex items-center ml-2">
+        <div class="flex items-center ml-2" *ngIf="isAverage">
           💡
           <p class="text12 ml-1 light-blue">The average time to complete this activity
             is {{ userAverageTime }}</p>

@@ -20,6 +20,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 const modules = [
   MatButtonModule,
@@ -42,7 +43,8 @@ const modules = [
   MatExpansionModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

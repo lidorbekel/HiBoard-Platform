@@ -60,6 +60,17 @@
             }}</mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="total">
+          <mat-header-cell *matHeaderCellDef
+          >Total Activities
+          </mat-header-cell
+          >
+          <mat-cell *matCellDef="let element"
+          >{{
+            element.activities?.length
+            }}</mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let element">

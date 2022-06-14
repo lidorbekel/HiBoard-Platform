@@ -24,3 +24,114 @@ mat-nav-list {
 .mat-icon {
   vertical-align: middle;
 }
+
+
+* {
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+#toggle_checkbox {
+  display: none;
+}
+
+label {
+  top: -900px;
+  right: 0;
+  left: 0;
+  width: 60px;
+  height: 23px;
+  margin: 0 auto;
+  background-color: #4d4d4d;
+  border-radius: 56px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: 0.3s ease background-color;
+  overflow: hidden;
+}
+
+#star {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 15px;
+  height: 15px;
+  background-color: #FFBF00;;
+  transform: scale(1);
+  border-radius: 50%;
+  transition: 0.3s ease top, 0.3s ease left, 0.3s ease transform,
+  0.3s ease background-color;
+  z-index: 1;
+}
+
+#star-1 {
+  position: relative;
+}
+
+#star-2 {
+  position: absolute;
+  transform: rotateZ(36deg);
+}
+
+.star {
+  top: -2px;
+  left: -2px;
+  font-size: 20px;
+  line-height: 16px;
+  color: #FFBF00;;
+  transition: 0.3s ease color;
+}
+
+#moon {
+  position: absolute;
+  bottom: -29px;
+  right: 4px;
+  width: 18px;
+  height: 16px;
+  background-color: #FFBF00;;
+  border-radius: 50%;
+  transition: 0.3s ease bottom;
+}
+
+#moon:before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  width: 20px;
+  height: 20px;
+  background-color: #4d4d4d;
+  border-radius: 50%;
+  transition: 0.3s ease background-color;
+}
+
+#toggle_checkbox:checked + label {
+  background-color: #4d4d4d;
+}
+
+#toggle_checkbox:checked + label #star {
+  top: 2px;
+  left: 32px;
+  transform: scale(0.3);
+  background-color: #FFBF00;;
+}
+
+#toggle_checkbox:checked + label .star {
+  color: #FFBF00;
+}
+
+#toggle_checkbox:checked + label #moon {
+  bottom: 4px;
+}
+
+#toggle_checkbox:checked + label #moon:before {
+  background-color: #4d4d4d;
+}

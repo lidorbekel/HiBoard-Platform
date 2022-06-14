@@ -5,6 +5,7 @@ import {TippyModule} from "@ngneat/helipopper";
 import {NavigationService} from "@hiboard/navigation/navigaiton.service";
 import {SubscribeModule} from "@ngneat/subscribe";
 import {UserRepository} from "../../../../user/src/lib/state/user.repository";
+import {ThemeService} from "@hiboard/core/theme.service";
 
 @Component({
   selector: 'hbd-header',
@@ -14,9 +15,12 @@ import {UserRepository} from "../../../../user/src/lib/state/user.repository";
 })
 export class HeaderComponent {
   user$ = this.userRepo.user$;
+  theme$ = this.themeService.activeTheme$;
 
   constructor(private auth: AuthService, private navigationService: NavigationService,
-              private userRepo: UserRepository) {
+              private userRepo: UserRepository,
+              private themeService: ThemeService
+  ) {
   }
 
   logout() {
@@ -27,6 +31,9 @@ export class HeaderComponent {
     this.navigationService.toProfile();
   }
 
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
 }
 
 @NgModule({
