@@ -11,6 +11,7 @@
         formControlName="username"
         [controlErrorAnchor]="emailAnchor"
         [controlErrorsOnBlur]="false"
+        data-cy="login-email-input"
       >
     </mat-form-field>
 
@@ -29,6 +30,7 @@
         formControlName="password"
         [controlErrorAnchor]="passwordAnchor"
         [controlErrorsOnBlur]="false"
+        data-cy="login-password-input"
       >
       <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
               [lazy]="true"
@@ -53,6 +55,7 @@
       (click)="login()"
       [class.hbd-spinner]="loading"
       [disabled]="loading"
+      data-cy="login-submit-btn"
     >
       Login
     </button>
@@ -63,6 +66,7 @@
       (click)="onJoin()"
       mat-button
       mat-stroked-button
+      data-cy="login-join-btn"
     >
       Join to HiBoard !
     </button>
@@ -71,6 +75,7 @@
   <p
     class="auth-form-error"
     *ngIf="error"
+    data-cy="login-error"
   >
     {{ error }}
   </p>

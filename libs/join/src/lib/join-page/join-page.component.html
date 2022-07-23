@@ -16,6 +16,7 @@
                   placeholder="First Name"
                   [controlErrorAnchor]="nameAnchor"
                   [controlErrorsOnBlur]="false"
+                  data-cy="join-firstName-input"
                 >
               </mat-form-field>
 
@@ -34,6 +35,7 @@
                   placeholder="Last Name"
                   [controlErrorAnchor]="lastNameAnchor"
                   [controlErrorsOnBlur]="false"
+                  data-cy="join-lastName-input"
                 >
               </mat-form-field>
 
@@ -53,6 +55,7 @@
                 placeholder="Email Address"
                 [controlErrorAnchor]="emailAnchor"
                 [controlErrorsOnBlur]="false"
+                data-cy="join-email-input"
               >
             </mat-form-field>
 
@@ -72,6 +75,7 @@
                 placeholder="Password"
                 [controlErrorAnchor]="passwordAnchor"
                 [controlErrorsOnBlur]="false"
+                data-cy="join-password-input"
               >
               <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="primary"
                       [lazy]="true"
@@ -102,6 +106,7 @@
                 placeholder="Company Name"
                 [controlErrorAnchor]="companyNameAnchor"
                 [controlErrorsOnBlur]="false"
+                data-cy="join-company-input"
               >
             </mat-form-field>
 
@@ -126,6 +131,7 @@
             (click)="register()"
             [class.hbd-spinner]="loading"
             [disabled]="loading || form.invalid"
+            data-cy="join-submit-btn"
     >
       Take me to HiBoard
     </button>
