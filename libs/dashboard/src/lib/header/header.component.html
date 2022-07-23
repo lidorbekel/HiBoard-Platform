@@ -14,6 +14,7 @@
           variation="popper"
           placement="bottom-end"
           class="flex items-center"
+          data-cy="header-profile-btn"
         >
           <mat-icon>person_outline</mat-icon>
         </button>
@@ -27,7 +28,7 @@
         <mat-icon class="mr-4">account_box</mat-icon>
         Profile
       </button>
-      <button mat-list-item (click)="logout()">
+      <button mat-list-item (click)="logout()" data-cy="header-logout-btn">
         <mat-icon class="mr-4">logout</mat-icon>
         logout
       </button>

@@ -10,7 +10,7 @@
 
 ::ng-deep {
   .auth-form-container {
-    width: min(100%, 330px);
+    min-width: min(100%, 330px);
   }
 
   .auth-title {
@@ -29,7 +29,7 @@
 .auth-container {
   border-radius: 10px;
   box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.16), 0 3px 6px -1px rgba(0, 0, 0, 0.23);
-  width: 45%;
+  width: 80%;
   max-width: 450px;
 
 }

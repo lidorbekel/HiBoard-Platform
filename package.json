@@ -9,7 +9,9 @@
     "start": "node ./scripts/serve.js development",
     "start:prod": "node ./scripts/serve.js production",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "e2e": "nx run platform-e2e:e2e",
+    "e2e:ci": "nx run platform-e2e:e2e:ci"
   },
   "private": true,
   "dependencies": {
@@ -77,7 +79,7 @@
     "@typescript-eslint/eslint-plugin": "5.10.1",
     "@typescript-eslint/experimental-utils": "5.10.1",
     "@typescript-eslint/parser": "5.10.1",
-    "cypress": "9.5.0",
+    "cypress": "10.3.1",
     "eslint": "8.7.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "2.12.1",
