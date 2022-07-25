@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
       - name: Dependencies
         run: npm i
       - name: E2E Test
