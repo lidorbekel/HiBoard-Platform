@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Dependencies
+        run: npm i
       - name: E2E Test
         run: npm run e2e:ci
 
