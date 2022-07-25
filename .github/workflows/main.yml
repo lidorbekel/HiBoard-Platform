@@ -1,0 +1,26 @@
+name: Run Liner and tests
+
+on: [ push ]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Dependencies
+        run: npm i --legacy-peer-deps
+      - name: E2E Test
+        run: npm run e2e:ci
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Dependencies
+        run: npm i --legacy-peer-deps
+      - name: Lint
+        run: npm run lint

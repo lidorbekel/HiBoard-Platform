@@ -11,7 +11,8 @@
     "build": "nx build",
     "test": "nx test",
     "e2e": "nx run platform-e2e:e2e",
-    "e2e:ci": "nx run platform-e2e:e2e:ci"
+    "e2e:ci": "nx run platform-e2e:e2e:ci",
+    "lint": "nx run-many --all --target=lint"
   },
   "private": true,
   "dependencies": {
